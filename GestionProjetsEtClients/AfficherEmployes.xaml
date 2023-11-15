@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="GestionProjetsEtClients.AfficherEmployes"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GestionProjetsEtClients"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <!--<CollectionViewSource x:Name="ContactsCVS" IsSourceGrouped="True"/>
+ <ListView ItemsSource="{x:Bind ContactsCVS.View, Mode=OneWay}">
+     <ListView.ItemsPanel>
+         <ItemsPanelTemplate>
+             <ItemsStackPanel AreStickyGroupHeadersEnabled="True"/>
+         </ItemsPanelTemplate>
+     </ListView.ItemsPanel>
+     <ListView.GroupStyle>
+         <GroupStyle >
+             <GroupStyle.HeaderTemplate>
+                 <DataTemplate x:DataType="local1:GroupInfoList">
+                     <Border AutomationProperties.AccessibilityView="Raw">
+                         <TextBlock Text="{x:Bind Key}" Style="{ThemeResource TitleTextBlockStyle}" AutomationProperties.AccessibilityView="Raw"/>
+                     </Border>
+                 </DataTemplate>
+             </GroupStyle.HeaderTemplate>
+         </GroupStyle>
+     </ListView.GroupStyle>
+ </ListView>-->
+    </Grid>
+</Page>
