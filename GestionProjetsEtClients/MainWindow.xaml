@@ -8,7 +8,27 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-        <Button x:Name="myButton" Click="myButton_Click">Click Me</Button>
-    </StackPanel>
+    <NavigationView PaneDisplayMode="Left" 
+                    PaneTitle="NicoMiro inc." 
+                    x:Name="navView" 
+                    IsSettingsVisible="False"
+                    ItemInvoked="navView_ItemInvoked"
+                    BackRequested="navView_BackRequested">
+        <NavigationView.MenuItems>
+            <NavigationViewItemHeader Content="Externe"/>
+            <NavigationViewItem Content="Projets" x:Name="iProjets" Icon="Folder"/>
+            <NavigationViewItem Content="Clients" x:Name="iClients" Icon="People"/>
+            <NavigationViewItemSeparator />
+            <NavigationViewItemHeader Content="Interne"/>
+            <NavigationViewItem Content="Employés" x:Name="iEmployes" Icon="Manage"/>
+        </NavigationView.MenuItems>
+
+        <NavigationView.FooterMenuItems>
+            <NavigationViewItem Content="Connexion" x:Name="iConnexion" Icon="Admin"/>
+            <NavigationViewItem Content="Déconnexion" x:Name="iDeconnexion" Icon="Switch"/>
+        </NavigationView.FooterMenuItems>
+
+        <Frame x:Name="mainFrame" Grid.Row="1" />
+    </NavigationView>
+
 </Window>

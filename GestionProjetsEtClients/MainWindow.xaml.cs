@@ -1,3 +1,4 @@
+using Google.Protobuf.Collections;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -26,11 +27,37 @@ namespace GestionProjetsEtClients
         public MainWindow()
         {
             this.InitializeComponent();
+            mainFrame.Navigate(typeof(AfficherProjets));
         }
 
-        private void myButton_Click(object sender, RoutedEventArgs e)
+        private void navView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            myButton.Content = "Clicked";
+            var item = (NavigationViewItem)args.InvokedItemContainer;
+
+            switch (item.Name)
+            {
+                case "iProjets":
+                    mainFrame.Navigate(typeof(AfficherProjets));
+                    break;
+                case "iClients":
+                    mainFrame.Navigate(typeof(AfficherClients));
+                    break;
+                case "iEmployes":
+                    mainFrame.Navigate(typeof(AfficherEmployes));
+                    break;
+                case "iConnexion":
+                    break;
+                case "iDeconnexion":
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void navView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+        {
+            if (mainFrame.CanGoBack)
+                mainFrame.GoBack();
         }
     }
 }

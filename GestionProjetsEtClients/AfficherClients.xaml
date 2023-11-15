@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="GestionProjetsEtClients.AfficherClients"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GestionProjetsEtClients"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" 
+                   Text="Liste des clients"
+                   HorizontalAlignment="Center"
+                   FontSize="25"
+                   Margin="0 15 0 0"/>
+
+        <GridView x:Name="lvListeClients" 
+                  Grid.Row="3"
+                  Margin="15"
+                  SelectionChanged="lvListeClients_SelectionChanged">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="local:Client">
+                    <StackPanel Orientation="Vertical"
+                                Margin="10">
+                        <TextBlock Text="{x:Bind Nom, Mode=OneWay}"
+                                   FontSize="15"
+                                   FontWeight="Bold"/>
+
+                        <TextBlock Text="{x:Bind Adresse, Mode=OneWay}"
+                                   Margin="0 10 0 0"
+                                   FontSize="15"/>
+
+                        <TextBlock Text="{x:Bind NoTelephone, Mode=OneWay}"
+                                   Margin="0 10 0 0"
+                                   FontSize="15"/>
+
+                        <TextBlock Text="{x:Bind Email, Mode=OneWay}"
+                                   Margin="0 10 0 0"
+                                   FontSize="15"/>
+                    </StackPanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+    </Grid>
+</Page>
