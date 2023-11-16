@@ -35,15 +35,25 @@
             <TextBlock x:Name="txtBlErreurNom" Foreground="Red" ></TextBlock>
         </StackPanel>
 
+
         <StackPanel Grid.Row="3" Padding="20">
             <TextBox x:Name="txtBoxPrenom" Header="Prénom"></TextBox>
             <TextBlock x:Name="txtBlErreurPrenom" Foreground="Red" ></TextBlock>
         </StackPanel>
-
-        <StackPanel Grid.Row="4" Padding="20">
-            <TextBox x:Name="txtBoxDdn" Header="Date de naissance"></TextBox>
-            <TextBlock x:Name="txtBlErreurDdn" Foreground="Red" ></TextBlock>
-        </StackPanel>
+        <Grid Grid.Row="4" Padding="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel HorizontalAlignment="Center">
+                <CalendarDatePicker x:Name="calDateNaissance"  Header="Date de naissance"></CalendarDatePicker>
+                <TextBlock x:Name="txtBlErreurDdn" Foreground="Red" ></TextBlock>
+            </StackPanel >
+            <StackPanel Grid.Column="1" >
+                <CalendarDatePicker x:Name="calDateEmbauche"  Header="Date d'embauche"></CalendarDatePicker>
+                <TextBlock x:Name="txtBlErreurDateEmbauche" Foreground="Red" ></TextBlock>
+            </StackPanel>
+        </Grid>
 
         <StackPanel Grid.Row="5" Padding="20">
             <TextBox x:Name="txtBoxCourriel" Header="Courriel"></TextBox>
@@ -56,21 +66,16 @@
         </StackPanel>
 
         <StackPanel Grid.Row="2" Grid.Column="1"  Padding="20">
-            <CalendarDatePicker x:Name="calDateEmbauche"  Header="Date d'embauche"></CalendarDatePicker>
-            <TextBlock x:Name="txtBlErreurDateEmbauche" Foreground="Red" ></TextBlock>
-        </StackPanel>
-
-        <StackPanel Grid.Row="3" Grid.Column="1"  Padding="20">
             <TextBox x:Name="txtBoxTauxHoraire" Header="Taux horaire"></TextBox>
             <TextBlock x:Name="txtBlErreurTauxHoraire" Foreground="Red" ></TextBlock>
         </StackPanel>
 
-        <StackPanel Grid.Row="4" Grid.Column="1"  Padding="20">
+        <StackPanel Grid.Row="3" Grid.Column="1"  Padding="20">
             <TextBox x:Name="txtBoxPhoto" Header="Lien vers photo d'identité"></TextBox>
             <TextBlock x:Name="txtBlErreurPhoto" Foreground="Red" ></TextBlock>
         </StackPanel>
 
-        <StackPanel Grid.Row="5" Grid.Column="1" Padding="20">
+        <StackPanel Grid.Row="4" Grid.Column="1" Padding="20">
             <ComboBox x:Name="cmbBoxStatut" Header="Statut" HorizontalAlignment="Stretch">
                 <x:String>Journalier</x:String>
                 <x:String>Temps plein</x:String>
@@ -78,6 +83,6 @@
             <TextBlock x:Name="txtBlErreurStatut" Foreground="Red" ></TextBlock>
         </StackPanel>
 
-        <Button x:Name="btnAjouterEmploye" Grid.Row="6">Ajouter</Button>
+        <Button x:Name="btnAjouterEmploye" Grid.Row="6" Margin="20" Click="btnAjouterEmploye_Click">Ajouter</Button>
     </Grid>
 </Page>

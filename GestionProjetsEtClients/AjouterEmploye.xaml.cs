@@ -27,5 +27,44 @@ namespace GestionProjetsEtClients
         {
             this.InitializeComponent();
         }
+
+        private void btnAjouterEmploye_Click(object sender, RoutedEventArgs e)
+        {
+            enleverMessagesErreurs();
+            bool bErreur = false;
+
+            if (!SingletonVerificationEmploye.getInstance().isTexteNonVideEtNonNum(txtBoxNom.Text))
+            {
+                txtBlErreurNom.Text = "Veuillez entrer le nom d'employé";
+                bErreur = true;
+            }
+
+            if (!SingletonVerificationEmploye.getInstance().isTexteNonVideEtNonNum(txtBoxPrenom.Text))
+            {
+                txtBlErreurPrenom.Text = "Veuillez entrer le prénom de l'employé";
+                bErreur = true;
+            }
+
+            if (!SingletonVerificationEmploye.getInstance().isDateValide(DateOnly.FromDateTime(calDateNaissance.Date)))
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// Permet d'enlever les messages d'erreurs
+        /// </summary>
+        private void enleverMessagesErreurs()
+        {
+            txtBlErreurNom.Text = string.Empty;
+            txtBlErreurPrenom.Text = string.Empty;
+            txtBlErreurDdn.Text = string.Empty;
+            txtBlErreurCourriel.Text = string.Empty;
+            txtBlErreurAdresse.Text = string.Empty;
+            txtBlErreurDateEmbauche.Text = string.Empty;
+            txtBlErreurTauxHoraire.Text = string.Empty;
+            txtBlErreurPhoto.Text = string.Empty;
+            txtBlErreurStatut.Text = string.Empty;        
+        }
     }
 }
