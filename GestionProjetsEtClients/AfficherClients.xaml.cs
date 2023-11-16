@@ -45,10 +45,22 @@ namespace GestionProjetsEtClients
 
             var resultat = await ajoutClient.ShowAsync();
 
-            /*if(resultat == ContentDialogButton.Primary)
+            /*if(resultat == ContentDialogResult.Primary)
             {
                 tblTest.Text = "Nom : " + ajoutClient.Nom + "Adresse : " + ajoutClient.Adresse + "NoTelephone : " + ajoutClient.NoTelephone + "Email : " + ajoutClient.Email;
             }*/
+        }
+
+        private async void AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            ModalAjoutClient ajoutClient = new ModalAjoutClient();
+            ajoutClient.XamlRoot = grilleListeClient.XamlRoot;
+            ajoutClient.Title = "Ajouter un client";
+            ajoutClient.PrimaryButtonText = "Ajouter";
+            ajoutClient.SecondaryButtonText = "Annuler";
+            ajoutClient.DefaultButton = ContentDialogButton.Primary;
+
+            var resultat = await ajoutClient.ShowAsync();
         }
     }
 }

@@ -38,10 +38,13 @@ namespace GestionProjetsEtClients
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+            bool erreurSaisie = false;
+
             if (String.IsNullOrEmpty(tbxNom.Text))
             {
                 tbxNom.BorderBrush = new SolidColorBrush(Colors.Red);
                 tblInvalidNom.Visibility = Visibility.Visible;
+                erreurSaisie = true;
                 args.Cancel = true;
             }
             else
@@ -55,6 +58,7 @@ namespace GestionProjetsEtClients
             {
                 tbxAdresse.BorderBrush = new SolidColorBrush(Colors.Red);
                 tblInvalidAdresse.Visibility = Visibility.Visible;
+                erreurSaisie = true;
                 args.Cancel = true;
             }
             else
@@ -68,6 +72,7 @@ namespace GestionProjetsEtClients
             {
                 tbxNoTel.BorderBrush = new SolidColorBrush(Colors.Red);
                 tblInvalidNoTel.Visibility = Visibility.Visible;
+                erreurSaisie = true;
                 args.Cancel = true;
             }
             else
@@ -81,6 +86,7 @@ namespace GestionProjetsEtClients
             {
                 tbxEmail.BorderBrush = new SolidColorBrush(Colors.Red);
                 tblInvalidEmail.Visibility = Visibility.Visible;
+                erreurSaisie = true;
                 args.Cancel = true;
             }
             else
@@ -88,6 +94,11 @@ namespace GestionProjetsEtClients
                 tbxEmail.ClearValue(TextBox.BorderBrushProperty);
                 tblInvalidEmail.Visibility = Visibility.Collapsed;
                 email = tbxEmail.Text;
+            }
+
+            if (!erreurSaisie)
+            {
+                SingletonClient.getInstance().ajouter(nom, adresse, noTelephone, email);
             }
 
         }
