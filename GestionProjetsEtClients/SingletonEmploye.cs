@@ -49,10 +49,10 @@ namespace GestionProjetsEtClients
                     string sMatricule = (string)reader["matricule"];
                     string sNom = (string)reader["nom"];
                     string sPrenom = (string)reader["prenom"];
-                    DateOnly datNaissance = (DateOnly)reader["date_naissance"];
+                    string datNaissance = (string)reader["date_naissance"];
                     string sEmail = (string)reader["email"];
                     string sAdresse = (string)reader["adresse"];
-                    DateOnly datEmbauche = (DateOnly)reader["date_embauche"];
+                    string datEmbauche = (string)reader["date_embauche"];
                     double dTauxHoraire = (double)reader["taux_horaire"];
                     string sLienPhoto = (string)reader["lien_photo"];
                     string sStatut = (string)reader["statut"];

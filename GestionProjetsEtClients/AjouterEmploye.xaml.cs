@@ -33,19 +33,19 @@ namespace GestionProjetsEtClients
             enleverMessagesErreurs();
             bool bErreur = false;
 
-            if (!SingletonVerificationEmploye.getInstance().isTexteNonVideEtNonNum(txtBoxNom.Text))
+            if (!SingletonVerification.getInstance().isTexteNonVideEtNonNum(txtBoxNom.Text))
             {
                 txtBlErreurNom.Text = "Veuillez entrer le nom d'employé";
                 bErreur = true;
             }
 
-            if (!SingletonVerificationEmploye.getInstance().isTexteNonVideEtNonNum(txtBoxPrenom.Text))
+            if (!SingletonVerification.getInstance().isTexteNonVideEtNonNum(txtBoxPrenom.Text))
             {
                 txtBlErreurPrenom.Text = "Veuillez entrer le prénom de l'employé";
                 bErreur = true;
             }
 
-            if (!SingletonVerificationEmploye.getInstance().isDateValide(DateOnly.FromDateTime(calDateNaissance.Date)))
+            if (!SingletonVerification.getInstance().isDateValide(Convert.ToString(calDateNaissance.Date)))
             {
 
             }
