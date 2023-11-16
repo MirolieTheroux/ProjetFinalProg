@@ -42,15 +42,17 @@ namespace GestionProjetsEtClients
                 return false;
         }
 
-        public bool isDateValide(DateOnly date)
+        public bool isDateValide(string date)
         {
-            var age = DateTime.Now.Year - date.Year;
-            if (age >= 18 && age <= 65)
+            int annee = Convert.ToInt32(date.Substring(0, 4));
+            int difference = DateTime.Now.Year - annee;
+            if (difference >= 18 && difference <= 65)
                 return true;
             else
                 return false;
         }
 
+    
         public bool isCourrielValide(string courriel)
         {
             string email = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
