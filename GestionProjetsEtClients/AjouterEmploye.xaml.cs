@@ -45,10 +45,10 @@ namespace GestionProjetsEtClients
                 bErreur = true;
             }
 
-            if (!SingletonVerificationEmploye.getInstance().isDateValide(DateOnly.FromDateTime(calDateNaissance.Date)))
+            /*if (!SingletonVerificationEmploye.getInstance().isDateValide(DateOnly.FromDateTime(calDateNaissance.Date)))
             {
 
-            }
+            }*/
         }
 
         /// <summary>

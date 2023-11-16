@@ -9,9 +9,10 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid x:Name="grilleListeClient">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -21,6 +22,19 @@
                    HorizontalAlignment="Center"
                    FontSize="25"
                    Margin="0 15 0 0"/>
+
+        <StackPanel Grid.Row="1"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <Button x:Name="btModalAjoutClient"
+                    FontSize="15"
+                    Margin="10"
+                    Click="btModalAjoutClient_Click">
+                Ajouter un client
+            </Button>
+        </StackPanel>
+
+        <TextBlock x:Name="tblTest"/>
 
         <GridView x:Name="lvListeClients" 
                   Grid.Row="3"
