@@ -11,7 +11,7 @@ namespace GestionProjetsEtClients
         public string  Matricule { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
-        public DateOnly DateNaissance { get; set; }
+        public string DateNaissance { get; set; }
         public string Email { get; set; }
         public string Adresse { get; set; }
         public string DateEmbauche { get; set; }
