@@ -35,13 +35,13 @@ namespace GestionProjetsEtClients
 
             if (!SingletonVerification.getInstance().isTexteNonVideEtNonNum(txtBoxNom.Text))
             {
-                txtBlErreurNom.Text = "Veuillez entrer le nom d'employé";
+                txtBlErreurNom.Text = "Veuillez entrer le nom d'employÃ©";
                 bErreur = true;
             }
 
             if (!SingletonVerification.getInstance().isTexteNonVideEtNonNum(txtBoxPrenom.Text))
             {
-                txtBlErreurPrenom.Text = "Veuillez entrer le prénom de l'employé";
+                txtBlErreurPrenom.Text = "Veuillez entrer le prÃ©nom de l'employÃ©";
                 bErreur = true;
             }
 

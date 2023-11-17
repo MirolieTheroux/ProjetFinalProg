@@ -66,5 +66,38 @@ namespace GestionProjetsEtClients
             }
 
         }
+
+        public int ajouter(string nom, string adresse, string no_telephone, string email)
+        {
+            int validation = 0;
+            try
+            {
+                MySqlCommand command = new MySqlCommand("p_ajout_client");
+                command.Connection = con;
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("_nom", nom);
+                command.Parameters.AddWithValue("_adresse", adresse);
+                command.Parameters.AddWithValue("_no_telephone", no_telephone);
+                command.Parameters.AddWithValue("_email", email);
+
+                con.Open();
+                command.Prepare();
+                validation = command.ExecuteNonQuery();
+                con.Close();
+
+                SingletonClient.getInstance().getListeClients();
+                return validation;
+            }
+            catch (MySqlException ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                {
+                    con.Close();
+                    return validation;
+                }
+                return validation;
+            }
+        }
     }
 }
