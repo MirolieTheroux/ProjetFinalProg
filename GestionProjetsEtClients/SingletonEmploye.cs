@@ -57,7 +57,7 @@ namespace GestionProjetsEtClients
                     string sLienPhoto = (string)reader["lien_photo"];
                     string sStatut = (string)reader["statut"];
 
-                    /*Employe employe = new Employe
+                    Employe employe = new Employe
                     {
                         Matricule = sMatricule,
                         Nom = sNom,
@@ -70,7 +70,7 @@ namespace GestionProjetsEtClients
                         LienPhoto = sLienPhoto,
                         Statut = sStatut
                     };
-                    listeEmployes.Add(employe);*/
+                    listeEmployes.Add(employe);
                 }
 
                 reader.Close();
