@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace GestionProjetsEtClients
 {
-    internal class SingletonVerificationEmploye
+    internal class SingletonVerification
     {
-        static SingletonVerificationEmploye instance;
+        static SingletonVerification instance;
 
-        public SingletonVerificationEmploye() { }
+        public SingletonVerification() { }
 
-        public static SingletonVerificationEmploye getInstance()
+        public static SingletonVerification getInstance()
         {
             if (instance == null)
-                instance = new SingletonVerificationEmploye();
+                instance = new SingletonVerification();
 
             return instance;
         }
@@ -52,7 +52,6 @@ namespace GestionProjetsEtClients
                 return false;
         }
 
-    
         public bool isCourrielValide(string courriel)
         {
             string email = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
