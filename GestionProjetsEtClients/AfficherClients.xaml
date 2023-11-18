@@ -29,6 +29,7 @@
                        Margin="50 15 0 0"/>
 
             <CommandBar Grid.Column="1" 
+                        x:Name="commandBar"
                         Background="Transparent" 
                         IsOpen="False" 
                         DefaultLabelPosition="Right"
