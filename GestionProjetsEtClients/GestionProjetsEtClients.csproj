@@ -17,6 +17,7 @@
     <None Remove="AfficherProjets.xaml" />
     <None Remove="AjouterEmploye.xaml" />
     <None Remove="ModalAjoutClient.xaml" />
+    <None Remove="ModalCreationAdmin.xaml" />
     <None Remove="ModifierEmploye.xaml" />
   </ItemGroup>
 
@@ -44,6 +45,11 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="ModalCreationAdmin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="ModalAjoutClient.xaml">

@@ -27,7 +27,18 @@ namespace GestionProjetsEtClients
         public MainWindow()
         {
             this.InitializeComponent();
-            mainFrame.Navigate(typeof(AfficherProjets));
+        }
+
+        private void navView_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (SingletonAdmin.getInstance().adminExiste())
+            {
+                mainFrame.Navigate(typeof(AfficherProjets));
+            }
+            else
+            {
+                afficherCreationAdmin();
+            }
         }
 
         private void navView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
@@ -61,6 +72,16 @@ namespace GestionProjetsEtClients
         {
             if (mainFrame.CanGoBack)
                 mainFrame.GoBack();
+        }
+
+        private async void afficherCreationAdmin()
+        {
+            ModalCreationAdmin ajoutAdmin = new ModalCreationAdmin();
+            ajoutAdmin.XamlRoot = navView.XamlRoot;
+            ajoutAdmin.Title = "Ajouter un compte administrateur";
+            ajoutAdmin.PrimaryButtonText = "Ajouter";
+
+            var resultat = await ajoutAdmin.ShowAsync();
         }
     }
 }
