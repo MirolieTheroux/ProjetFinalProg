@@ -27,6 +27,14 @@ namespace GestionProjetsEtClients
         {
             this.InitializeComponent();
             lvListeClients.ItemsSource = SingletonClient.getInstance().Clients;
+            if (SingletonAdmin.connexion)
+            {
+                commandBar.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                commandBar.Visibility= Visibility.Collapsed;
+            }
         }
 
         private void lvListeClients_SelectionChanged(object sender, SelectionChangedEventArgs e)

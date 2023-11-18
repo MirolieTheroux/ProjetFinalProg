@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Security.Cryptography;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace GestionProjetsEtClients
     internal class SingletonAdmin
     {
         static SingletonAdmin instance = null;
+        static public bool connexion = false;
         MySqlConnection con;
 
         public SingletonAdmin()
@@ -68,7 +70,7 @@ namespace GestionProjetsEtClients
                 command.CommandType = System.Data.CommandType.StoredProcedure;
 
                 command.Parameters.AddWithValue("_user", user);
-                command.Parameters.AddWithValue("_password", password);
+                command.Parameters.AddWithValue("_password", convertionHash(password));
 
                 con.Open();
                 command.Prepare();
@@ -87,6 +89,51 @@ namespace GestionProjetsEtClients
                 }
                 return validation;
             }
+        }
+
+        public void connexionAdmin(string user, string password)
+        {
+            int nbr_compte = 0;
+            try
+            {
+                MySqlCommand command = new MySqlCommand("p_valid_admin");
+                command.Connection = con;
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("_user", user);
+                command.Parameters.AddWithValue("_password", convertionHash(password));
+
+                con.Open();
+                command.Prepare();
+                MySqlDataReader r = command.ExecuteReader();
+
+                while (r.Read())
+                {
+                    nbr_compte = Convert.ToInt32(r["nbr_compte"]);
+                }
+                r.Close();
+                con.Close();
+            }
+            catch (MySqlException ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                {
+                    con.Close();
+                }
+            }
+
+            if (nbr_compte > 0)
+                connexion = true;
+            else
+                connexion = false;
+        }
+
+        private string convertionHash(string password)
+        {
+            SHA256 sha256 = SHA256.Create();
+            Byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
+            Byte[] hashedBytes = sha256.ComputeHash(passwordBytes);
+            string cleanHashedPassword = BitConverter.ToString(hashedBytes).Replace("-", "");
+            return cleanHashedPassword;
         }
     }
 }

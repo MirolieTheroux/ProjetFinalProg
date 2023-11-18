@@ -19,12 +19,12 @@ using Windows.Foundation.Collections;
 
 namespace GestionProjetsEtClients
 {
-    public sealed partial class ModalCreationAdmin : ContentDialog
+    public sealed partial class ModalConnexionAdmin : ContentDialog
     {
         string user;
         string password;
 
-        public ModalCreationAdmin()
+        public ModalConnexionAdmin()
         {
             this.InitializeComponent();
         }
@@ -35,6 +35,7 @@ namespace GestionProjetsEtClients
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             bool erreurSaisie = false;
+            tblInvalidConnexion.Visibility = Visibility.Collapsed;
 
             if (String.IsNullOrEmpty(tbxUser.Text))
             {
@@ -64,31 +65,20 @@ namespace GestionProjetsEtClients
                 password = pwbxMDP.Password;
             }
 
-            if (String.IsNullOrEmpty(pwbxConfirmMDP.Password))
+            if (!erreurSaisie)
             {
-                pwbxConfirmMDP.BorderBrush = new SolidColorBrush(Colors.Red);
-                tblInvalidConfirmMDP.Text = "Veuillez entrer la confirmation de votre mot de passe";
-                tblInvalidConfirmMDP.Visibility = Visibility.Visible;
-                erreurSaisie = true;
-                args.Cancel = true;
-            }
-            else if(pwbxConfirmMDP.Password != password)
-            {
-                pwbxConfirmMDP.BorderBrush = new SolidColorBrush(Colors.Red);
-                tblInvalidConfirmMDP.Text = "Les 2 mots de passe de correspondent pas";
-                tblInvalidConfirmMDP.Visibility = Visibility.Visible;
-                erreurSaisie = true;
-                args.Cancel = true;
-            }
-            else
-            {
-                pwbxConfirmMDP.ClearValue(PasswordBox.BorderBrushProperty);
-                tblInvalidConfirmMDP.Visibility = Visibility.Collapsed;
-            }
-
-            if(!erreurSaisie)
-            {
-                SingletonAdmin.getInstance().ajouter(user, password);
+                SingletonAdmin.getInstance().connexionAdmin(user, password);
+                if (SingletonAdmin.connexion)
+                {
+                    args.Cancel = false;
+                }
+                else
+                {
+                    tbxUser.BorderBrush = new SolidColorBrush(Colors.Red);
+                    pwbxMDP.BorderBrush = new SolidColorBrush(Colors.Red);
+                    tblInvalidConnexion.Visibility = Visibility.Visible;
+                    args.Cancel = true;
+                }
             }
         }
 

@@ -27,17 +27,30 @@ namespace GestionProjetsEtClients
         public MainWindow()
         {
             this.InitializeComponent();
+            SingletonFenetre.getInstance().Fenetre = this;
+            mainFrame.Navigate(typeof(AfficherProjets));
+            afficherBoutonConnexion();
         }
 
         private void navView_Loaded(object sender, RoutedEventArgs e)
         {
-            if (SingletonAdmin.getInstance().adminExiste())
+            if (!(SingletonAdmin.getInstance().adminExiste()))
             {
-                mainFrame.Navigate(typeof(AfficherProjets));
+                afficherCreationAdmin();
+            }
+        }
+
+        public void afficherBoutonConnexion()
+        {
+            if (SingletonAdmin.connexion)
+            {
+                iConnexion.Visibility = Visibility.Collapsed;
+                iDeconnexion.Visibility = Visibility.Visible;
             }
             else
             {
-                afficherCreationAdmin();
+                iConnexion.Visibility = Visibility.Visible;
+                iDeconnexion.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -60,6 +73,7 @@ namespace GestionProjetsEtClients
                     mainFrame.Navigate(typeof(AjouterEmploye));
                     break;
                 case "iConnexion":
+                    afficherConnexionAdmin();
                     break;
                 case "iDeconnexion":
                     break;
@@ -82,6 +96,24 @@ namespace GestionProjetsEtClients
             ajoutAdmin.PrimaryButtonText = "Ajouter";
 
             var resultat = await ajoutAdmin.ShowAsync();
+
+            afficherBoutonConnexion();
+        }
+
+        private async void afficherConnexionAdmin()
+        {
+            ModalConnexionAdmin connexionAdmin = new ModalConnexionAdmin();
+            connexionAdmin.XamlRoot = navView.XamlRoot;
+            connexionAdmin.Title = "Connexion compte administrateur";
+            connexionAdmin.PrimaryButtonText = "Connexion";
+            connexionAdmin.CloseButtonText = "Annuler";
+
+            connexionAdmin.DefaultButton = ContentDialogButton.Primary;
+
+            var resultat = await connexionAdmin.ShowAsync();
+
+            afficherBoutonConnexion();
+            mainFrame.Navigate(typeof(AfficherProjets));
         }
     }
 }
