@@ -45,9 +45,6 @@ namespace GestionProjetsEtClients
                 case "iEmployes":
                     mainFrame.Navigate(typeof(AfficherEmployes));
                     break;
-                case "aEmployes":
-                    mainFrame.Navigate(typeof(AjouterEmploye));
-                    break;
                 case "iConnexion":
                     break;
                 case "iDeconnexion":

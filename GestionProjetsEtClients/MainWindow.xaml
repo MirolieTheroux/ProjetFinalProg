@@ -21,7 +21,6 @@
             <NavigationViewItemSeparator />
             <NavigationViewItemHeader Content="Interne"/>
             <NavigationViewItem Content="Employés" x:Name="iEmployes" Icon="Manage"/>
-            <NavigationViewItem Content="Ajouter un employé" x:Name="aEmployes" Icon="Add"/>
         </NavigationView.MenuItems>
 
         <NavigationView.FooterMenuItems>
