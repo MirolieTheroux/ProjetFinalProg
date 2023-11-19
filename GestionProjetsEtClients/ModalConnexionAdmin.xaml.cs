@@ -68,7 +68,7 @@ namespace GestionProjetsEtClients
             if (!erreurSaisie)
             {
                 SingletonAdmin.getInstance().connexionAdmin(user, password);
-                if (SingletonAdmin.connexion)
+                if (SingletonAdmin.getInstance().valideConnexion())
                 {
                     args.Cancel = false;
                 }

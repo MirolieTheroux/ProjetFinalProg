@@ -12,7 +12,7 @@ namespace GestionProjetsEtClients
     internal class SingletonAdmin
     {
         static SingletonAdmin instance = null;
-        static public bool connexion = false;
+        static private bool connexion = false;
         MySqlConnection con;
 
         public SingletonAdmin()
@@ -125,6 +125,16 @@ namespace GestionProjetsEtClients
                 connexion = true;
             else
                 connexion = false;
+        }
+
+        public void deconnexionAdmin()
+        {
+            connexion = false;
+        }
+
+        public bool valideConnexion()
+        {
+            return connexion;
         }
 
         private string convertionHash(string password)

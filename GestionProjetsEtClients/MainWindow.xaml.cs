@@ -42,7 +42,7 @@ namespace GestionProjetsEtClients
 
         public void afficherBoutonConnexion()
         {
-            if (SingletonAdmin.connexion)
+            if (SingletonAdmin.getInstance().valideConnexion())
             {
                 iConnexion.Visibility = Visibility.Collapsed;
                 iDeconnexion.Visibility = Visibility.Visible;
@@ -76,6 +76,8 @@ namespace GestionProjetsEtClients
                     afficherConnexionAdmin();
                     break;
                 case "iDeconnexion":
+                    SingletonAdmin.getInstance().deconnexionAdmin();
+                    mainFrame.Navigate(typeof(AfficherProjets));
                     break;
                 default:
                     break;
