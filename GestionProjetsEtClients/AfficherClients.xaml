@@ -48,11 +48,11 @@
 
         </Grid>
 
-        <GridView x:Name="lvListeClients" 
+        <GridView x:Name="gvListeClients" 
                   Grid.Row="3"
                   HorizontalAlignment="Center"
                   Margin="15"
-                  SelectionChanged="lvListeClients_SelectionChanged">
+                  SelectionChanged="gvListeClients_SelectionChanged">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="local:Client">
                     <StackPanel Orientation="Vertical"

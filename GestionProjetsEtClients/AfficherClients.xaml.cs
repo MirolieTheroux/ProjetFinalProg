@@ -26,7 +26,7 @@ namespace GestionProjetsEtClients
         public AfficherClients()
         {
             this.InitializeComponent();
-            lvListeClients.ItemsSource = SingletonClient.getInstance().Clients;
+            gvListeClients.ItemsSource = SingletonClient.getInstance().Clients;
             if (SingletonAdmin.getInstance().valideConnexion())
             {
                 commandBar.Visibility = Visibility.Visible;
@@ -35,11 +35,6 @@ namespace GestionProjetsEtClients
             {
                 commandBar.Visibility= Visibility.Collapsed;
             }
-        }
-
-        private void lvListeClients_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
 
         private async void AppBarButton_Click(object sender, RoutedEventArgs e)
@@ -52,6 +47,14 @@ namespace GestionProjetsEtClients
             ajoutClient.DefaultButton = ContentDialogButton.Primary;
 
             var resultat = await ajoutClient.ShowAsync();
+        }
+
+        private void gvListeClients_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (gvListeClients.SelectedIndex >= 0)
+            {
+                this.Frame.Navigate(typeof(ZoomClient), gvListeClients.SelectedIndex);
+            }
         }
     }
 }

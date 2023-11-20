@@ -20,6 +20,7 @@
     <None Remove="ModalConnexionAdmin.xaml" />
     <None Remove="ModalCreationAdmin.xaml" />
     <None Remove="ModifierEmploye.xaml" />
+    <None Remove="ZoomClient.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,6 +47,11 @@
   -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="ZoomClient.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="ModalConnexionAdmin.xaml">
