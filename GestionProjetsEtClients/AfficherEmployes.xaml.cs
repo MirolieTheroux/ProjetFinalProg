@@ -7,9 +7,12 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Contacts;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 
@@ -26,6 +29,19 @@ namespace GestionProjetsEtClients
         public AfficherEmployes()
         {
             this.InitializeComponent();
+            lvEmployes.ItemsSource = SingletonEmploye.getInstance().Employes;
+        }
+
+        private async void  AppBarButton_Click(object sender, RoutedEventArgs e)
+        {
+            ModalAjouterEmploye ajouterEmploye = new ModalAjouterEmploye();
+            ajouterEmploye.XamlRoot = grilleEmployes.XamlRoot;
+            ajouterEmploye.Title = "Ajouter un employé";
+            ajouterEmploye.PrimaryButtonText = "Ajouter";
+            ajouterEmploye.SecondaryButtonText = "Annuler";
+            ajouterEmploye.DefaultButton = ContentDialogButton.Primary;
+
+            var resultat = await ajouterEmploye.ShowAsync();
         }
     }
 }

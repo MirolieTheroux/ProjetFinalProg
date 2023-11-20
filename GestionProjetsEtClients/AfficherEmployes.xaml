@@ -9,25 +9,36 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <!--<CollectionViewSource x:Name="ContactsCVS" IsSourceGrouped="True"/>
- <ListView ItemsSource="{x:Bind ContactsCVS.View, Mode=OneWay}">
-     <ListView.ItemsPanel>
-         <ItemsPanelTemplate>
-             <ItemsStackPanel AreStickyGroupHeadersEnabled="True"/>
-         </ItemsPanelTemplate>
-     </ListView.ItemsPanel>
-     <ListView.GroupStyle>
-         <GroupStyle >
-             <GroupStyle.HeaderTemplate>
-                 <DataTemplate x:DataType="local1:GroupInfoList">
-                     <Border AutomationProperties.AccessibilityView="Raw">
-                         <TextBlock Text="{x:Bind Key}" Style="{ThemeResource TitleTextBlockStyle}" AutomationProperties.AccessibilityView="Raw"/>
-                     </Border>
-                 </DataTemplate>
-             </GroupStyle.HeaderTemplate>
-         </GroupStyle>
-     </ListView.GroupStyle>
- </ListView>-->
+    <Grid x:Name="grilleEmployes">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <CommandBar 
+               Background="Transparent" 
+               IsOpen="False" 
+               DefaultLabelPosition="Right"
+               Margin="0 0 15 0">
+            <AppBarButton Icon="Add" Label="Ajouter un employé" Click="AppBarButton_Click" />
+        </CommandBar>
+
+        <ListView x:Name="lvEmployes" Grid.Row="1" Margin="10">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:Employe">
+                    <StackPanel Orientation="Horizontal" Margin="10"   HorizontalAlignment="Stretch">
+                        <TextBlock Text="{x:Bind Matricule}" FontSize="18"  />
+                        <TextBlock Text="{x:Bind Prenom}" Margin="0 0 5 0" FontSize="18"/>
+                        <TextBlock Text="{x:Bind Nom}" FontSize="18"/>
+                        <TextBlock Text="{x:Bind DateNaissance}" FontSize="18"/>
+                        <TextBlock Text="{x:Bind Email}" FontSize="18"/>
+                        <TextBlock Text="{x:Bind Adresse}" FontSize="18"/>
+                        <TextBlock Text="{x:Bind DateEmbauche}" FontSize="18"/>
+                        <TextBlock Text="{x:Bind Statut}" FontSize="18"/>
+                    </StackPanel>
+
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </Grid>
 </Page>
