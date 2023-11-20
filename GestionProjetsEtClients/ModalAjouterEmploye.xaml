@@ -10,71 +10,75 @@
     PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
     CloseButtonClick="ContentDialog_CloseButtonClick">
 
+    <ScrollViewer>
+        <Grid  >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
 
-    <Grid Width="500" >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="250"></ColumnDefinition>
-            <ColumnDefinition Width="250"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-
-        <StackPanel  Padding="20">
-            <TextBox x:Name="txtBoxNom" Header="Nom"></TextBox>
-            <TextBlock x:Name="txtBlErreurNom" Foreground="Red" ></TextBlock>
-        </StackPanel>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
 
 
-        <StackPanel Grid.Row="1" Padding="20">
-            <TextBox x:Name="txtBoxPrenom" Header="Prénom"></TextBox>
-            <TextBlock x:Name="txtBlErreurPrenom" Foreground="Red" ></TextBlock>
-        </StackPanel>
+            <TextBox x:Name="txtBoxNom" Header="Nom" Margin="10 10 10 0" ></TextBox>
+            <TextBlock x:Name="txtBlErreurNom" Margin="10 0 0 0" Foreground="Red" Grid.Row="1" ></TextBlock>
 
-        <StackPanel Grid.Row="2" HorizontalAlignment="Center" Padding="20">
-            <CalendarDatePicker x:Name="calDateNaissance"  Header="Date de naissance"></CalendarDatePicker>
-            <TextBlock x:Name="txtBlErreurDdn" Foreground="Red" ></TextBlock>
-        </StackPanel >
 
-        <StackPanel Grid.Row="3" Padding="20">
-            <TextBox x:Name="txtBoxCourriel" Header="Courriel"></TextBox>
-            <TextBlock x:Name="txtBlErreurCourriel" Foreground="Red" ></TextBlock>
-        </StackPanel>
 
-        <StackPanel Grid.Column="1" Padding="20">
-            <TextBox x:Name="txtBoxAdresse" Header="Adresse"></TextBox>
-            <TextBlock x:Name="txtBlErreurAdresse" Foreground="Red" ></TextBlock>
-        </StackPanel>
+            <TextBox x:Name="txtBoxPrenom" Header="Prénom" Margin="10 10 10 0" Grid.Row="2"></TextBox>
+            <TextBlock x:Name="txtBlErreurPrenom" Foreground="Red" Margin="10 0 0 0" Grid.Row="3" ></TextBlock>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Padding="20">
-            <CalendarDatePicker x:Name="calDateEmbauche"  Header="Date d'embauche"></CalendarDatePicker>
-            <TextBlock x:Name="txtBlErreurDateEmbauche" Foreground="Red" ></TextBlock>
-        </StackPanel>
 
-        <StackPanel Grid.Row="2" Grid.Column="1"  Padding="20">
-            <TextBox x:Name="txtBoxTauxHoraire" Header="Taux horaire"></TextBox>
-            <TextBlock x:Name="txtBlErreurTauxHoraire" Foreground="Red" ></TextBlock>
-        </StackPanel>
 
-        <StackPanel Grid.Row="3" Grid.Column="1" Padding="20">
-            <ComboBox x:Name="cmbBoxStatut" Header="Statut" HorizontalAlignment="Stretch">
+            <CalendarDatePicker x:Name="calDateNaissance" Margin="10 10 10 0"  Header="Date de naissance" Grid.Row="4"></CalendarDatePicker>
+            <TextBlock x:Name="txtBlErreurDdn" Foreground="Red" Margin="10 0 0 0" Grid.Row="5" ></TextBlock>
+
+
+
+            <TextBox x:Name="txtBoxCourriel" Header="Courriel" Margin="10 10 10 0" Grid.Row="6"></TextBox>
+            <TextBlock x:Name="txtBlErreurCourriel"  Margin="10 0 0 0" Foreground="Red" Grid.Row="7" ></TextBlock>
+
+
+
+            <TextBox x:Name="txtBoxAdresse" Header="Adresse" Margin="10 10 10 0"  Grid.Column="1"></TextBox>
+            <TextBlock x:Name="txtBlErreurAdresse"  Margin="10 0 0 0" Foreground="Red" Grid.Row="1" Grid.Column="1" ></TextBlock>
+
+
+
+            <CalendarDatePicker x:Name="calDateEmbauche" Margin="10 10 10 0"  Header="Date d'embauche" Grid.Row="2" Grid.Column="1"></CalendarDatePicker>
+            <TextBlock x:Name="txtBlErreurDateEmbauche"  Margin="10 0 0 0" Foreground="Red" Grid.Row="3" Grid.Column="1" ></TextBlock>
+
+
+
+            <TextBox x:Name="txtBoxTauxHoraire" Margin="10 10 10 0" Header="Taux horaire" Grid.Row="4" Grid.Column="1"></TextBox>
+            <TextBlock x:Name="txtBlErreurTauxHoraire"  Margin="10 0 0 0" Foreground="Red" Grid.Row="5" Grid.Column="1" ></TextBlock>
+
+
+
+            <ComboBox x:Name="cmbBoxStatut" Margin="10 10 10 0" Header="Statut" HorizontalAlignment="Stretch" Grid.Row="6" Grid.Column="1">
                 <x:String>Journalier</x:String>
                 <x:String>Temps plein</x:String>
             </ComboBox>
-            <TextBlock x:Name="txtBlErreurStatut" Foreground="Red" ></TextBlock>
-        </StackPanel>
+            <TextBlock x:Name="txtBlErreurStatut"  Margin="10 0 0 0" Foreground="Red" Grid.Row="7" Grid.Column="1"></TextBlock>
 
-        <StackPanel Grid.Row="4" Grid.ColumnSpan="2"  Padding="20">
-            <TextBox x:Name="txtBoxPhoto" Header="Lien vers photo d'identité"></TextBox>
-            <TextBlock x:Name="txtBlErreurPhoto" Foreground="Red" ></TextBlock>
-        </StackPanel>
 
-      
-    </Grid>
+
+            <TextBox x:Name="txtBoxPhoto" Margin="10 10 10 0" Header="Lien vers photo d'identité" Grid.Row="8" Grid.ColumnSpan="2"></TextBox>
+            <TextBlock x:Name="txtBlErreurPhoto"  Margin="10 0 0 0" Foreground="Red" Grid.Row="9" Grid.ColumnSpan="2" ></TextBlock>
+
+        </Grid>
+    </ScrollViewer>
 </ContentDialog>
