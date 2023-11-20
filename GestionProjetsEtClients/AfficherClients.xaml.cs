@@ -27,28 +27,19 @@ namespace GestionProjetsEtClients
         {
             this.InitializeComponent();
             lvListeClients.ItemsSource = SingletonClient.getInstance().Clients;
+            if (SingletonAdmin.getInstance().valideConnexion())
+            {
+                commandBar.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                commandBar.Visibility= Visibility.Collapsed;
+            }
         }
 
         private void lvListeClients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-        }
-
-        private async void btModalAjoutClient_Click(object sender, RoutedEventArgs e)
-        {
-            ModalAjoutClient ajoutClient = new ModalAjoutClient();
-            ajoutClient.XamlRoot = grilleListeClient.XamlRoot;
-            ajoutClient.Title = "Ajouter un client";
-            ajoutClient.PrimaryButtonText = "Ajouter";
-            ajoutClient.SecondaryButtonText = "Annuler";
-            ajoutClient.DefaultButton = ContentDialogButton.Primary;
-
-            var resultat = await ajoutClient.ShowAsync();
-
-            /*if(resultat == ContentDialogResult.Primary)
-            {
-                tblTest.Text = "Nom : " + ajoutClient.Nom + "Adresse : " + ajoutClient.Adresse + "NoTelephone : " + ajoutClient.NoTelephone + "Email : " + ajoutClient.Email;
-            }*/
         }
 
         private async void AppBarButton_Click(object sender, RoutedEventArgs e)

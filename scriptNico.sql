@@ -3,7 +3,11 @@
 
 -- Suppresion des tables au besoin
 DROP TABLE IF EXISTS client;
+DROP TABLE IF EXISTS admin_user;
 
+-- #######################################################################################
+-- ################################### Table Client ######################################
+-- #######################################################################################
 -- Création de la table Client
 CREATE TABLE client (
     id_client INT PRIMARY KEY ,
@@ -61,5 +65,43 @@ CREATE PROCEDURE p_get_clients()
 BEGIN
     SELECT * FROM client
     ORDER BY nom;
+END //
+DELIMITER ;
+
+
+-- #######################################################################################
+-- ################################# Table Admin_User ####################################
+-- #######################################################################################
+-- Création de la table Admin_User
+CREATE TABLE admin_user
+(
+    user VARCHAR(50) PRIMARY KEY,
+    password varchar(64) NOT NULL
+);
+
+-- Procédure pour valider si un compte existe déjà
+DROP PROCEDURE IF EXISTS p_existe_admin;
+DELIMITER //
+CREATE PROCEDURE p_existe_admin()
+BEGIN
+    SELECT COUNT(*) AS nbr_compte FROM admin_user;
+END //
+DELIMITER ;
+
+-- Procédure pour ajouter un compte admin
+DROP PROCEDURE IF EXISTS p_ajout_admin;
+DELIMITER //
+CREATE PROCEDURE p_ajout_admin(IN _user varchar(50), IN _password varchar(64))
+BEGIN
+    INSERT INTO admin_user VALUES (_user, _password);
+END //
+DELIMITER ;
+
+-- Procédure pour valider si le compte de connexion est valide
+DROP PROCEDURE IF EXISTS p_valid_admin;
+DELIMITER //
+CREATE PROCEDURE p_valid_admin(IN _user varchar(50), IN _password varchar(64))
+BEGIN
+    SELECT COUNT(*) AS nbr_compte FROM admin_user WHERE user = _user AND password = _password;
 END //
 DELIMITER ;
