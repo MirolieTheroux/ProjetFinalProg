@@ -28,7 +28,7 @@ namespace GestionProjetsEtClients
             string nonNumeric = "^[0-9]";
             Regex reg = new Regex(nonNumeric, RegexOptions.IgnoreCase);
 
-            if (!string.IsNullOrEmpty(valeur.Trim()) || !reg.IsMatch(valeur))
+            if (!string.IsNullOrEmpty(valeur.Trim()) && reg.IsMatch(valeur))
                 return true;
             else
                 return false;
@@ -45,7 +45,7 @@ namespace GestionProjetsEtClients
         public bool isDateValide(string date)
         {
             if (date == "")
-                return true;
+                return false;
 
             int annee = Convert.ToInt32(date.Substring(0, 4));
             int difference = DateTime.Now.Year - annee;
@@ -58,7 +58,7 @@ namespace GestionProjetsEtClients
         public bool isDateEmbaucheValide(string date)
         {
             if (date == "")
-                return true;
+                return false;
             if (DateTime.Now < Convert.ToDateTime(date))
                 return true;
             else
@@ -71,7 +71,7 @@ namespace GestionProjetsEtClients
             string email = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
             Regex reg2 = new Regex(email, RegexOptions.None);
 
-            if (!string.IsNullOrEmpty(courriel.Trim()) || !reg2.IsMatch(courriel))
+            if (!string.IsNullOrEmpty(courriel.Trim()) && reg2.IsMatch(courriel))
                 return true;
             else
                 return false;
@@ -101,7 +101,7 @@ namespace GestionProjetsEtClients
 
         public bool isStatutValide(int index)
         {
-            if (index < 0)
+            if (index > 0)
                 return true;
             else
                 return false;
