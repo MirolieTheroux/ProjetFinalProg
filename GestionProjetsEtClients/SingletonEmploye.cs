@@ -16,9 +16,9 @@ namespace GestionProjetsEtClients
 
         public SingletonEmploye()
         {
-            connection = new MySqlConnection("Server=cours.cegep3r.info;Database=1468780-mirolie-théroux;Uid=1468780;Pwd=1468780;");
+            connection = new MySqlConnection("Server=cours.cegep3r.info;Database=a2023_420325ri_fabeq11;Uid=1468780;Pwd=1468780;");
             listeEmployes = new ObservableCollection<Employe>();
-
+            getListeEmployesBD();
         }
 
         public static SingletonEmploye getInstance()
@@ -49,10 +49,10 @@ namespace GestionProjetsEtClients
                     string sMatricule = (string)reader["matricule"];
                     string sNom = (string)reader["nom"];
                     string sPrenom = (string)reader["prenom"];
-                    string datNaissance = (string)reader["date_naissance"];
+                    DateTime datNaissance = ((DateTime)reader["date_naissance"]).Date;
                     string sEmail = (string)reader["email"];
                     string sAdresse = (string)reader["adresse"];
-                    string datEmbauche = (string)reader["date_embauche"];
+                    DateTime datEmbauche = ((DateTime)reader["date_embauche"]).Date;
                     double dTauxHoraire = (double)reader["taux_horaire"];
                     string sLienPhoto = (string)reader["lien_photo"];
                     string sStatut = (string)reader["statut"];
@@ -62,10 +62,10 @@ namespace GestionProjetsEtClients
                         Matricule = sMatricule,
                         Nom = sNom,
                         Prenom = sPrenom,
-                        DateNaissance = datNaissance,
+                        DateNaissance = datNaissance.ToString("yyyy-MM-dd"),
                         Email = sEmail,
                         Adresse = sAdresse,
-                        DateEmbauche = datEmbauche,
+                        DateEmbauche = datEmbauche.ToString("yyyy-MM-dd"),
                         TauxHoraire = dTauxHoraire,
                         LienPhoto = sLienPhoto,
                         Statut = sStatut
@@ -94,7 +94,7 @@ namespace GestionProjetsEtClients
         /// <param name="taux_horaire">Taux Horaire de l'employé</param>
         /// <param name="lien_photo">Photo de l'employé</param>
         /// <param name="statut">Statut de l'employé</param>
-        public void ajouterEmployesBD(string nom, string prenom,DateOnly date_naissance, string email, string adresse, DateOnly date_embauche, double taux_horaire, string lien_photo, string statut)
+        public void ajouterEmployesBD(string nom, string prenom, string date_naissance, string email, string adresse, string date_embauche, double taux_horaire, string lien_photo, string statut)
         {
             try
             {

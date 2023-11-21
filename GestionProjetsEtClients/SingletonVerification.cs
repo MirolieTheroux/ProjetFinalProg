@@ -44,17 +44,31 @@ namespace GestionProjetsEtClients
 
         public bool isDateValide(string date)
         {
+            if (date == "")
+                return true;
+
             int annee = Convert.ToInt32(date.Substring(0, 4));
             int difference = DateTime.Now.Year - annee;
-            if (difference >= 18 && difference <= 65)
+            if (difference < 18 || difference > 65)
                 return true;
             else
                 return false;
         }
 
+        public bool isDateEmbaucheValide(string date)
+        {
+            if (date == "")
+                return true;
+            if (DateTime.Now < Convert.ToDateTime(date))
+                return true;
+            else
+                return false;
+
+        }
+
         public bool isCourrielValide(string courriel)
         {
-            string email = "^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$";
+            string email = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
             Regex reg2 = new Regex(email, RegexOptions.None);
 
             if (!string.IsNullOrEmpty(courriel.Trim()) || !reg2.IsMatch(courriel))
@@ -73,7 +87,6 @@ namespace GestionProjetsEtClients
                 else
                     return false;
             }
-
             else
                 return false;
         }
@@ -88,7 +101,7 @@ namespace GestionProjetsEtClients
 
         public bool isStatutValide(int index)
         {
-            if (index >= 0)
+            if (index < 0)
                 return true;
             else
                 return false;
