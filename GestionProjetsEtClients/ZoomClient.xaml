@@ -9,7 +9,103 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <TextBlock Text="affichage client"/>
+    <Grid x:Name="grilleClient">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="tblTitrePage"
+                       HorizontalAlignment="Left"
+                       FontSize="25"
+                       Margin="50 15 0 0"/>
+
+            <CommandBar Grid.Column="1" 
+                        x:Name="commandBar"
+                        Background="Transparent" 
+                        IsOpen="False" 
+                        DefaultLabelPosition="Right"
+                        Margin="0 0 15 0">
+                <AppBarButton x:Name="abModifier" Icon="Edit" Label="Modifier" Click="abModifier_Click" />
+                <AppBarButton x:Name="abCreerProjet" Icon="Add" Label="Ajouter un projet" Click="abCreerProjet_Click" />
+                <!--<AppBarButton Icon="Edit" Label="Edit"/>
+                    <AppBarButton Icon="Share" Label="Share"/>
+                    <CommandBar.SecondaryCommands>
+                        <AppBarButton Icon="Setting" Label="Settings">
+                            <AppBarButton.KeyboardAccelerators>
+                                <KeyboardAccelerator Modifiers="Control" Key="I" />
+                            </AppBarButton.KeyboardAccelerators>
+                        </AppBarButton>
+                    </CommandBar.SecondaryCommands>-->
+            </CommandBar>
+        </Grid>
+
+        <TextBlock Grid.Row="1"
+                    x:Name="tblAdresse"
+                    FontSize="20"
+                    Margin="50 15 0 0"/>
+
+        <TextBlock Grid.Row="2"
+                    x:Name="tblNoTel"
+                    FontSize="20"
+                    Margin="50 15 0 0"/>
+
+        <TextBlock Grid.Row="3"
+                    x:Name="tblEmail"
+                    FontSize="20"
+                    Margin="50 15 0 0"/>
+
+        <ListView x:Name="lvListeProjetClient" 
+                  Grid.Row="3"
+                  HorizontalAlignment="Center"
+                  Margin="15"
+                  SelectionChanged="lvListeProjetClient_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:Client">
+                    <StackPanel Orientation="Vertical"
+                        Margin="10"
+                        Width="225">
+                        <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                            <TextBlock Text="{x:Bind Id, Mode=OneWay}"
+                               FontSize="15"
+                               HorizontalAlignment="Center"
+                               FontWeight="Bold"/>
+                            <TextBlock Text="-"
+                               Margin="5 0 5 0"
+                               FontSize="15"
+                               HorizontalAlignment="Center"
+                               FontWeight="Bold"/>
+                            <TextBlock Text="{x:Bind Nom, Mode=OneWay}"
+                               FontSize="15"
+                               HorizontalAlignment="Center"
+                               FontWeight="Bold"/>
+                        </StackPanel>
+
+
+                        <TextBlock Text="{x:Bind Adresse, Mode=OneWay}"
+                           Margin="0 10 0 0"
+                           FontSize="15"/>
+
+                        <TextBlock Text="{x:Bind NoTelephone, Mode=OneWay}"
+                           Margin="0 10 0 0"
+                           FontSize="15"/>
+
+                        <TextBlock Text="{x:Bind Email, Mode=OneWay}"
+                           Margin="0 10 0 0"
+                           FontSize="15"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

@@ -1,3 +1,4 @@
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -9,26 +10,33 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-using Microsoft.UI;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace GestionProjetsEtClients
 {
-    public sealed partial class ModalAjoutClient : ContentDialog
+    public sealed partial class ModalModificationClient : ContentDialog
     {
+        public int Index { get; set; }
+
+        int id;
         string nom;
         string adresse;
         string noTelephone;
         string email;
-
-        public ModalAjoutClient()
+        public ModalModificationClient()
         {
             this.InitializeComponent();
+            id = SingletonClient.getInstance().Clients[Index].Id;
+            tbxNom.Text = SingletonClient.getInstance().Clients[Index].Nom.ToString();
+            tbxAdresse.Text = SingletonClient.getInstance().Clients[Index].Adresse.ToString();
+            tbxNoTel.Text = SingletonClient.getInstance().Clients[Index].NoTelephone.ToString();
+            tbxEmail.Text = SingletonClient.getInstance().Clients[Index].Email.ToString();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -93,9 +101,8 @@ namespace GestionProjetsEtClients
 
             if (!erreurSaisie)
             {
-                SingletonClient.getInstance().ajouter(nom, adresse, noTelephone, email);
+                SingletonClient.getInstance().modifier(id, nom, adresse, noTelephone, email);
             }
-
         }
 
         private void ContentDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
