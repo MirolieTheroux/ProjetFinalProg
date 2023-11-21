@@ -50,7 +50,6 @@
 		<ProjectCapability Include="Msix" />
 	</ItemGroup>
 	<ItemGroup>
-
 		<Page Update="ModalConnexionAdmin.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</Page>
@@ -66,9 +65,9 @@
 		</Page>
 	</ItemGroup>
 	<ItemGroup>
-	<Page Update="ModalAjouterEmploye.xaml">
-		<Generator>MSBuild:Compile</Generator>
-	</Page>
+		<Page Update="ModalAjouterEmploye.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</Page>
 	</ItemGroup>
 	<ItemGroup>
 		<Page Update="ModalAjoutClient.xaml">
@@ -96,11 +95,6 @@
 		</Page>
 	</ItemGroup>
 
-	<!-- 
-    Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution 
-    Explorer "Package and Publish" context menu entry to be enabled for this project even if 
-    the Windows App SDK Nuget package has not yet been restored.
-  -->
 	<PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
 		<HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
 	</PropertyGroup>
