@@ -23,11 +23,17 @@
         </CommandBar>
 
         <ListView x:Name="lvEmployes" Grid.Row="1" Margin="10">
+
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Employe">
                     <StackPanel Orientation="Horizontal" Margin="10"   HorizontalAlignment="Stretch">
-                        <TextBlock Text="{x:Bind Matricule}" FontSize="18"  />
-                        <TextBlock Text="{x:Bind Prenom}" Margin="0 0 5 0" FontSize="18"/>
+                        <Ellipse Width="50" Height="50" Margin="0 0 10 0">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{x:Bind LienPhoto}" Stretch="UniformToFill"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock Text="{x:Bind Matricule}" Margin="10" Width="100" FontSize="18"  />
+                        <TextBlock Text="{x:Bind Prenom}"  Margin="10" Width="100" FontSize="18"/>
                         <TextBlock Text="{x:Bind Nom}" FontSize="18"/>
                         <TextBlock Text="{x:Bind DateNaissance}" FontSize="18"/>
                         <TextBlock Text="{x:Bind Email}" FontSize="18"/>
@@ -35,7 +41,6 @@
                         <TextBlock Text="{x:Bind DateEmbauche}" FontSize="18"/>
                         <TextBlock Text="{x:Bind Statut}" FontSize="18"/>
                     </StackPanel>
-
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

@@ -30,23 +30,23 @@ namespace GestionProjetsEtClients
             enleverMessagesErreurs();
             bool bErreur = false;
 
-            if (SingletonVerification.getInstance().isTexteNonVideEtNonNum(txtBoxNom.Text))
+            if (!SingletonVerification.getInstance().isTexteNonVideEtNonNum(txtBoxNom.Text))
             {
-                txtBlErreurNom.Text = "Veuillez entrer le nom d'employé.";
+                txtBlErreurNom.Text = "Veuillez entrer un nom.";
                 bErreur = true;
                 args.Cancel = true;
             }
 
-            if (SingletonVerification.getInstance().isTexteNonVideEtNonNum(txtBoxPrenom.Text))
+            if (!SingletonVerification.getInstance().isTexteNonVideEtNonNum(txtBoxPrenom.Text))
             {
-                txtBlErreurPrenom.Text = "Veuillez entrer le prénom de l'employé.";
+                txtBlErreurPrenom.Text = "Veuillez entrer un prénom.";
                 bErreur = true;
                 args.Cancel = true;
             }
 
-            if (SingletonVerification.getInstance().isDateValide(Convert.ToString(calDateNaissance.Date)))
+            if (!SingletonVerification.getInstance().isDateValide(Convert.ToString(calDateNaissance.Date)))
             {
-                txtBlErreurDdn.Text = "Veuillez entrer une date de naissance valide.";
+                txtBlErreurDdn.Text = "Veuillez entrer une date valide.";
                 bErreur = true;
                 args.Cancel = true;
             }
@@ -58,16 +58,16 @@ namespace GestionProjetsEtClients
                 args.Cancel = true;
             }
 
-            if (SingletonVerification.getInstance().isAdresseValide(txtBoxAdresse.Text))
+            if (!SingletonVerification.getInstance().isAdresseValide(txtBoxAdresse.Text))
             {
                 txtBlErreurAdresse.Text = "Veuillez entrer une adresse.";
                 bErreur = true;
                 args.Cancel = true;
             }
 
-            if (SingletonVerification.getInstance().isDateEmbaucheValide(Convert.ToString(calDateEmbauche.Date)))
+            if (!SingletonVerification.getInstance().isDateEmbaucheValide(Convert.ToString(calDateEmbauche.Date)))
             {
-                txtBlErreurDateEmbauche.Text = "Veuillez entrer une date d'embauche valide.";
+                txtBlErreurDateEmbauche.Text = "Veuillez entrer une date valide.";
                 bErreur = true;
                 args.Cancel = true;
             }
@@ -86,7 +86,7 @@ namespace GestionProjetsEtClients
                 args.Cancel = true;
             }
 
-            if (SingletonVerification.getInstance().isStatutValide(cmbBoxStatut.SelectedIndex))
+            if (!SingletonVerification.getInstance().isStatutValide(cmbBoxStatut.SelectedIndex))
             {
                 txtBlErreurStatut.Text = "Veuillez sélectionner un statut.";
                 bErreur = true;

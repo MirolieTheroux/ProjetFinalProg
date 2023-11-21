@@ -30,6 +30,7 @@ namespace GestionProjetsEtClients
         {
             this.InitializeComponent();
             lvEmployes.ItemsSource = SingletonEmploye.getInstance().Employes;
+            
         }
 
         private async void  AppBarButton_Click(object sender, RoutedEventArgs e)
