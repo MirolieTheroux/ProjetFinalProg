@@ -62,8 +62,11 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="ModalAjoutClient.xaml">
+ <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+ <ItemGroup>
     <Page Update="ModalAjouterEmploye.xaml">
-
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
