@@ -15,6 +15,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -49,23 +50,31 @@
             </CommandBar>
         </Grid>
 
-        <TextBlock Grid.Row="1"
+        <InfoBar Grid.Row="1"
+                 x:Name="infoBar"
+                 IsOpen="False"
+                 Severity="Success"
+                 Title="Titre"
+                 Margin="50 10 50 10"
+                 Message="Définir un message aproprié" />
+
+        <TextBlock Grid.Row="2"
                     x:Name="tblAdresse"
                     FontSize="20"
                     Margin="50 15 0 0"/>
 
-        <TextBlock Grid.Row="2"
+        <TextBlock Grid.Row="3"
                     x:Name="tblNoTel"
                     FontSize="20"
                     Margin="50 15 0 0"/>
 
-        <TextBlock Grid.Row="3"
+        <TextBlock Grid.Row="4"
                     x:Name="tblEmail"
                     FontSize="20"
                     Margin="50 15 0 0"/>
 
         <ListView x:Name="lvListeProjetClient" 
-                  Grid.Row="3"
+                  Grid.Row="5"
                   HorizontalAlignment="Center"
                   Margin="15"
                   SelectionChanged="lvListeProjetClient_SelectionChanged">

@@ -27,6 +27,25 @@ namespace GestionProjetsEtClients
         public ZoomClient()
         {
             this.InitializeComponent();
+
+            if (SingletonMessageValidation.getInstance().AfficherSucces)
+            {
+                infoBar.IsOpen = true;
+                infoBar.Severity = InfoBarSeverity.Success;
+                infoBar.Title = SingletonMessageValidation.getInstance().Titre.ToString();
+                infoBar.Message = SingletonMessageValidation.getInstance().Message.ToString();
+            }
+            else if (SingletonMessageValidation.getInstance().AfficherErreur)
+            {
+                infoBar.IsOpen = true;
+                infoBar.Severity = InfoBarSeverity.Error;
+                infoBar.Title = SingletonMessageValidation.getInstance().Titre.ToString();
+                infoBar.Message = SingletonMessageValidation.getInstance().Message.ToString();
+            }
+            else
+            {
+                infoBar.IsOpen = false;
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

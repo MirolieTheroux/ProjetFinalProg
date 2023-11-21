@@ -93,7 +93,20 @@ namespace GestionProjetsEtClients
 
             if (!erreurSaisie)
             {
-                SingletonClient.getInstance().ajouter(nom, adresse, noTelephone, email);
+                if(SingletonClient.getInstance().ajouter(nom, adresse, noTelephone, email) > 0)
+                {
+                    SingletonMessageValidation.getInstance().AfficherSucces = true;
+                    SingletonMessageValidation.getInstance().AfficherErreur = false;
+                    SingletonMessageValidation.getInstance().Titre = "Ajout";
+                    SingletonMessageValidation.getInstance().Titre = "L'ajout d'un client a fonctionnée";
+                }
+                else
+                {
+                    SingletonMessageValidation.getInstance().AfficherSucces = false;
+                    SingletonMessageValidation.getInstance().AfficherErreur = true;
+                    SingletonMessageValidation.getInstance().Titre = "Ajout";
+                    SingletonMessageValidation.getInstance().Titre = "L'ajout d'un client a échouée";
+                }
             }
 
         }

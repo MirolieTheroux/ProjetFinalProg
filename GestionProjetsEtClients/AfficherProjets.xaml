@@ -23,5 +23,13 @@
                    FontSize="25"
                    Margin="0 15 0 0"/>
 
+        <InfoBar Grid.Row="1"
+                 x:Name="infoBar"
+                 IsOpen="False"
+                 Severity="Success"
+                 Title="Titre"
+                 Margin="50 10 50 10"
+                 Message="Définir un message aproprié" />
+
     </Grid>
 </Page>

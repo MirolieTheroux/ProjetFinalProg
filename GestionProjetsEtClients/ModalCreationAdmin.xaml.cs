@@ -6,6 +6,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Microsoft.WindowsAppSDK.Runtime.Packages;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -88,7 +89,20 @@ namespace GestionProjetsEtClients
 
             if(!erreurSaisie)
             {
-                SingletonAdmin.getInstance().ajouter(user, password);
+                if (SingletonAdmin.getInstance().ajouter(user, password) > 0)
+                {
+                    SingletonMessageValidation.getInstance().AfficherSucces = true;
+                    SingletonMessageValidation.getInstance().AfficherErreur = false;
+                    SingletonMessageValidation.getInstance().Titre = "Ajout";
+                    SingletonMessageValidation.getInstance().Titre = "L'ajout du compte administrateur a fonctionnée";
+                }
+                else
+                {
+                    SingletonMessageValidation.getInstance().AfficherSucces = false;
+                    SingletonMessageValidation.getInstance().AfficherErreur = true;
+                    SingletonMessageValidation.getInstance().Titre = "Ajout";
+                    SingletonMessageValidation.getInstance().Titre = "L'ajout du compte administrateur a échouée";
+                }
             }
         }
 

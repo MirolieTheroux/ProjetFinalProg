@@ -130,6 +130,10 @@ namespace GestionProjetsEtClients
         public void deconnexionAdmin()
         {
             connexion = false;
+            SingletonMessageValidation.getInstance().AfficherSucces = true;
+            SingletonMessageValidation.getInstance().AfficherErreur = false;
+            SingletonMessageValidation.getInstance().Titre = "Déconnexion";
+            SingletonMessageValidation.getInstance().Titre = "La déconnexion du compte administrateur a fonctionnée";
         }
 
         public bool valideConnexion()

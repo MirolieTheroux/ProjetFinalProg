@@ -71,6 +71,10 @@ namespace GestionProjetsEtClients
                 if (SingletonAdmin.getInstance().valideConnexion())
                 {
                     args.Cancel = false;
+                    SingletonMessageValidation.getInstance().AfficherSucces = true;
+                    SingletonMessageValidation.getInstance().AfficherErreur = false;
+                    SingletonMessageValidation.getInstance().Titre = "Connexion";
+                    SingletonMessageValidation.getInstance().Titre = "La connexion au compte administrateur a fonctionnée";
                 }
                 else
                 {
