@@ -47,12 +47,32 @@ namespace GestionProjetsEtClients
             ajoutClient.DefaultButton = ContentDialogButton.Primary;
 
             var resultat = await ajoutClient.ShowAsync();
+
+            if (SingletonMessageValidation.getInstance().AfficherSucces)
+            {
+                infoBar.IsOpen = true;
+                infoBar.Severity = InfoBarSeverity.Success;
+                infoBar.Title = SingletonMessageValidation.getInstance().Titre.ToString();
+                infoBar.Message = SingletonMessageValidation.getInstance().Message.ToString();
+            }
+            else if(SingletonMessageValidation.getInstance().AfficherErreur)
+            {
+                infoBar.IsOpen = true;
+                infoBar.Severity = InfoBarSeverity.Error;
+                infoBar.Title = SingletonMessageValidation.getInstance().Titre.ToString();
+                infoBar.Message = SingletonMessageValidation.getInstance().Message.ToString();
+            }
+            else
+            {
+                infoBar.IsOpen = false;
+            }
         }
 
         private void gvListeClients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (gvListeClients.SelectedIndex >= 0)
             {
+                SingletonMessageValidation.getInstance().annulerMessage();
                 this.Frame.Navigate(typeof(ZoomClient), gvListeClients.SelectedIndex);
             }
         }

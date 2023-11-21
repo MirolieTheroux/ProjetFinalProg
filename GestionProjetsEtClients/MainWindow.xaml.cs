@@ -61,12 +61,15 @@ namespace GestionProjetsEtClients
             switch (item.Name)
             {
                 case "iProjets":
+                    SingletonMessageValidation.getInstance().annulerMessage();
                     mainFrame.Navigate(typeof(AfficherProjets));
                     break;
                 case "iClients":
+                    SingletonMessageValidation.getInstance().annulerMessage();
                     mainFrame.Navigate(typeof(AfficherClients));
                     break;
                 case "iEmployes":
+                    SingletonMessageValidation.getInstance().annulerMessage();
                     mainFrame.Navigate(typeof(AfficherEmployes));
                     break;
                 case "iConnexion":
@@ -97,6 +100,7 @@ namespace GestionProjetsEtClients
             var resultat = await ajoutAdmin.ShowAsync();
 
             afficherBoutonConnexion();
+            mainFrame.Navigate(typeof(AfficherProjets));
         }
 
         private async void afficherConnexionAdmin()

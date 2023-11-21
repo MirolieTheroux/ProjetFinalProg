@@ -48,45 +48,28 @@
 
         </Grid>
 
+        <InfoBar Grid.Row="1"
+                 x:Name="infoBar"
+                 IsOpen="False"
+                 Severity="Success"
+                 Title="Titre"
+                 Margin="50 10 50 10"
+                 Message="Définir un message aproprié" />
+
         <GridView x:Name="gvListeClients" 
                   Grid.Row="3"
                   HorizontalAlignment="Center"
-                  Margin="15"
+                  Margin="50 15 50 15"
                   SelectionChanged="gvListeClients_SelectionChanged">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="local:Client">
                     <StackPanel Orientation="Vertical"
                                 Margin="10"
                                 Width="225">
-                        <StackPanel Orientation="Horizontal"
-                                    HorizontalAlignment="Center">
-                            <TextBlock Text="{x:Bind Id, Mode=OneWay}"
-                                       FontSize="15"
-                                       HorizontalAlignment="Center"
-                                       FontWeight="Bold"/>
-                            <TextBlock Text="-"
-                                       Margin="5 0 5 0"
-                                       FontSize="15"
-                                       HorizontalAlignment="Center"
-                                       FontWeight="Bold"/>
-                            <TextBlock Text="{x:Bind Nom, Mode=OneWay}"
-                                       FontSize="15"
-                                       HorizontalAlignment="Center"
-                                       FontWeight="Bold"/>
-                        </StackPanel>
-                        
-
-                        <TextBlock Text="{x:Bind Adresse, Mode=OneWay}"
-                                   Margin="0 10 0 0"
-                                   FontSize="15"/>
-
-                        <TextBlock Text="{x:Bind NoTelephone, Mode=OneWay}"
-                                   Margin="0 10 0 0"
-                                   FontSize="15"/>
-
-                        <TextBlock Text="{x:Bind Email, Mode=OneWay}"
-                                   Margin="0 10 0 0"
-                                   FontSize="15"/>
+                        <TextBlock  Text="{x:Bind Nom, Mode=OneWay}"
+                                    FontSize="15"
+                                    HorizontalAlignment="Center"
+                                    FontWeight="Bold"/>
                     </StackPanel>
                 </DataTemplate>
             </GridView.ItemTemplate>
