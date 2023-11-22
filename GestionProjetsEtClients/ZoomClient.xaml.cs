@@ -63,13 +63,13 @@ namespace GestionProjetsEtClients
 
         private async void abModifier_Click(object sender, RoutedEventArgs e)
         {
+            SingletonClient.getInstance().setIndex(index);
             ModalModificationClient modifClient = new ModalModificationClient();
             modifClient.XamlRoot = grilleClient.XamlRoot;
             modifClient.Title = "Modifier un client";
             modifClient.PrimaryButtonText = "Modifier";
             modifClient.SecondaryButtonText = "Annuler";
             modifClient.DefaultButton = ContentDialogButton.Primary;
-            modifClient.Index = index;
             var resultat = await modifClient.ShowAsync();
             this.Frame.Navigate(typeof(ZoomClient), index);
         }

@@ -14,11 +14,13 @@ namespace GestionProjetsEtClients
         static SingletonClient instance = null;
         MySqlConnection con;
         ObservableCollection<Client> listeClients;
+        int index;
 
         public SingletonClient()
         {
             con = new MySqlConnection("Server=cours.cegep3r.info;Database=a2023_420325ri_fabeq11;Uid=1468780;Pwd=1468780;");
             listeClients = new ObservableCollection<Client>();
+            index = -1;
             getListeClients();
         }
 
@@ -28,6 +30,16 @@ namespace GestionProjetsEtClients
                 instance = new SingletonClient();
 
             return instance;
+        }
+
+        public void setIndex(int _index)
+        {
+            index = _index;
+        }
+
+        public int getIndex()
+        {
+            return index;
         }
 
         public ObservableCollection<Client> Clients { get { return listeClients; } }

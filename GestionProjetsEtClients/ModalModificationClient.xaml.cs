@@ -22,8 +22,7 @@ namespace GestionProjetsEtClients
 {
     public sealed partial class ModalModificationClient : ContentDialog
     {
-        public int Index { get; set; }
-
+        int index;
         int id;
         string nom;
         string adresse;
@@ -32,11 +31,13 @@ namespace GestionProjetsEtClients
         public ModalModificationClient()
         {
             this.InitializeComponent();
-            id = SingletonClient.getInstance().Clients[Index].Id;
-            tbxNom.Text = SingletonClient.getInstance().Clients[Index].Nom.ToString();
-            tbxAdresse.Text = SingletonClient.getInstance().Clients[Index].Adresse.ToString();
-            tbxNoTel.Text = SingletonClient.getInstance().Clients[Index].NoTelephone.ToString();
-            tbxEmail.Text = SingletonClient.getInstance().Clients[Index].Email.ToString();
+            index = SingletonClient.getInstance().getIndex();
+
+            id = SingletonClient.getInstance().Clients[index].Id;
+            tbxNom.Text = SingletonClient.getInstance().Clients[index].Nom.ToString();
+            tbxAdresse.Text = SingletonClient.getInstance().Clients[index].Adresse.ToString();
+            tbxNoTel.Text = SingletonClient.getInstance().Clients[index].NoTelephone.ToString();
+            tbxEmail.Text = SingletonClient.getInstance().Clients[index].Email.ToString();
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)

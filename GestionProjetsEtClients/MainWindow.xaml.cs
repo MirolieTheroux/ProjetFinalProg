@@ -40,20 +40,6 @@ namespace GestionProjetsEtClients
             }
         }
 
-        public void afficherBoutonConnexion()
-        {
-            if (SingletonAdmin.getInstance().valideConnexion())
-            {
-                iConnexion.Visibility = Visibility.Collapsed;
-                iDeconnexion.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                iConnexion.Visibility = Visibility.Visible;
-                iDeconnexion.Visibility = Visibility.Collapsed;
-            }
-        }
-
         private void navView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             var item = (NavigationViewItem)args.InvokedItemContainer;
@@ -77,6 +63,7 @@ namespace GestionProjetsEtClients
                     break;
                 case "iDeconnexion":
                     SingletonAdmin.getInstance().deconnexionAdmin();
+                    afficherBoutonConnexion();
                     mainFrame.Navigate(typeof(AfficherProjets));
                     break;
                 default:
@@ -117,6 +104,20 @@ namespace GestionProjetsEtClients
 
             afficherBoutonConnexion();
             mainFrame.Navigate(typeof(AfficherProjets));
+        }
+
+        public void afficherBoutonConnexion()
+        {
+            if (SingletonAdmin.getInstance().valideConnexion())
+            {
+                iConnexion.Visibility = Visibility.Collapsed;
+                iDeconnexion.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                iConnexion.Visibility = Visibility.Visible;
+                iDeconnexion.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }
