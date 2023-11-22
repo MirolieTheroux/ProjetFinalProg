@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="GestionProjetsEtClients.ZoomEmploye"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GestionProjetsEtClients"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="grilleEmploye">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <CommandBar 
+       Grid.Column="1"
+        x:Name="comModifier"
+        Background="Transparent" 
+        IsOpen="False" 
+        FontSize="20"
+        DefaultLabelPosition="Right"
+        Margin="0 0 15 0">
+            <AppBarButton Icon="Edit" Label="Modifier" Click="AppBarButton_Click" />
+        </CommandBar>
+
+        <StackPanel HorizontalAlignment="Center">
+            <Ellipse HorizontalAlignment="Center" Width="150" Height="150" Margin="0 0 10 0">
+                <Ellipse.Fill>
+                    <ImageBrush x:Name="imgProfil" Stretch="UniformToFill"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            
+            <TextBlock x:Name="txtBlMatricule" Margin="5" Grid.Row="1"></TextBlock>
+            <TextBlock x:Name="txtBlPrenom" Margin="5" Grid.Row="2"></TextBlock>
+            <TextBlock x:Name="txtBlNom" Grid.Row="3" Margin="5"></TextBlock>
+            <TextBlock x:Name="txtBlDateNaissance" Grid.Row="4" Margin="5"></TextBlock>
+            <TextBlock x:Name="txtBlEmail" Grid.Column="1"  Grid.Row="1" Margin="5"></TextBlock>
+            <TextBlock x:Name="txtBlAdresse" Grid.Column="1" Grid.Row="2" Margin="5"></TextBlock>
+            <TextBlock x:Name="txtBlDateEmbauche"  Grid.Column="1" Grid.Row="3" Margin="5"></TextBlock>
+            <TextBlock x:Name="txtBlAnciennete"  Grid.Column="1" Grid.Row="4" Margin="5"></TextBlock>
+            <TextBlock x:Name="txtBlTauxHoraire"  Grid.Column="1" Grid.Row="5" Margin="5"></TextBlock>
+            <TextBlock x:Name="txtBlStatut"  Grid.Column="1" Grid.Row="6" Margin="5"></TextBlock>
+        </StackPanel>
+    </Grid>
+</Page>
