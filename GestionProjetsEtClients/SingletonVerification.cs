@@ -28,7 +28,7 @@ namespace GestionProjetsEtClients
             string nonNumeric = "^[0-9]";
             Regex reg = new Regex(nonNumeric, RegexOptions.IgnoreCase);
 
-            if (!string.IsNullOrEmpty(valeur.Trim()) && reg.IsMatch(valeur))
+            if (!string.IsNullOrEmpty(valeur.Trim()) && !reg.IsMatch(valeur))
                 return true;
             else
                 return false;
@@ -49,7 +49,7 @@ namespace GestionProjetsEtClients
 
             int annee = Convert.ToInt32(date.Substring(0, 4));
             int difference = DateTime.Now.Year - annee;
-            if (difference < 18 || difference > 65)
+            if (difference >= 18 && difference <= 65)
                 return true;
             else
                 return false;
@@ -59,7 +59,7 @@ namespace GestionProjetsEtClients
         {
             if (date == "")
                 return false;
-            if (DateTime.Now < Convert.ToDateTime(date))
+            if (DateTime.Now > Convert.ToDateTime(date))
                 return true;
             else
                 return false;
@@ -101,10 +101,11 @@ namespace GestionProjetsEtClients
 
         public bool isStatutValide(int index)
         {
-            if (index > 0)
+            if (index >= 0)
                 return true;
             else
                 return false;
         }
+
     }
 }

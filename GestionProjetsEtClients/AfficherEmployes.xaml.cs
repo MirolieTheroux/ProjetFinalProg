@@ -30,7 +30,15 @@ namespace GestionProjetsEtClients
         {
             this.InitializeComponent();
             lvEmployes.ItemsSource = SingletonEmploye.getInstance().Employes;
-            
+            if (SingletonAdmin.getInstance().valideConnexion())
+            {
+                comAjout.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                comAjout.Visibility = Visibility.Collapsed;
+            }
+
         }
 
         private async void  AppBarButton_Click(object sender, RoutedEventArgs e)
@@ -43,6 +51,14 @@ namespace GestionProjetsEtClients
             ajouterEmploye.DefaultButton = ContentDialogButton.Primary;
 
             var resultat = await ajouterEmploye.ShowAsync();
+        }
+
+        private void lvEmployes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lvEmployes.SelectedIndex >= 0)
+            {
+                this.Frame.Navigate(typeof(ZoomEmploye), lvEmployes.SelectedIndex);
+            }
         }
     }
 }

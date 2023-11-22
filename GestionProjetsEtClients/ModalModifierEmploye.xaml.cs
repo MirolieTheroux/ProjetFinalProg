@@ -18,11 +18,63 @@ using Windows.Foundation.Collections;
 
 namespace GestionProjetsEtClients
 {
-    public sealed partial class ModalAjouterEmploye : ContentDialog
+    public sealed partial class ModalModifierEmploye : ContentDialog
     {
-        public ModalAjouterEmploye()
+        int iIndex;
+
+        public ModalModifierEmploye()
         {
             this.InitializeComponent();
+
+            iIndex = SingletonEmploye.getInstance().getIndex();
+            txtBoxNom.Text = SingletonEmploye.getInstance().Employes[iIndex].Nom;
+            txtBoxPrenom.Text = SingletonEmploye.getInstance().Employes[iIndex].Prenom;
+
+            string sDateNaissance = SingletonEmploye.getInstance().Employes[iIndex].DateNaissance;
+
+            // Convertir la chaîne de date de naissance en objet DateTime
+            if (DateTime.TryParse(sDateNaissance, out DateTime dateNaissance))
+            {
+                // Assigner la date de naissance à calDateNaissance.Date
+                calDateNaissance.Date = dateNaissance;
+            }
+
+            txtBoxCourriel.Text = SingletonEmploye.getInstance().Employes[iIndex].Email;
+            txtBoxAdresse.Text = SingletonEmploye.getInstance().Employes[iIndex].Adresse;
+
+            string sDateEmbauche = SingletonEmploye.getInstance().Employes[iIndex].DateEmbauche;
+
+            // Convertir la chaîne de date de naissance en objet DateTime
+            if (DateTime.TryParse(sDateEmbauche, out DateTime dateEmbauche))
+            {
+                // Assigner la date de naissance à calDateNaissance.Date
+                calDateEmbauche.Date = dateEmbauche;
+            }
+            txtBoxTauxHoraire.Text = SingletonEmploye.getInstance().Employes[iIndex].TauxHoraire.ToString();
+           
+            switch (SingletonEmploye.getInstance().Employes[iIndex].Statut)
+            {
+                case "Journalier":
+                    cmbBoxStatut.SelectedIndex = 0;
+                    break;
+                case "Temps plein":
+                    cmbBoxStatut.SelectedIndex = 1;
+                    break;
+                default:
+                    break;
+            }
+
+            int iAnneeEmbauche = Convert.ToInt32(sDateEmbauche.Substring(0, 4));
+            int iNbAnciennete = DateTime.Now.Year - iAnneeEmbauche;
+            if (iNbAnciennete > 3)
+            {
+                cmbBoxStatut.IsEnabled = true;
+            }
+            else
+            {
+                cmbBoxStatut.IsEnabled = false;
+            }
+            txtBoxPhoto.Text = SingletonEmploye.getInstance().Employes[iIndex].LienPhoto;
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -44,13 +96,6 @@ namespace GestionProjetsEtClients
                 args.Cancel = true;
             }
 
-            if (!SingletonVerification.getInstance().isDateValide(Convert.ToString(calDateNaissance.Date)))
-            {
-                txtBlErreurDdn.Text = "Veuillez entrer une date valide.";
-                bErreur = true;
-                args.Cancel = true;
-            }
-
             if (!SingletonVerification.getInstance().isCourrielValide(txtBoxCourriel.Text))
             {
                 txtBlErreurCourriel.Text = "Veuillez entrer un email valide.";
@@ -61,13 +106,6 @@ namespace GestionProjetsEtClients
             if (!SingletonVerification.getInstance().isAdresseValide(txtBoxAdresse.Text))
             {
                 txtBlErreurAdresse.Text = "Veuillez entrer une adresse.";
-                bErreur = true;
-                args.Cancel = true;
-            }
-
-            if (!SingletonVerification.getInstance().isDateEmbaucheValide(Convert.ToString(calDateEmbauche.Date)))
-            {
-                txtBlErreurDateEmbauche.Text = "Veuillez entrer une date valide.";
                 bErreur = true;
                 args.Cancel = true;
             }
@@ -84,41 +122,39 @@ namespace GestionProjetsEtClients
                 txtBlErreurPhoto.Text = "Veuillez entrer un lien valide.";
                 bErreur = true;
                 args.Cancel = true;
-
             }
 
-            if (calDateEmbauche.Date != null)
+            if (cmbBoxStatut.IsEnabled)
             {
-                string sEmbauche = Convert.ToString(calDateEmbauche.Date);
-                int iAnneeEmbauche = Convert.ToInt32(sEmbauche.Substring(0, 4));
-                int iNbAnciennete = DateTime.Now.Year - iAnneeEmbauche;
+                
 
-                if (iNbAnciennete < 3 && cmbBoxStatut.SelectedIndex == 1)
+                if (!SingletonVerification.getInstance().isStatutValide(cmbBoxStatut.SelectedIndex))
                 {
-                    txtBlErreurStatut1.Text = "Le statut ne peut pas être TP, selon l'anciennteté";
+                    txtBlErreurStatut.Text = "Veuillez sélectionner un statut.";
                     bErreur = true;
                     args.Cancel = true;
                 }
             }
 
-            if (!SingletonVerification.getInstance().isStatutValide(cmbBoxStatut.SelectedIndex))
+            string sEmbauche = Convert.ToString(calDateEmbauche.Date);
+            int iAnneeEmbauche = Convert.ToInt32(sEmbauche.Substring(0, 4));
+            int iNbAnciennete = DateTime.Now.Year - iAnneeEmbauche;
+
+            if (iNbAnciennete > 3 && cmbBoxStatut.SelectedIndex == 0)
             {
-                txtBlErreurStatut.Text = "Veuillez sélectionner un statut.";
+                txtBlErreurStatut1.Text = "Impossible de changer pour journalier";
                 bErreur = true;
                 args.Cancel = true;
             }
 
+
             if (!bErreur)
             {
-                string sNaissance = Convert.ToString(calDateNaissance.Date);
-                string sDateNaissance = sNaissance.Substring(0, 10);
-
-                string sEmbauche = Convert.ToString(calDateEmbauche.Date);
-                string sDateEmbauche = sEmbauche.Substring(0, 10);
-
-                SingletonEmploye.getInstance().ajouterEmployesBD(txtBoxNom.Text, txtBoxPrenom.Text, sDateNaissance, txtBoxCourriel.Text, txtBoxAdresse.Text,
-                sDateEmbauche, Convert.ToDouble(txtBoxTauxHoraire.Text), txtBoxPhoto.Text, cmbBoxStatut.SelectedItem as string);
+                string sMatricule = SingletonEmploye.getInstance().Employes[iIndex].Matricule;
+                SingletonEmploye.getInstance().modifierEmployesBD(sMatricule,txtBoxNom.Text, txtBoxPrenom.Text, txtBoxCourriel.Text, txtBoxAdresse.Text,
+                Convert.ToDouble(txtBoxTauxHoraire.Text), txtBoxPhoto.Text, cmbBoxStatut.SelectedItem as string);
             }
+
         }
 
         private void ContentDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -133,10 +169,8 @@ namespace GestionProjetsEtClients
         {
             txtBlErreurNom.Text = string.Empty;
             txtBlErreurPrenom.Text = string.Empty;
-            txtBlErreurDdn.Text = string.Empty;
             txtBlErreurCourriel.Text = string.Empty;
             txtBlErreurAdresse.Text = string.Empty;
-            txtBlErreurDateEmbauche.Text = string.Empty;
             txtBlErreurTauxHoraire.Text = string.Empty;
             txtBlErreurPhoto.Text = string.Empty;
             txtBlErreurStatut.Text = string.Empty;
