@@ -21,10 +21,12 @@
 		<None Remove="ModalCreationAdmin.xaml" />
 
 		<None Remove="ModalAjouterEmploye.xaml" />
-		<None Remove="ModifierEmploye.xaml" />
 
 		<None Remove="ModalModificationClient.xaml" />
+
+		<None Remove="ModalModifierEmploye.xaml" />
     	<None Remove="ZoomClient.xaml" />
+    	<None Remove="ZoomEmploye.xaml" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -51,6 +53,11 @@
   -->
 	<ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
 		<ProjectCapability Include="Msix" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="ModalModifierEmploye.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
 	</ItemGroup>
 	<ItemGroup>
 		<Page Update="ModalModificationClient.xaml">
@@ -98,7 +105,7 @@
 		</Page>
 	</ItemGroup>
 	<ItemGroup>
-		<Page Update="ModifierEmploye.xaml">
+		<Page Update="ZoomEmploye.xaml">
 			<Generator>MSBuild:Compile</Generator>
 		</Page>
 	</ItemGroup>

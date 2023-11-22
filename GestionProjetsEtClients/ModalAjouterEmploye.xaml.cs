@@ -84,6 +84,21 @@ namespace GestionProjetsEtClients
                 txtBlErreurPhoto.Text = "Veuillez entrer un lien valide.";
                 bErreur = true;
                 args.Cancel = true;
+
+            }
+
+            if (calDateEmbauche.Date != null)
+            {
+                string sEmbauche = Convert.ToString(calDateEmbauche.Date);
+                int iAnneeEmbauche = Convert.ToInt32(sEmbauche.Substring(0, 4));
+                int iNbAnciennete = DateTime.Now.Year - iAnneeEmbauche;
+
+                if (iNbAnciennete < 3 && cmbBoxStatut.SelectedIndex == 1)
+                {
+                    txtBlErreurStatut1.Text = "Le statut ne peut pas être TP, selon l'anciennteté";
+                    bErreur = true;
+                    args.Cancel = true;
+                }
             }
 
             if (!SingletonVerification.getInstance().isStatutValide(cmbBoxStatut.SelectedIndex))
@@ -95,9 +110,14 @@ namespace GestionProjetsEtClients
 
             if (!bErreur)
             {
+                string sNaissance = Convert.ToString(calDateNaissance.Date);
+                string sDateNaissance = sNaissance.Substring(0, 10);
 
-                SingletonEmploye.getInstance().ajouterEmployesBD(txtBoxNom.Text, txtBoxPrenom.Text, Convert.ToString(calDateNaissance.Date), txtBoxCourriel.Text, txtBoxAdresse.Text,
-                    Convert.ToString(calDateEmbauche.Date), Convert.ToDouble(txtBoxTauxHoraire.Text), txtBoxPhoto.Text, cmbBoxStatut.SelectedItem as string);
+                string sEmbauche = Convert.ToString(calDateEmbauche.Date);
+                string sDateEmbauche = sEmbauche.Substring(0, 10);
+
+                SingletonEmploye.getInstance().ajouterEmployesBD(txtBoxNom.Text, txtBoxPrenom.Text, sDateNaissance, txtBoxCourriel.Text, txtBoxAdresse.Text,
+                sDateEmbauche, Convert.ToDouble(txtBoxTauxHoraire.Text), txtBoxPhoto.Text, cmbBoxStatut.SelectedItem as string);
             }
         }
 
