@@ -17,11 +17,28 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" 
-                   Text="Liste des projets"
-                   HorizontalAlignment="Center"
-                   FontSize="25"
-                   Margin="0 15 0 0"/>
+        <TextBlock Text="Liste des projets"
+           HorizontalAlignment="Left"
+           FontSize="25"
+           Margin="50 15 0 0"/>
+
+        <CommandBar Grid.Column="1" 
+                    x:Name="commandBar"
+                    Background="Transparent" 
+                    IsOpen="False" 
+                    DefaultLabelPosition="Right"
+                    Margin="0 0 15 0">
+            <AppBarButton x:Name="abbExportProjet" Icon="Download" Label="Exporter la liste" Click="abbExportProjet_Click" />
+            <!--<AppBarButton Icon="Edit" Label="Edit"/>
+                <AppBarButton Icon="Share" Label="Share"/>
+                <CommandBar.SecondaryCommands>
+                    <AppBarButton Icon="Setting" Label="Settings">
+                        <AppBarButton.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control" Key="I" />
+                        </AppBarButton.KeyboardAccelerators>
+                    </AppBarButton>
+                </CommandBar.SecondaryCommands>-->
+        </CommandBar>
 
         <InfoBar Grid.Row="1"
                  x:Name="infoBar"
@@ -31,31 +48,21 @@
                  Margin="50 10 50 10"
                  Message="Définir un message aproprié"/>
 
-        <ListView x:Name="lvProjets" Grid.Row="3" Margin="10" SelectionChanged="lvEmployes_SelectionChanged">
+        <ListView x:Name="lvListeProjets" Grid.Row="3" Margin="10" SelectionChanged="lvListeProjets_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Projet">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10" HorizontalAlignment="Stretch">
-                        <Ellipse Width="50" Height="50" Margin="0 0 10 0">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="{x:Bind LienPhoto}" Stretch="UniformToFill"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <TextBlock Text="{x:Bind Matricule}" Margin="5" VerticalAlignment="Center" FontSize="15"  />
+                        <TextBlock Text="{x:Bind NoProjet}" Margin="5" VerticalAlignment="Center" FontSize="15"  />
                         <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                        <TextBlock Text="{x:Bind Prenom}" VerticalAlignment="Center"  Margin="5" FontSize="15"/>
-                        <TextBlock Text="{x:Bind Nom}" VerticalAlignment="Center"  Margin="5" FontSize="15"/>
+                        <TextBlock Text="{x:Bind Titre}" VerticalAlignment="Center"  Margin="5" FontSize="15"/>
                         <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                        <TextBlock Text="{x:Bind DateNaissance}" VerticalAlignment="Center" Margin="5" FontSize="15"/>
+                        <TextBlock Text="{x:Bind DateDebut}" VerticalAlignment="Center" Margin="5" FontSize="15"/>
                         <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                        <TextBlock Text="{x:Bind Email}" VerticalAlignment="Center"  Margin="5" FontSize="15"/>
-                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                        <TextBlock Text="{x:Bind Adresse}" VerticalAlignment="Center" Margin="5" FontSize="15"/>
-                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                        <TextBlock Text="{x:Bind DateEmbauche}" VerticalAlignment="Center" Margin="5" FontSize="15"/>
-                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                        <TextBlock Text="{x:Bind TauxHoraireFormat}" VerticalAlignment="Center" Margin="5" FontSize="15"/>
+                        <TextBlock Text="{x:Bind BudgetFormat}" VerticalAlignment="Center"  Margin="5" FontSize="15"/>
                         <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
                         <TextBlock Text="{x:Bind Statut}" VerticalAlignment="Center" Margin="5" FontSize="15"/>
+                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
+                        <TextBlock Text="{x:Bind NomClient}" VerticalAlignment="Center" Margin="5" FontSize="15"/>
                         <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
                     </StackPanel>
                 </DataTemplate>
