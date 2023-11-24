@@ -26,6 +26,7 @@ namespace GestionProjetsEtClients
         public AfficherProjets()
         {
             this.InitializeComponent();
+            lvListeProjets.ItemsSource = SingletonProjet.getInstance().Projets;
 
             if (SingletonMessageValidation.getInstance().AfficherSucces)
             {
@@ -45,6 +46,20 @@ namespace GestionProjetsEtClients
             {
                 infoBar.IsOpen = false;
             }
+        }
+
+        private void lvListeProjets_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lvListeProjets.SelectedIndex >= 0)
+            {
+                SingletonMessageValidation.getInstance().annulerMessage();
+                this.Frame.Navigate(typeof(ZoomProjet), lvListeProjets.SelectedIndex);
+            }
+        }
+
+        private void abbExportProjet_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

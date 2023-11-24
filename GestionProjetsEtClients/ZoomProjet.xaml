@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Page
+    x:Class="GestionProjetsEtClients.ZoomProjet"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GestionProjetsEtClients"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <ScrollViewer x:Name="grilleProjet">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="tblTitrePage"
+                   HorizontalAlignment="Left"
+                   FontSize="25"
+                   Margin="50 15 0 0"/>
+
+                <CommandBar Grid.Column="1" 
+                    x:Name="commandBarHaut"
+                    Background="Transparent" 
+                    IsOpen="False" 
+                    DefaultLabelPosition="Right"
+                    Margin="0 0 15 0">
+                    <AppBarButton x:Name="abModifierProjet" Icon="Edit" Label="Modifier" Click="abModifierProjet_Click" />
+                </CommandBar>
+            </Grid>
+
+            <InfoBar Grid.Row="1"
+                     x:Name="infoBar"
+                     IsOpen="False"
+                     Severity="Success"
+                     Title="Titre"
+                     Margin="50 10 50 10"
+                     Message="Définir un message aproprié" />
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                       x:Name="tblStatut"
+                       FontSize="20"
+                       Margin="50 15 0 0"/>
+
+                <TextBlock Grid.Column="1"
+                           x:Name="tblBudget"
+                           FontSize="20"
+                           Margin="50 15 0 0"/>
+                
+                <TextBlock Grid.Column="2"
+                           x:Name="tblDateDebut"
+                           FontSize="20"
+                           Margin="50 15 0 0"/>
+
+            </Grid>
+
+            <TextBlock Grid.Row="4"
+                       x:Name="tblClient"
+                       FontSize="20"
+                       Margin="50 15 0 0"/>
+
+            <RichTextBlock Grid.Row="6"
+                           Margin="50 15 50 0"
+                           FontSize="20">
+                <Paragraph x:Name="rtbpDescription"></Paragraph>
+            </RichTextBlock>
+
+            <TextBlock Grid.Row="7"
+                       x:Name="tblTotalSalaire"
+                       FontSize="20"
+                       Margin="50 15 0 0"/>
+
+            <Grid Grid.Row="8" Margin="0 20 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Travail effectué"
+                               HorizontalAlignment="Left"
+                               FontSize="25"
+                               Margin="50 15 3 0"/>
+
+                    <TextBlock x:Name="tblEmployeRequis" 
+                               Text="(max employé)"
+                               HorizontalAlignment="Left"
+                               FontSize="25"
+                               Margin="50 15 3 0"/>
+                </StackPanel>
+
+                <CommandBar Grid.Column="1" 
+                            x:Name="commandBarBas"
+                            Background="Transparent" 
+                            IsOpen="False" 
+                            DefaultLabelPosition="Right"
+                            Margin="0 0 15 0">
+                    <AppBarButton x:Name="abAjouterEmployer" Icon="Add" Label="Ajouter un employé" Click="abAjouterEmployer_Click" />
+                    <AppBarButton x:Name="abModiferHeures" Icon="Edit" Label="Modifier les heures de travail" Click="abModiferHeures_Click" />
+                </CommandBar>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</Page>

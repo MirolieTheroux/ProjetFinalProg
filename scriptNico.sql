@@ -165,6 +165,17 @@ BEGIN
 END //
 DELIMITER ;
 
+-- (Nicolas) Fonction pour obetnir le nom du client
+DROP FUNCTION IF EXISTS f_get_nom_client;
+DELIMITER //
+CREATE function f_get_nom_client(id_recherche INT) RETURNS VARCHAR(100)
+BEGIN
+	DECLARE nom_client VARCHAR(100);
+	SELECT nom INTO nom_client FROM client WHERE id_client = id_recherche;
+	RETURN nom_client;
+END//
+DELIMITER ;
+
 -- (Nicolas) Procédure pour obtenir les projets
 DROP PROCEDURE IF EXISTS p_get_projets;
 DELIMITER //
