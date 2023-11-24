@@ -14,44 +14,64 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
+        
+        <TextBlock x:Name="txtBlNom" HorizontalAlignment="Left" FontSize="25" Margin="50 15 0 0"></TextBlock>
 
         <CommandBar 
-       Grid.Column="1"
-        x:Name="comModifier"
-        Background="Transparent" 
-        IsOpen="False" 
-        FontSize="20"
-        DefaultLabelPosition="Right"
-        Margin="0 0 15 0">
-            <AppBarButton Icon="Edit" Label="Modifier" Click="AppBarButton_Click" />
-        </CommandBar>
+              Grid.Column="2"
+              x:Name="commandBar"
+              Background="Transparent" 
+              IsOpen="False" 
+              FontSize="20"
+              DefaultLabelPosition="Right"
+              Margin="0 0 15 0">
+                <AppBarButton Icon="Edit" Label="Modifier" Click="AppBarButton_Click" />
+                <AppBarButton Icon="Add" Label="Associer un projet" Click="AppBarButton_Click_1"></AppBarButton>
+            </CommandBar>
+  
+        <InfoBar 
+          Grid.Row="1"
+            Grid.ColumnSpan="2"
+          x:Name="infoBar"
+          IsOpen="False"
+          Severity="Success"
+          Title="Titre"
+          Margin="50 10 50 10"
+          Message="Définir un message aproprié" />
 
-        <StackPanel HorizontalAlignment="Center">
-            <Ellipse HorizontalAlignment="Center" Width="150" Height="150" Margin="0 0 10 0">
-                <Ellipse.Fill>
-                    <ImageBrush x:Name="imgProfil" Stretch="UniformToFill"/>
-                </Ellipse.Fill>
-            </Ellipse>
-            
-            <TextBlock x:Name="txtBlMatricule" Margin="5" Grid.Row="1"></TextBlock>
-            <TextBlock x:Name="txtBlPrenom" Margin="5" Grid.Row="2"></TextBlock>
-            <TextBlock x:Name="txtBlNom" Grid.Row="3" Margin="5"></TextBlock>
-            <TextBlock x:Name="txtBlDateNaissance" Grid.Row="4" Margin="5"></TextBlock>
-            <TextBlock x:Name="txtBlEmail" Grid.Column="1"  Grid.Row="1" Margin="5"></TextBlock>
-            <TextBlock x:Name="txtBlAdresse" Grid.Column="1" Grid.Row="2" Margin="5"></TextBlock>
-            <TextBlock x:Name="txtBlDateEmbauche"  Grid.Column="1" Grid.Row="3" Margin="5"></TextBlock>
-            <TextBlock x:Name="txtBlAnciennete"  Grid.Column="1" Grid.Row="4" Margin="5"></TextBlock>
-            <TextBlock x:Name="txtBlTauxHoraire"  Grid.Column="1" Grid.Row="5" Margin="5"></TextBlock>
-            <TextBlock x:Name="txtBlStatut"  Grid.Column="1" Grid.Row="6" Margin="5"></TextBlock>
+        <StackPanel Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50 15 0 0" BorderBrush="DarkGreen" BorderThickness="2" Height="450" Width="350">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Ellipse HorizontalAlignment="Center" Width="150" Margin="0 10 0 0"  Height="150" >
+                    <Ellipse.Fill>
+                        <ImageBrush x:Name="imgProfil" Stretch="UniformToFill"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <TextBlock x:Name="txtBlMatricule" TextAlignment="Center" Grid.Row="1" Margin="5" ></TextBlock>
+                <TextBlock x:Name="txtBlDateNaissance" TextAlignment="Center" Grid.Row="2" Margin="5"></TextBlock>
+                <TextBlock x:Name="txtBlEmail" TextAlignment="Center"  Grid.Row="3" Margin="5"></TextBlock>
+                <TextBlock x:Name="txtBlAdresse" TextAlignment="Center" Grid.Row="4" Margin="5"></TextBlock>
+                <TextBlock x:Name="txtBlDateEmbauche" TextAlignment="Center" Grid.Row="5" Margin="5"></TextBlock>
+                <TextBlock x:Name="txtBlAnciennete" TextAlignment="Center" Grid.Row="6" Margin="5"></TextBlock>
+                <TextBlock x:Name="txtBlTauxHoraire" TextAlignment="Center" Grid.Row="7" Margin="5"></TextBlock>
+                <TextBlock x:Name="txtBlStatut" TextAlignment="Center" Grid.Row="8" Margin="5"></TextBlock>
+            </Grid>
         </StackPanel>
     </Grid>
 </Page>

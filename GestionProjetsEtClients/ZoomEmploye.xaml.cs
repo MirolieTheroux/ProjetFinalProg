@@ -30,6 +30,18 @@ namespace GestionProjetsEtClients
         public ZoomEmploye()
         {
             this.InitializeComponent();
+
+            if (SingletonMessageValidation.getInstance().AfficherSucces)
+            {
+                infoBar.IsOpen = true;
+                infoBar.Severity = InfoBarSeverity.Success;
+                infoBar.Title = SingletonMessageValidation.getInstance().Titre.ToString();
+                infoBar.Message = SingletonMessageValidation.getInstance().Message.ToString();
+            }
+            else
+            {
+                infoBar.IsOpen = false;
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -39,9 +51,8 @@ namespace GestionProjetsEtClients
             {
             
                 imgProfil.ImageSource = new BitmapImage(new Uri(SingletonEmploye.getInstance().Employes[index].LienPhoto));
-                txtBlMatricule.Text = "Matricule : " + SingletonEmploye.getInstance().Employes[index].Matricule;
-                txtBlPrenom.Text = "Prénom : " + SingletonEmploye.getInstance().Employes[index].Prenom;
-                txtBlNom.Text ="Nom : " + SingletonEmploye.getInstance().Employes[index].Nom;
+                txtBlMatricule.Text = "Matricule : " + SingletonEmploye.getInstance().Employes[index].Matricule; 
+                txtBlNom.Text = SingletonEmploye.getInstance().Employes[index].Prenom + " " +  SingletonEmploye.getInstance().Employes[index].Nom;
                 txtBlDateNaissance.Text ="Date de naissance : " + SingletonEmploye.getInstance().Employes[index].DateNaissance;
                 txtBlEmail.Text ="Courriel : " + SingletonEmploye.getInstance().Employes[index].Email;
                 txtBlAdresse.Text = "Adresse : " + SingletonEmploye.getInstance().Employes[index].Adresse;
@@ -65,7 +76,14 @@ namespace GestionProjetsEtClients
             modifierEmploye.SecondaryButtonText = "Annuler";
             modifierEmploye.DefaultButton = ContentDialogButton.Primary;
             var resultat = await modifierEmploye.ShowAsync();
+
+            //raffraichis la liste des employés
+            SingletonEmploye.getInstance().getListeEmployesBD();
             this.Frame.Navigate(typeof(ZoomEmploye), index);
+        }
+
+        private void AppBarButton_Click_1(object sender, RoutedEventArgs e)
+        {
 
         }
     }

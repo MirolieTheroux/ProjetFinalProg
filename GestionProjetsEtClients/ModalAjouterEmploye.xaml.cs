@@ -116,8 +116,14 @@ namespace GestionProjetsEtClients
                 string sEmbauche = Convert.ToString(calDateEmbauche.Date);
                 string sDateEmbauche = sEmbauche.Substring(0, 10);
 
-                SingletonEmploye.getInstance().ajouterEmployesBD(txtBoxNom.Text, txtBoxPrenom.Text, sDateNaissance, txtBoxCourriel.Text, txtBoxAdresse.Text,
-                sDateEmbauche, Convert.ToDouble(txtBoxTauxHoraire.Text), txtBoxPhoto.Text, cmbBoxStatut.SelectedItem as string);
+                if (SingletonEmploye.getInstance().ajouterEmployesBD(txtBoxNom.Text, txtBoxPrenom.Text, sDateNaissance, txtBoxCourriel.Text, txtBoxAdresse.Text,
+                 sDateEmbauche, Convert.ToDouble(txtBoxTauxHoraire.Text), txtBoxPhoto.Text, cmbBoxStatut.SelectedItem as string) > 0)
+                {
+                    SingletonMessageValidation.getInstance().AfficherSucces = true;
+                    SingletonMessageValidation.getInstance().AfficherErreur = false;
+                    SingletonMessageValidation.getInstance().Titre = "Ajout";
+                    SingletonMessageValidation.getInstance().Titre = "L'ajout d'un employé a fonctionné";
+                }
             }
         }
 

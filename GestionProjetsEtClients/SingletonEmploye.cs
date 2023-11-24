@@ -106,12 +106,13 @@ namespace GestionProjetsEtClients
         /// <param name="taux_horaire">Taux Horaire de l'employé</param>
         /// <param name="lien_photo">Photo de l'employé</param>
         /// <param name="statut">Statut de l'employé</param>
-        public void ajouterEmployesBD(string nom, string prenom, string date_naissance, string email, string adresse, string date_embauche, double taux_horaire, string lien_photo, string statut)
+        public int ajouterEmployesBD(string nom, string prenom, string date_naissance, string email, string adresse, string date_embauche, double taux_horaire, string lien_photo, string statut)
         {
+            int iValidation = 0;
             try
             {
-                //appel de la procédure stockées (plus de requête SQL)
-                MySqlCommand commande = new MySqlCommand("p_ajouter_enployes");
+                //appel de la procédure stockées
+                MySqlCommand commande = new MySqlCommand("p_ajouter_employes");
                 commande.Connection = connection;
                 commande.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -127,16 +128,21 @@ namespace GestionProjetsEtClients
 
                 connection.Open();
                 commande.Prepare();
-                commande.ExecuteNonQuery();
+                iValidation = commande.ExecuteNonQuery();
 
                 connection.Close();
 
                 getListeEmployesBD();
+                return iValidation;
             }
             catch (Exception ex)
             {
                 if (connection.State == System.Data.ConnectionState.Open)
+                {
                     connection.Close();
+                    return iValidation;
+                }
+                return iValidation;
             }
         }
 
@@ -151,11 +157,12 @@ namespace GestionProjetsEtClients
         /// <param name="taux_horaire">Taux Horaire de l'employé</param>
         /// <param name="lien_photo">Photo de l'employé</param>
         /// <param name="statut">Statut de l'employé</param>
-        public void modifierEmployesBD(string matricule, string nom, string prenom, string email, string adresse, double taux_horaire, string lien_photo, string statut)
+        public int modifierEmployesBD(string matricule, string nom, string prenom, string email, string adresse, double taux_horaire, string lien_photo, string statut)
         {
+            int iValidation = 0;
             try
             {
-                //appel de la procédure stockées (plus de requête SQL)
+                //appel de la procédure stockées 
                 MySqlCommand commande = new MySqlCommand("p_modifier_employe");
                 commande.Connection = connection;
                 commande.CommandType = System.Data.CommandType.StoredProcedure;
@@ -171,23 +178,23 @@ namespace GestionProjetsEtClients
 
                 connection.Open();
                 commande.Prepare();
-                commande.ExecuteNonQuery();
+                iValidation = commande.ExecuteNonQuery();
 
                 connection.Close();
 
                 getListeEmployesBD();
+                return iValidation;
             }
             catch (Exception ex)
             {
                 if (connection.State == System.Data.ConnectionState.Open)
+                {
                     connection.Close();
+                    return iValidation;
+                }
+                return iValidation;
             }
         }
-
-
-
     }
-
-
 }
 

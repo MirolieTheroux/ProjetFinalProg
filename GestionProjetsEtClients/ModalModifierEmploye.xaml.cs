@@ -51,7 +51,7 @@ namespace GestionProjetsEtClients
                 calDateEmbauche.Date = dateEmbauche;
             }
             txtBoxTauxHoraire.Text = SingletonEmploye.getInstance().Employes[iIndex].TauxHoraire.ToString();
-           
+
             switch (SingletonEmploye.getInstance().Employes[iIndex].Statut)
             {
                 case "Journalier":
@@ -126,7 +126,7 @@ namespace GestionProjetsEtClients
 
             if (cmbBoxStatut.IsEnabled)
             {
-                
+
 
                 if (!SingletonVerification.getInstance().isStatutValide(cmbBoxStatut.SelectedIndex))
                 {
@@ -147,14 +147,19 @@ namespace GestionProjetsEtClients
                 args.Cancel = true;
             }
 
-
             if (!bErreur)
             {
                 string sMatricule = SingletonEmploye.getInstance().Employes[iIndex].Matricule;
-                SingletonEmploye.getInstance().modifierEmployesBD(sMatricule,txtBoxNom.Text, txtBoxPrenom.Text, txtBoxCourriel.Text, txtBoxAdresse.Text,
-                Convert.ToDouble(txtBoxTauxHoraire.Text), txtBoxPhoto.Text, cmbBoxStatut.SelectedItem as string);
-            }
 
+                if (SingletonEmploye.getInstance().modifierEmployesBD(sMatricule, txtBoxNom.Text, txtBoxPrenom.Text, txtBoxCourriel.Text, txtBoxAdresse.Text,
+                Convert.ToDouble(txtBoxTauxHoraire.Text), txtBoxPhoto.Text, cmbBoxStatut.SelectedItem as string) > 0)
+                {
+                    SingletonMessageValidation.getInstance().AfficherSucces = true;
+                    SingletonMessageValidation.getInstance().AfficherErreur = false;
+                    SingletonMessageValidation.getInstance().Titre = "Modification";
+                    SingletonMessageValidation.getInstance().Titre = "La modification de l'employé a fonctionnée";
+                }
+            }
         }
 
         private void ContentDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
