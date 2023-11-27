@@ -181,7 +181,41 @@ DROP PROCEDURE IF EXISTS p_get_projets;
 DELIMITER //
 CREATE PROCEDURE p_get_projets()
 BEGIN
-    SELECT * FROM projet;
+    SELECT
+        no_projet,
+        titre,
+        date_debut,
+        description,
+        budget,
+        nbr_employe_requis,
+        total_salaire,
+        statut,
+        id_client,
+        f_get_nom_client(id_client) as nom_client
+    FROM projet;
+END //
+DELIMITER ;
+
+-- (Nicolas) Procédure pour obtenir les projets d'un client
+DROP PROCEDURE IF EXISTS p_get_projets_client;
+DELIMITER //
+CREATE PROCEDURE p_get_projets_client(IN _id_client INT)
+BEGIN
+    SELECT 
+        no_projet,
+        titre,
+        date_debut,
+        description,
+        budget,
+        nbr_employe_requis,
+        total_salaire,
+        statut,
+        id_client,
+        f_get_nom_client(id_client) as nom_client
+    FROM projet
+    WHERE id_client = _id_client
+    ORDER BY FIELD(statut,'en cours','terminé'),
+             date_debut;
 END //
 DELIMITER ;
 
@@ -189,6 +223,7 @@ DELIMITER ;
 -- Attention, modifier les id_client selon le réel si l'on éxécute se script pour la première fois (à cause des nombre aléatoire)
 CALL p_ajout_projet("Retructuration de l'architecture informatique", '2022-10-10', "Recréer une nouvelle archiecture de l'infrastructure informatique du client en lui proposant un système de gestion des dossiers, un système de cybersécurité et un support technique.", 200000, 4, 972);
 CALL p_ajout_projet("Audit sur le réseau inter-pavillons", CURDATE(), "Déterminer les enjeux lier à la passation d'un cable réseau entre le pavillon des humanités et le pavillons des sciences pour simplifier le transfert d'information entre ceux-ci. Valider le gain en cybersécurité, le cout et le temps nécessaire à la réalisation de cet éventuel projet.", 15800, 1, 915);
+CALL p_ajout_projet("Achats d'un poste informatique", '2001-05-09', "Guider le client dans l'achat d'un poste informatique", 250, 1, 972);
 
 
 
