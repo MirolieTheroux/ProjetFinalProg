@@ -14,6 +14,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using System.Reflection;
 using Windows.Globalization.NumberFormatting;
+using Microsoft.UI;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -62,6 +63,78 @@ namespace GestionProjetsEtClients
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+            bool erreurSaisie = false;
+
+            if (String.IsNullOrEmpty(tbxTitre.Text))
+            {
+                tbxTitre.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidTitre.Visibility = Visibility.Visible;
+                erreurSaisie = true;
+                args.Cancel = true;
+            }
+            else
+            {
+                tbxTitre.ClearValue(TextBox.BorderBrushProperty);
+                tblInvalidTitre.Visibility = Visibility.Collapsed;
+                titre = tbxTitre.Text;
+            }
+
+            if (nbxBudget.Value is double.NaN)
+            {
+                nbxBudget.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidBudget.Visibility = Visibility.Visible;
+                erreurSaisie = true;
+                args.Cancel = true;
+            }
+            else
+            {
+                nbxBudget.ClearValue(TextBox.BorderBrushProperty);
+                tblInvalidBudget.Visibility = Visibility.Collapsed;
+                budget = (double)nbxBudget.Value;
+            }
+
+            if (nbxNbrEmployeRequis.Value is double.NaN)
+            {
+                nbxNbrEmployeRequis.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidNbrEmployeRequis.Visibility = Visibility.Visible;
+                erreurSaisie = true;
+                args.Cancel = true;
+            }
+            else
+            {
+                nbxNbrEmployeRequis.ClearValue(TextBox.BorderBrushProperty);
+                tblInvalidNbrEmployeRequis.Visibility = Visibility.Collapsed;
+                nbrEmployeRequis = (int)nbxNbrEmployeRequis.Value;
+            }
+
+            if (SingletonVerification.getInstance().isDateDebutValide(Convert.ToString(calDateDebut.Date)))
+            {
+                calDateDebut.ClearValue(TextBox.BorderBrushProperty);
+                tblInvalidDateDebut.Visibility = Visibility.Collapsed;
+                string sNaissance = Convert.ToString(calDateDebut.Date);
+            }
+            else
+            {
+                calDateDebut.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidDateDebut.Visibility = Visibility.Visible;
+                erreurSaisie = true;
+                args.Cancel = true;
+            }
+
+            if (String.IsNullOrEmpty(tbxDescription.Text))
+            {
+                tbxDescription.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidDescription.Visibility = Visibility.Visible;
+                erreurSaisie = true;
+                args.Cancel = true;
+            }
+            else
+            {
+                tbxDescription.ClearValue(TextBox.BorderBrushProperty);
+                tblInvalidDescription.Visibility = Visibility.Collapsed;
+                description = tbxDescription.Text;
+            }
+
 
         }
 
