@@ -58,6 +58,9 @@ namespace GestionProjetsEtClients
                 tblAdresse.Text = $"Adresse : {SingletonClient.getInstance().Clients[index].Adresse.ToString()}";
                 tblNoTel.Text = $"Numéro de téléphone : {SingletonClient.getInstance().Clients[index].NoTelephone.ToString()}";
                 tblEmail.Text = $"Adresse courriel : {SingletonClient.getInstance().Clients[index].Email.ToString()}";
+
+                SingletonProjet.getInstance().getListeProjetsClient(SingletonClient.getInstance().Clients[index].Id);
+                lvListeProjetClient.ItemsSource = SingletonProjet.getInstance().Projets;
             }
         }
 
@@ -74,14 +77,45 @@ namespace GestionProjetsEtClients
             this.Frame.Navigate(typeof(ZoomClient), index);
         }
 
-        private void abCreerProjet_Click(object sender, RoutedEventArgs e)
+        private async void abCreerProjet_Click(object sender, RoutedEventArgs e)
         {
+            SingletonClient.getInstance().setIndex(index);
+            ModalAjoutProjet ajoutProjet = new ModalAjoutProjet();
+            ajoutProjet.XamlRoot = grilleClient.XamlRoot;
+            ajoutProjet.Title = "Ajouter un projet";
+            ajoutProjet.PrimaryButtonText = "Ajouter";
+            ajoutProjet.SecondaryButtonText = "Annuler";
+            ajoutProjet.DefaultButton = ContentDialogButton.Primary;
 
+            var resultat = await ajoutProjet.ShowAsync();
+
+            if (SingletonMessageValidation.getInstance().AfficherSucces)
+            {
+                infoBar.IsOpen = true;
+                infoBar.Severity = InfoBarSeverity.Success;
+                infoBar.Title = SingletonMessageValidation.getInstance().Titre.ToString();
+                infoBar.Message = SingletonMessageValidation.getInstance().Message.ToString();
+            }
+            else if (SingletonMessageValidation.getInstance().AfficherErreur)
+            {
+                infoBar.IsOpen = true;
+                infoBar.Severity = InfoBarSeverity.Error;
+                infoBar.Title = SingletonMessageValidation.getInstance().Titre.ToString();
+                infoBar.Message = SingletonMessageValidation.getInstance().Message.ToString();
+            }
+            else
+            {
+                infoBar.IsOpen = false;
+            }
         }
 
         private void lvListeProjetClient_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            if (lvListeProjetClient.SelectedIndex >= 0)
+            {
+                SingletonMessageValidation.getInstance().annulerMessage();
+                this.Frame.Navigate(typeof(ZoomProjet), lvListeProjetClient.SelectedIndex);
+            }
         }
     }
 }
