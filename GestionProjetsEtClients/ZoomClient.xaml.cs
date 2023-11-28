@@ -107,6 +107,8 @@ namespace GestionProjetsEtClients
             {
                 infoBar.IsOpen = false;
             }
+
+            this.Frame.Navigate(typeof(ZoomClient), index);
         }
 
         private void lvListeProjetClient_SelectionChanged(object sender, SelectionChangedEventArgs e)

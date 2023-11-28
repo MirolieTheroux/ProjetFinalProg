@@ -15,6 +15,7 @@ using Microsoft.UI.Xaml.Navigation;
 using System.Reflection;
 using Windows.Globalization.NumberFormatting;
 using Microsoft.UI;
+using Microsoft.WindowsAppSDK.Runtime.Packages;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -25,6 +26,7 @@ namespace GestionProjetsEtClients
     {
         int indexClient;
         string titre;
+        string dateDebutPrep;
         string dateDebut;
         string description;
         double budget;
@@ -97,6 +99,15 @@ namespace GestionProjetsEtClients
             {
                 nbxNbrEmployeRequis.BorderBrush = new SolidColorBrush(Colors.Red);
                 tblInvalidNbrEmployeRequis.Visibility = Visibility.Visible;
+                tblInvalidNbrEmployeRequis.Text = "Veuillez entrer le nombre d'employés requis";
+                erreurSaisie = true;
+                args.Cancel = true;
+            }
+            else if (nbxNbrEmployeRequis.Value < 1 || nbxNbrEmployeRequis.Value > 5)
+            {
+                nbxNbrEmployeRequis.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidNbrEmployeRequis.Visibility = Visibility.Visible;
+                tblInvalidNbrEmployeRequis.Text = "Entrer un nombre entre 1 et 5 inclus";
                 erreurSaisie = true;
                 args.Cancel = true;
             }
@@ -111,7 +122,8 @@ namespace GestionProjetsEtClients
             {
                 calDateDebut.ClearValue(TextBox.BorderBrushProperty);
                 tblInvalidDateDebut.Visibility = Visibility.Collapsed;
-                string sNaissance = Convert.ToString(calDateDebut.Date);
+                dateDebutPrep = Convert.ToString(calDateDebut.Date);
+                dateDebut = dateDebutPrep.Substring(0, 10);
             }
             else
             {
@@ -135,11 +147,28 @@ namespace GestionProjetsEtClients
                 description = tbxDescription.Text;
             }
 
-
+            if (!erreurSaisie)
+            {
+                if (SingletonProjet.getInstance().ajouter(titre, dateDebut, description, budget, nbrEmployeRequis, idClient) > 0)
+                {
+                    SingletonMessageValidation.getInstance().AfficherSucces = true;
+                    SingletonMessageValidation.getInstance().AfficherErreur = false;
+                    SingletonMessageValidation.getInstance().Titre = "Ajout";
+                    SingletonMessageValidation.getInstance().Titre = "L'ajout du projet a fonctionné";
+                }
+                else
+                {
+                    SingletonMessageValidation.getInstance().AfficherSucces = false;
+                    SingletonMessageValidation.getInstance().AfficherErreur = true;
+                    SingletonMessageValidation.getInstance().Titre = "Ajout";
+                    SingletonMessageValidation.getInstance().Titre = "L'ajout du projet a échoué";
+                }
+            }
         }
 
         private void ContentDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+            SingletonMessageValidation.getInstance().annulerMessage();
             args.Cancel = false;
         }
     }

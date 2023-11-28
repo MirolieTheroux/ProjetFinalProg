@@ -149,5 +149,40 @@ namespace GestionProjetsEtClients
             }
 
         }
+
+        public int ajouter(string titre, string date_debut, string description, double budget, int nbr_employe_requis, int id_client)
+        {
+            int validation = 0;
+            try
+            {
+                MySqlCommand command = new MySqlCommand("p_ajout_projet");
+                command.Connection = con;
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("_titre", titre);
+                command.Parameters.AddWithValue("_date_debut", date_debut);
+                command.Parameters.AddWithValue("_description", description);
+                command.Parameters.AddWithValue("_budget", budget);
+                command.Parameters.AddWithValue("_nbr_employe_requis", nbr_employe_requis);
+                command.Parameters.AddWithValue("_id_client", id_client);
+
+                con.Open();
+                command.Prepare();
+                validation = command.ExecuteNonQuery();
+                con.Close();
+
+                SingletonClient.getInstance().getListeClients();
+                return validation;
+            }
+            catch (MySqlException ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                {
+                    con.Close();
+                    return validation;
+                }
+                return validation;
+            }
+        }
     }
 }
