@@ -35,15 +35,6 @@
                         DefaultLabelPosition="Right"
                         Margin="0 0 15 0">
                 <AppBarButton Icon="Add" Label="Ajouter un client" Click="AppBarButton_Click" />
-                <!--<AppBarButton Icon="Edit" Label="Edit"/>
-                <AppBarButton Icon="Share" Label="Share"/>
-                <CommandBar.SecondaryCommands>
-                    <AppBarButton Icon="Setting" Label="Settings">
-                        <AppBarButton.KeyboardAccelerators>
-                            <KeyboardAccelerator Modifiers="Control" Key="I" />
-                        </AppBarButton.KeyboardAccelerators>
-                    </AppBarButton>
-                </CommandBar.SecondaryCommands>-->
             </CommandBar>
 
         </Grid>
@@ -56,23 +47,25 @@
                  Margin="50 10 50 10"
                  Message="Définir un message aproprié" />
 
-        <GridView x:Name="gvListeClients" 
+        <ListView x:Name="lvListeClients" 
                   Grid.Row="3"
-                  HorizontalAlignment="Center"
-                  Margin="50 15 50 15"
-                  SelectionChanged="gvListeClients_SelectionChanged">
-            <GridView.ItemTemplate>
+                  Margin="10"
+                  SelectionChanged="lvListeClients_SelectionChanged">
+            <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Client">
-                    <StackPanel Orientation="Vertical"
-                                Margin="10"
-                                Width="225">
-                        <TextBlock  Text="{x:Bind Nom, Mode=OneWay}"
-                                    FontSize="15"
-                                    HorizontalAlignment="Center"
-                                    FontWeight="Bold"/>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10" HorizontalAlignment="Stretch">
+                        <TextBlock Text="{x:Bind Nom}" Margin="5" VerticalAlignment="Center" FontSize="15"  />
+                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
+                        <TextBlock Text="{x:Bind Id}" Margin="5" VerticalAlignment="Center" FontSize="15"  />
+                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
+                        <TextBlock Text="{x:Bind Adresse}" VerticalAlignment="Center" Margin="5" FontSize="15"/>
+                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
+                        <TextBlock Text="{x:Bind NoTelephone}" VerticalAlignment="Center"  Margin="5" FontSize="15"/>
+                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
+                        <TextBlock Text="{x:Bind Email}" VerticalAlignment="Center"  Margin="5" FontSize="15"/>
                     </StackPanel>
                 </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

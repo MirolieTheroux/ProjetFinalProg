@@ -66,6 +66,14 @@ namespace GestionProjetsEtClients
 
         }
 
+        public bool isDateDebutValide(string date)
+        {
+            if (date == "")
+                return false;
+            else
+                return true;
+        }
+
         public bool isCourrielValide(string courriel)
         {
             string email = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";

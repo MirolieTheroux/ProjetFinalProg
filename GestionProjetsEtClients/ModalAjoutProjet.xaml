@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentDialog
+    x:Class="GestionProjetsEtClients.ModalAjoutProjet"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GestionProjetsEtClients"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    CloseButtonClick="ContentDialog_CloseButtonClick">
+
+    <ScrollViewer>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBox Grid.Row="0"
+                     x:Name="tbxTitre"
+                     Header="Titre"/>
+            <TextBlock Grid.Row="1"
+                       x:Name="tblInvalidTitre"
+                       Foreground="Red"
+                       Visibility="Collapsed"
+                       Text="Veuillez entrer le titre"/>
+
+            <CalendarDatePicker Grid.Row="2" x:Name="calDateDebut" Margin="0 10 0 0"  Header="Date de début" HorizontalAlignment="Stretch"/>
+            <TextBlock Grid.Row="3" x:Name="tblInvalidDateDebut" Foreground="Red" Visibility="Collapsed"
+                       Text="Veuillez entrer la date de début"/>
+
+            <NumberBox Grid.Row="4"
+                       x:Name="nbxBudget"
+                       Header="Budget"
+                       Margin="0 10 0 0"/>
+            <TextBlock Grid.Row="5"
+                       x:Name="tblInvalidBudget"
+                       Foreground="Red"
+                       Visibility="Collapsed"
+                       Text="Veuillez entrer le budget"/>
+            
+            <NumberBox Grid.Row="6"
+                       x:Name="nbxNbrEmployeRequis"
+                       Header="Nombre d'employés requis"
+                       Margin="0 10 0 0"/>
+            <TextBlock Grid.Row="7"
+                       x:Name="tblInvalidNbrEmployeRequis"
+                       Foreground="Red"
+                       Visibility="Collapsed"
+                       Text="Veuillez entrer le nombre d'employés requis"/>
+            
+            <TextBox AutomationProperties.Name="multi-line TextBox"
+                     Grid.Row="8" 
+                     x:Name="tbxDescription" 
+                     Header="Description" 
+                     Margin="0 10 0 0"
+                     TextWrapping="Wrap" 
+                     AcceptsReturn="True" 
+                     IsSpellCheckEnabled="True"/>
+            <TextBlock Grid.Row="9"
+                       x:Name="tblInvalidDescription"
+                       Foreground="Red"
+                       Visibility="Collapsed"
+                       Text="Veuillez entrer la description"/>
+        </Grid>
+    </ScrollViewer>
+</ContentDialog>

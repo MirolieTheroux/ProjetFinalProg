@@ -96,8 +96,20 @@ END //
 DELIMITER ;
 
 -- (Nicolas) Ajout d'élément dans la table client
-CALL p_ajout_client('Boisdaction inc.', '2165 rue Jules Paquette', '819-621-2333','info@boisdaction.com');
-CALL p_ajout_client('Cégep de Trois-Rivières', '3500 rue de Courval', '819-376-1721','info@cegeptr.qc.ca');
+CALL p_ajout_client('Boisdaction inc.', '2165 rue Jules Paquette, Plessisville, QC, G6U 3R5', '819-621-2333','info@boisdaction.com');
+CALL p_ajout_client('Cégep de Trois-Rivières', '3500 rue de Courval, Trois-Rivières, QC, G7T 5D4', '819-376-1721','info@cegeptr.qc.ca');
+CALL p_ajout_client('Planit Canada inc.', '468 rue Main, Hudson, QC, H5T 4F5', '514-375-9676','info@planitcanada.ca');
+CALL p_ajout_client('Progression', '356 rue Parent, Trois-Rivières, QC, G2T 5H6', '819-377-8456','info@progression.ca');
+CALL p_ajout_client('Sonia Leblanc Agente immobilière', '245 des Érables, Plessisville, QC, G6W 3E4', '819-376-1721','sonial@hotmail.com');
+CALL p_ajout_client('Cégep de Victoriaville', '432 boul. Bois-Franc, Victoriaville, QC, G5E 7T3', '819-758-7461','info@cegepvicto.qc.ca');
+CALL p_ajout_client('Le Grand Constant', '30 rang St-Charles, Trois-Rivières, QC, G9B 3R5', '819-377-1552','constant@gmail.com');
+CALL p_ajout_client('IGA Ronald Giguères', '260 chemin Ste-Margerite, Trois-Rivières, QC, G5R 6Y5', '819-377-8441','rgiguere@iga.ca');
+CALL p_ajout_client('Desjardins Trois-Rivières', '450 boul. Jean XVIII, Trois-Rivières, QC, G2W 9G5', '819-687-8552','mtremblay@desjardins.ca');
+CALL p_ajout_client('Tim Hortons', '3000 rue des Forges, Trois-Rivières, QC, G6T 9F4', '819-376-5579','info@timhortons.ca');
+CALL p_ajout_client('Boutique Imaginaire', '2590 rue des Forges, Trois-Rivières, QC, G6T 3E4', '819-377-8876','info@imaginaire.ca');
+CALL p_ajout_client('Patricia Tremblay Représentant Tupperware', '4503 rue de la forêt, Trois-Rivières, QC, G5T 2E0', '768-558-9842','ptremblay@gmail.com');
+CALL p_ajout_client('Projet Interne', '123 à la maison, Trois-Rivières, QC, G5D 6Y8', '819-699-0432','info@NicoMiro.ca');
+CALL p_ajout_client('Indigo', '1500 Av. McGill College, Montréal, QC, H3A 3J5', '(514) 281-5549','info@indigo.ca');
 
 -- #######################################################################################
 -- ################################### Table Projet ######################################
@@ -176,12 +188,62 @@ BEGIN
 END//
 DELIMITER ;
 
--- (Nicolas) Procédure pour obtenir les projets
+-- (Nicolas) Requête pour voir les projets
 DROP PROCEDURE IF EXISTS p_get_projets;
 DELIMITER //
 CREATE PROCEDURE p_get_projets()
 BEGIN
-    SELECT * FROM projet;
+    SELECT
+        no_projet,
+        titre,
+        date_debut,
+        description,
+        budget,
+        nbr_employe_requis,
+        total_salaire,
+        statut,
+        p.id_client,
+        c.nom as nom_client
+    FROM projet p
+    INNER JOIN client c on p.id_client = c.id_client;
+END //
+DELIMITER ;
+
+-- (Nicolas) Procédure pour obtenir les projets d'un client
+DROP PROCEDURE IF EXISTS p_get_projets_client;
+DELIMITER //
+CREATE PROCEDURE p_get_projets_client(IN _id_client INT)
+BEGIN
+    SELECT
+        no_projet,
+        titre,
+        date_debut,
+        description,
+        budget,
+        nbr_employe_requis,
+        total_salaire,
+        statut,
+        p.id_client,
+        c.nom as nom_client
+    FROM projet p
+    INNER JOIN client c on p.id_client = c.id_client
+    WHERE p.id_client = _id_client
+    ORDER BY FIELD(statut,'en cours','terminé'),
+             date_debut;
+END //
+DELIMITER ;
+
+-- (Nicolas) Procédure pour modifier les projets
+DROP PROCEDURE IF EXISTS p_modifier_projet;
+DELIMITER //
+CREATE PROCEDURE p_modifier_projet(IN _no_projet char(11), IN _titre varchar(50), IN _description TEXT, IN _budget DOUBLE)
+BEGIN
+    UPDATE projet
+    SET
+        titre = _titre,
+        description = _description,
+        budget = _budget
+    WHERE no_projet = _no_projet;
 END //
 DELIMITER ;
 
@@ -189,6 +251,18 @@ DELIMITER ;
 -- Attention, modifier les id_client selon le réel si l'on éxécute se script pour la première fois (à cause des nombre aléatoire)
 CALL p_ajout_projet("Retructuration de l'architecture informatique", '2022-10-10', "Recréer une nouvelle archiecture de l'infrastructure informatique du client en lui proposant un système de gestion des dossiers, un système de cybersécurité et un support technique.", 200000, 4, 972);
 CALL p_ajout_projet("Audit sur le réseau inter-pavillons", CURDATE(), "Déterminer les enjeux lier à la passation d'un cable réseau entre le pavillon des humanités et le pavillons des sciences pour simplifier le transfert d'information entre ceux-ci. Valider le gain en cybersécurité, le cout et le temps nécessaire à la réalisation de cet éventuel projet.", 15800, 1, 915);
+CALL p_ajout_projet("Patou Tremble en folie", '2020-09-09', "Réalisation de la plateforme web pour vendre des plats tupperwares.", 500, 1, 111);
+CALL p_ajout_projet("Restructuration", CURDATE(), "Restructurer la façon de travailler en équipe pour être plus éficace dans les comunication.", 1000, 1, 124);
+CALL p_ajout_projet("Mise à jours de soniaremax.com", '2023-10-03', "Enjolivement du site web de la cliente.", 15000, 2, 167);
+CALL p_ajout_projet("Réparation Application Indigo", CURDATE(), "Réparation de leur application 'mal faite en tabarouette'. Mettre à jours la wishlist pour éviter les bug.", 1000000, 5, 186);
+CALL p_ajout_projet("Mise à jour système informatique", '2002-04-05', "Le client désire mettre à jours l'infrastructure de son système informatique dans la surcursale.", 75750, 3, 284);
+CALL p_ajout_projet("Système de communication", '2020-07-17', "Il faut mettre en place un système de communication inter-surcursale pour facilité le transfère des commandes de leur client.", 999999, 5, 410);
+CALL p_ajout_projet("Paiement par tablette", '2023-08-05', "Installation d'un système de commende et paiement avec une tablette laisser au table.", 5000, 2, 455);
+CALL p_ajout_projet("Sous-traitance programmation", CURDATE(), "Le client nous à contacter pour qu'on l'aide dans la programmation de son application.", 80000, 4, 534);
+CALL p_ajout_projet("Bornes de commande", '2015-09-10', "Nous devons créer des bornes de commande tactile et les programmer pour qu'elles soient fonctionnel.", 2000000, 5, 614);
+CALL p_ajout_projet("Recréation de planitcanada.ca", '2006-04-10', "Recréation du site web pour le rendre plus conviviale et symptathique pour les visiteurs.", 20000, 3, 802);
+CALL p_ajout_projet("Erreur calcul guichets automatiques", '2022-03-30', "Il faut mettre à jour l'application des guichets automatiques pour corriger les erreurs de calcul des dépots.", 150000, 3, 853);
+CALL p_ajout_projet("Local de cybersécurité", '2010-12-12', "Créer un local d'informatique avec des failles de sécurité isolé du reste du cégep pour que les élèves d'informatique effectue leur test.", 50000, 2, 931);
 
 
 

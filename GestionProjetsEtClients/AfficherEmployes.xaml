@@ -13,7 +13,7 @@
     <Grid x:Name="grilleEmployes">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Margin="50 15 0 0" FontSize="25">Liste des employés</TextBlock>
         <CommandBar 

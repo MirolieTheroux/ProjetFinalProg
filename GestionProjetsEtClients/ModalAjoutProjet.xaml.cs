@@ -12,21 +12,19 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
-using Microsoft.UI;
-using Windows.Globalization.NumberFormatting;
 using System.Reflection;
+using Windows.Globalization.NumberFormatting;
+using Microsoft.UI;
+using Microsoft.WindowsAppSDK.Runtime.Packages;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace GestionProjetsEtClients
 {
-    public sealed partial class ModalModifierProjet : ContentDialog
+    public sealed partial class ModalAjoutProjet : ContentDialog
     {
-        int index;
         int indexClient;
-
-        string no_projet;
         string titre;
         string dateDebutPrep;
         string dateDebut;
@@ -35,33 +33,12 @@ namespace GestionProjetsEtClients
         int nbrEmployeRequis;
         int idClient;
 
-        public ModalModifierProjet()
+        public ModalAjoutProjet()
         {
             this.InitializeComponent();
             SetNumberBoxNumberFormatter();
-
-            index = SingletonProjet.getInstance().getIndex();
-
-            no_projet = SingletonProjet.getInstance().Projets[index].NoProjet.ToString();
-            tbxTitre.Text = SingletonProjet.getInstance().Projets[index].Titre.ToString();
-            nbxBudget.Value = SingletonProjet.getInstance().Projets[index].Budget;
-
-            nbxNbrEmployeRequis.Value = SingletonProjet.getInstance().Projets[index].NbrEmployeRequis;
-            nbrEmployeRequis = SingletonProjet.getInstance().Projets[index].NbrEmployeRequis;
-
-            tbxDescription.Text = SingletonProjet.getInstance().Projets[index].Description.ToString();
-            idClient = SingletonProjet.getInstance().Projets[index].IdClient;
-
-            string sDateDebut = SingletonProjet.getInstance().Projets[index].DateDebut;
-
-            // Convertir la chaîne de date de naissance en objet DateTime
-            if (DateTime.TryParse(sDateDebut, out DateTime dateDebutAffichage))
-            {
-                // Assigner la date de naissance à calDateNaissance.Date
-                calDateDebut.Date = dateDebutAffichage;
-            }
-
-            dateDebut = SingletonProjet.getInstance().Projets[index].DateDebut.ToString();
+            indexClient = SingletonClient.getInstance().getIndex();
+            idClient = SingletonClient.getInstance().Clients[indexClient].Id;
         }
         private void SetNumberBoxNumberFormatter()
         {
@@ -118,6 +95,44 @@ namespace GestionProjetsEtClients
                 budget = (double)nbxBudget.Value;
             }
 
+            if (nbxNbrEmployeRequis.Value is double.NaN)
+            {
+                nbxNbrEmployeRequis.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidNbrEmployeRequis.Visibility = Visibility.Visible;
+                tblInvalidNbrEmployeRequis.Text = "Veuillez entrer le nombre d'employés requis";
+                erreurSaisie = true;
+                args.Cancel = true;
+            }
+            else if (nbxNbrEmployeRequis.Value < 1 || nbxNbrEmployeRequis.Value > 5)
+            {
+                nbxNbrEmployeRequis.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidNbrEmployeRequis.Visibility = Visibility.Visible;
+                tblInvalidNbrEmployeRequis.Text = "Entrer un nombre entre 1 et 5 inclus";
+                erreurSaisie = true;
+                args.Cancel = true;
+            }
+            else
+            {
+                nbxNbrEmployeRequis.ClearValue(TextBox.BorderBrushProperty);
+                tblInvalidNbrEmployeRequis.Visibility = Visibility.Collapsed;
+                nbrEmployeRequis = (int)nbxNbrEmployeRequis.Value;
+            }
+
+            if (SingletonVerification.getInstance().isDateDebutValide(Convert.ToString(calDateDebut.Date)))
+            {
+                calDateDebut.ClearValue(TextBox.BorderBrushProperty);
+                tblInvalidDateDebut.Visibility = Visibility.Collapsed;
+                dateDebutPrep = Convert.ToString(calDateDebut.Date);
+                dateDebut = dateDebutPrep.Substring(0, 10);
+            }
+            else
+            {
+                calDateDebut.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidDateDebut.Visibility = Visibility.Visible;
+                erreurSaisie = true;
+                args.Cancel = true;
+            }
+
             if (String.IsNullOrEmpty(tbxDescription.Text))
             {
                 tbxDescription.BorderBrush = new SolidColorBrush(Colors.Red);
@@ -134,19 +149,19 @@ namespace GestionProjetsEtClients
 
             if (!erreurSaisie)
             {
-                if (SingletonProjet.getInstance().modifier(no_projet, titre, description, budget) > 0)
+                if (SingletonProjet.getInstance().ajouter(titre, dateDebut, description, budget, nbrEmployeRequis, idClient) > 0)
                 {
                     SingletonMessageValidation.getInstance().AfficherSucces = true;
                     SingletonMessageValidation.getInstance().AfficherErreur = false;
-                    SingletonMessageValidation.getInstance().Titre = "Modification";
-                    SingletonMessageValidation.getInstance().Titre = "La modification du projet a fonctionné";
+                    SingletonMessageValidation.getInstance().Titre = "Ajout";
+                    SingletonMessageValidation.getInstance().Titre = "L'ajout du projet a fonctionné";
                 }
                 else
                 {
                     SingletonMessageValidation.getInstance().AfficherSucces = false;
                     SingletonMessageValidation.getInstance().AfficherErreur = true;
                     SingletonMessageValidation.getInstance().Titre = "Ajout";
-                    SingletonMessageValidation.getInstance().Titre = "La modification du projet a échoué";
+                    SingletonMessageValidation.getInstance().Titre = "L'ajout du projet a échoué";
                 }
             }
         }

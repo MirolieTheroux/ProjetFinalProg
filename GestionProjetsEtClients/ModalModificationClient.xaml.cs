@@ -86,7 +86,7 @@ namespace GestionProjetsEtClients
                 noTelephone = tbxNoTel.Text;
             }
 
-            if (String.IsNullOrEmpty(tbxEmail.Text))
+            if (!SingletonVerification.getInstance().isCourrielValide(tbxEmail.Text))
             {
                 tbxEmail.BorderBrush = new SolidColorBrush(Colors.Red);
                 tblInvalidEmail.Visibility = Visibility.Visible;

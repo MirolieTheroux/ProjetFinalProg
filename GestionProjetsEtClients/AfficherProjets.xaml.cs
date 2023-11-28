@@ -26,6 +26,7 @@ namespace GestionProjetsEtClients
         public AfficherProjets()
         {
             this.InitializeComponent();
+            SingletonProjet.getInstance().getListeProjets();
             lvListeProjets.ItemsSource = SingletonProjet.getInstance().Projets;
 
             if (SingletonMessageValidation.getInstance().AfficherSucces)

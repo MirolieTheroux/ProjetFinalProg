@@ -77,7 +77,7 @@ namespace GestionProjetsEtClients
                 noTelephone = tbxNoTel.Text;
             }
 
-            if (String.IsNullOrEmpty(tbxEmail.Text))
+            if (!SingletonVerification.getInstance().isCourrielValide(tbxEmail.Text))
             {
                 tbxEmail.BorderBrush = new SolidColorBrush(Colors.Red);
                 tblInvalidEmail.Visibility = Visibility.Visible;
@@ -113,6 +113,7 @@ namespace GestionProjetsEtClients
 
         private void ContentDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+            SingletonMessageValidation.getInstance().annulerMessage();
             args.Cancel = false;
         }
     }
