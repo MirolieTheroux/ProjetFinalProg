@@ -26,7 +26,7 @@ namespace GestionProjetsEtClients
         public AfficherClients()
         {
             this.InitializeComponent();
-            gvListeClients.ItemsSource = SingletonClient.getInstance().Clients;
+            lvListeClients.ItemsSource = SingletonClient.getInstance().Clients;
             if (SingletonAdmin.getInstance().valideConnexion())
             {
                 commandBar.Visibility = Visibility.Visible;
@@ -68,12 +68,12 @@ namespace GestionProjetsEtClients
             }
         }
 
-        private void gvListeClients_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void lvListeClients_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (gvListeClients.SelectedIndex >= 0)
+            if (lvListeClients.SelectedIndex >= 0)
             {
                 SingletonMessageValidation.getInstance().annulerMessage();
-                this.Frame.Navigate(typeof(ZoomClient), gvListeClients.SelectedIndex);
+                this.Frame.Navigate(typeof(ZoomClient), lvListeClients.SelectedIndex);
             }
         }
     }

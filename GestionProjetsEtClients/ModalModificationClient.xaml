@@ -56,6 +56,6 @@
            x:Name="tblInvalidEmail"
            Foreground="Red"
            Visibility="Collapsed"
-           Text="Veuillez entrer un email"/>
+           Text="Veuillez entrer un email valide"/>
     </Grid>
 </ContentDialog>
