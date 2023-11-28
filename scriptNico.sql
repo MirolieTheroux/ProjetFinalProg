@@ -214,7 +214,7 @@ DROP PROCEDURE IF EXISTS p_get_projets_client;
 DELIMITER //
 CREATE PROCEDURE p_get_projets_client(IN _id_client INT)
 BEGIN
-    SELECT 
+    SELECT
         no_projet,
         titre,
         date_debut,
@@ -223,10 +223,11 @@ BEGIN
         nbr_employe_requis,
         total_salaire,
         statut,
-        id_client,
-        f_get_nom_client(id_client) as nom_client
-    FROM projet
-    WHERE id_client = _id_client
+        p.id_client,
+        c.nom as nom_client
+    FROM projet p
+    INNER JOIN client c on p.id_client = c.id_client
+    WHERE p.id_client = _id_client
     ORDER BY FIELD(statut,'en cours','terminé'),
              date_debut;
 END //

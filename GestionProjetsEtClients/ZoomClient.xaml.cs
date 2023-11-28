@@ -27,6 +27,16 @@ namespace GestionProjetsEtClients
         public ZoomClient()
         {
             this.InitializeComponent();
+            if (SingletonAdmin.getInstance().valideConnexion())
+            {
+                commandBar.Visibility = Visibility.Visible;
+                commandBarProjet.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                commandBar.Visibility = Visibility.Collapsed;
+                commandBarProjet.Visibility = Visibility.Collapsed;
+            }
 
             if (SingletonMessageValidation.getInstance().AfficherSucces)
             {
