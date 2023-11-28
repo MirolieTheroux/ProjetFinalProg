@@ -23,39 +23,44 @@
         </Grid.RowDefinitions>
 
         <TextBox Grid.Row="0"
-                 x:Name="tbxNom"
-                 Header="Nom"/>
+                     x:Name="tbxTitre"
+                     Header="Titre"/>
         <TextBlock Grid.Row="1"
-                   x:Name="tblInvalidNom"
-                   Foreground="Red"
-                   Visibility="Collapsed"
-                   Text="Veuillez entrer un nom"/>
-        <TextBox Grid.Row="2"
-                 x:Name="tbxAdresse"
-                 Header="Adresse"
-                 Margin="0 10 0 0"/>
-        <TextBlock Grid.Row="3"
-                   x:Name="tblInvalidAdresse"
-                   Foreground="Red"
-                   Visibility="Collapsed"
-                   Text="Veuillez entrer une adresse"/>
-        <TextBox Grid.Row="4"
-                 x:Name="tbxNoTel"
-                 Header="Numéro de téléphone"
-                 Margin="0 10 0 0"/>
-        <TextBlock Grid.Row="5"
-                   x:Name="tblInvalidNoTel"
-                   Foreground="Red"
-                   Visibility="Collapsed"
-                   Text="Veuillez entrer un numéro de téléphone"/>
-        <TextBox Grid.Row="6"
-                 x:Name="tbxEmail"
-                 Header="Email"
-                 Margin="0 10 0 0"/>
+                       x:Name="tblInvalidTitre"
+                       Foreground="Red"
+                       Visibility="Collapsed"
+                       Text="Veuillez entrer le titre"/>
+
+        <CalendarDatePicker Grid.Row="2" x:Name="calDateDebut" Margin="0 10 0 0"  Header="Date de début" HorizontalAlignment="Stretch" IsEnabled="False"/>
+
+        <NumberBox Grid.Row="3"
+                       x:Name="nbxBudget"
+                       Header="Budget"
+                       Margin="0 10 0 0"/>
+        <TextBlock Grid.Row="4"
+                       x:Name="tblInvalidBudget"
+                       Foreground="Red"
+                       Visibility="Collapsed"
+                       Text="Veuillez entrer le budget"/>
+
+        <NumberBox Grid.Row="5"
+                       x:Name="nbxNbrEmployeRequis"
+                       Header="Nombre d'employés requis"
+                       Margin="0 10 0 0"
+                       IsEnabled="False"/>
+
+        <TextBox AutomationProperties.Name="multi-line TextBox"
+                    Grid.Row="6" 
+                    x:Name="tbxDescription" 
+                    Header="Description" 
+                    Margin="0 10 0 0"
+                    TextWrapping="Wrap" 
+                    AcceptsReturn="True" 
+                    IsSpellCheckEnabled="True"/>
         <TextBlock Grid.Row="7"
-                   x:Name="tblInvalidEmail"
-                   Foreground="Red"
-                   Visibility="Collapsed"
-                   Text="Veuillez entrer un email"/>
+                       x:Name="tblInvalidDescription"
+                       Foreground="Red"
+                       Visibility="Collapsed"
+                       Text="Veuillez entrer la description"/>
     </Grid>
 </ContentDialog>

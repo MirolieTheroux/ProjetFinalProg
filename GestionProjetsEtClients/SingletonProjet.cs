@@ -184,5 +184,38 @@ namespace GestionProjetsEtClients
                 return validation;
             }
         }
+
+        public int modifier(string no_projet, string titre, string description, double budget)
+        {
+            int validation = 0;
+            try
+            {
+                MySqlCommand command = new MySqlCommand("p_modifier_projet");
+                command.Connection = con;
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("_no_projet", no_projet);
+                command.Parameters.AddWithValue("_titre", titre);
+                command.Parameters.AddWithValue("_description", description);
+                command.Parameters.AddWithValue("_budget", budget);
+
+                con.Open();
+                command.Prepare();
+                validation = command.ExecuteNonQuery();
+                con.Close();
+
+                SingletonClient.getInstance().getListeClients();
+                return validation;
+            }
+            catch (MySqlException ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                {
+                    con.Close();
+                    return validation;
+                }
+                return validation;
+            }
+        }
     }
 }

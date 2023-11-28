@@ -57,12 +57,7 @@
                        Foreground="Red"
                        Visibility="Collapsed"
                        Text="Veuillez entrer le nombre d'employés requis"/>
-
-            <!--<RichEditBox Grid.Row="8" 
-                         x:Name="rebxDescription" 
-                         Header="Description" 
-                         Margin="0 10 0 0"
-                         AutomationProperties.Name="simple text editor"/>-->
+            
             <TextBox AutomationProperties.Name="multi-line TextBox"
                      Grid.Row="8" 
                      x:Name="tbxDescription" 
