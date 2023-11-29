@@ -19,7 +19,6 @@ namespace GestionProjetsEtClients
         {
             connection = new MySqlConnection("Server=cours.cegep3r.info;Database=a2023_420325ri_fabeq11;Uid=1468780;Pwd=1468780;");
             listeProjetEmploye = new ObservableCollection<ProjetEmploye>();
-            //getListeProjetEmployeD();
         }
 
         public static SingletonProjetEmploye getInstance()

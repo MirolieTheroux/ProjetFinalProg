@@ -17,7 +17,7 @@ namespace GestionProjetsEtClients
         public double NbHeuresTravaillees { get; set; }
         public string NbHeures
         {
-            get { return NbHeuresTravaillees.ToString(NbHeuresTravaillees + "h"); }
+            get { return NbHeuresTravaillees.ToString() + "h"; }
         }
         public double SalaireEmploye{ get; set; }
         public string SalaireEmpFormat
