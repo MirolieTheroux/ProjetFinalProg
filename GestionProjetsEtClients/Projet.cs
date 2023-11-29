@@ -29,6 +29,11 @@ namespace GestionProjetsEtClients
         public int IdClient { get; set; }
         public string NomClient { get; set; }
 
+        public string stringCSV()
+        {
+            return $"{NoProjet};{Titre};{DateDebut};{Budget};{NbrEmployeRequis};{TotalSalaire};{Statut};{IdClient};{NomClient};{Description}";
+        }
+
         public override string ToString()
         {
             return $"NoProjet = {NoProjet}, Titre = {Titre}, DateDebut = {DateDebut}, Budget = {BudgetFormat}, NbrEmployeRequis = {NbrEmployeRequis}, TotalSalaire = {TotalSalaireFormat}, Statut = {Statut}, IdClient = {IdClient}, NomClient = {NomClient}, Description = {Description}";
