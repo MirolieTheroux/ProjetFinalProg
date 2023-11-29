@@ -17,6 +17,7 @@
 		<None Remove="AfficherProjets.xaml" />
 		<None Remove="ModalAjoutClient.xaml" />
 		<None Remove="ModalAjoutProjet.xaml" />
+		<None Remove="ModalAjouterEmployeProjet.xaml" />
 
 		<None Remove="ModalConnexionAdmin.xaml" />
 		<None Remove="ModalCreationAdmin.xaml" />
@@ -60,6 +61,11 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Page Update="ModalAjoutProjet.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </Page>
+	</ItemGroup>
+	<ItemGroup>
+	  <Page Update="ModalAjouterEmployeProjet.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </Page>
 	</ItemGroup>

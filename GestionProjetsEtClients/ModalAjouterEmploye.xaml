@@ -36,20 +36,20 @@
             <TextBox x:Name="txtBoxNom" Header="Nom" Margin="10 10 10 0"></TextBox>
             <TextBlock x:Name="txtBlErreurNom" Margin="10 0 0 0" Foreground="Red" Grid.Row="1" ></TextBlock>
 
-            <TextBox x:Name="txtBoxPrenom" Header="Prénom" Margin="10 10 10 0" Grid.Row="2"></TextBox>
-            <TextBlock x:Name="txtBlErreurPrenom" Foreground="Red" Margin="10 0 0 0" Grid.Row="3" ></TextBlock>
+            <TextBox x:Name="txtBoxPrenom" Header="Prénom" Margin="10 10 10 0" Grid.Row="2" Width="200"></TextBox>
+            <TextBlock x:Name="txtBlErreurPrenom" Foreground="Red" Margin="10 0 0 0" Grid.Row="3"></TextBlock>
 
             <CalendarDatePicker x:Name="calDateNaissance" Margin="10 10 10 0"  Header="Date de naissance" Grid.Row="4" HorizontalAlignment="Stretch"></CalendarDatePicker>
-            <TextBlock x:Name="txtBlErreurDdn" Foreground="Red" Margin="10 0 0 0" Grid.Row="5"  MinWidth="60"></TextBlock>
+            <TextBlock x:Name="txtBlErreurDdn" Foreground="Red" Margin="10 0 0 0" Grid.Row="5"  MinWidth="60" TextWrapping="Wrap"></TextBlock>
 
             <TextBox x:Name="txtBoxCourriel" Header="Courriel" Margin="10 10 10 0" Grid.Row="6"></TextBox>
             <TextBlock x:Name="txtBlErreurCourriel"  Margin="10 0 0 0" Foreground="Red" Grid.Row="7" ></TextBlock>
 
-            <TextBox x:Name="txtBoxAdresse" Header="Adresse" Margin="10 10 10 0"  Grid.Column="1"></TextBox>
+            <TextBox x:Name="txtBoxAdresse" Header="Adresse" Margin="10 10 10 0"  Grid.Column="1" Width="200"></TextBox>
             <TextBlock x:Name="txtBlErreurAdresse"  Margin="10 0 0 0" Foreground="Red" Grid.Row="1" Grid.Column="1" ></TextBlock>
 
             <CalendarDatePicker x:Name="calDateEmbauche" Margin="10 10 10 0"  Header="Date d'embauche" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch"></CalendarDatePicker>
-            <TextBlock x:Name="txtBlErreurDateEmbauche"  Margin="10 0 0 0" Foreground="Red" Grid.Row="5" Grid.Column="1"  ></TextBlock>
+            <TextBlock x:Name="txtBlErreurDateEmbauche"  Margin="10 0 0 0" Foreground="Red" Grid.Row="5" Grid.Column="1" TextWrapping="Wrap" ></TextBlock>
 
             <TextBox x:Name="txtBoxTauxHoraire" Margin="10 10 10 0" Header="Taux horaire" Grid.Row="2" Grid.Column="1"></TextBox>
             <TextBlock x:Name="txtBlErreurTauxHoraire"  Margin="10 0 0 0" Foreground="Red" Grid.Row="3" Grid.Column="1" ></TextBlock>
@@ -61,7 +61,7 @@
             <TextBlock x:Name="txtBlErreurStatut"  Margin="10 0 0 0" Foreground="Red" Grid.Row="7" Grid.Column="1" ></TextBlock>
             <TextBlock x:Name="txtBlErreurStatut1"  Margin="10 0 0 0" Foreground="Red" Grid.Row="7" Grid.Column="1" FontSize="10" ></TextBlock>
 
-            <TextBox x:Name="txtBoxPhoto" Margin="10 10 10 0" Header="Lien vers photo d'identité" Grid.Row="8" Grid.ColumnSpan="2"></TextBox>
+            <TextBox x:Name="txtBoxPhoto" Margin="10 10 10 0" Header="Lien vers photo d'identité" Grid.Row="8" Grid.ColumnSpan="2" TextWrapping="Wrap"></TextBox>
             <TextBlock x:Name="txtBlErreurPhoto"  Margin="10 0 0 0" Foreground="Red" Grid.Row="9" Grid.ColumnSpan="2"></TextBlock>
         </Grid>
     </ScrollViewer>
