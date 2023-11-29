@@ -28,16 +28,7 @@
                     IsOpen="False" 
                     DefaultLabelPosition="Right"
                     Margin="0 0 15 0">
-            <AppBarButton x:Name="abbExportProjet" Icon="Download" Label="Exporter la liste" Click="abbExportProjet_Click" />
-            <!--<AppBarButton Icon="Edit" Label="Edit"/>
-                <AppBarButton Icon="Share" Label="Share"/>
-                <CommandBar.SecondaryCommands>
-                    <AppBarButton Icon="Setting" Label="Settings">
-                        <AppBarButton.KeyboardAccelerators>
-                            <KeyboardAccelerator Modifiers="Control" Key="I" />
-                        </AppBarButton.KeyboardAccelerators>
-                    </AppBarButton>
-                </CommandBar.SecondaryCommands>-->
+            <AppBarButton x:Name="abbExportProjet" Icon="Download" Label="Télécharger la liste des projets" Click="abbExportProjet_Click" />
         </CommandBar>
 
         <InfoBar Grid.Row="1"

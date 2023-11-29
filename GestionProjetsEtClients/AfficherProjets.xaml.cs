@@ -29,6 +29,15 @@ namespace GestionProjetsEtClients
             SingletonProjet.getInstance().getListeProjets();
             lvListeProjets.ItemsSource = SingletonProjet.getInstance().Projets;
 
+            if (SingletonAdmin.getInstance().valideConnexion())
+            {
+                commandBar.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                commandBar.Visibility = Visibility.Collapsed;
+            }
+
             if (SingletonMessageValidation.getInstance().AfficherSucces)
             {
                 infoBar.IsOpen = true;
@@ -58,9 +67,30 @@ namespace GestionProjetsEtClients
             }
         }
 
-        private void abbExportProjet_Click(object sender, RoutedEventArgs e)
+        private async void abbExportProjet_Click(object sender, RoutedEventArgs e)
         {
+            var picker = new Windows.Storage.Pickers.FileSavePicker();
 
+            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(SingletonFenetre.getInstance().Fenetre);
+            WinRT.Interop.InitializeWithWindow.Initialize(picker, hWnd);
+
+            picker.SuggestedFileName = "info_projets";
+            picker.FileTypeChoices.Add("Fichier texte", new List<string>() { ".csv" });
+
+            //crée le fichier
+            Windows.Storage.StorageFile monFichier = await picker.PickSaveFileAsync();
+
+            List<Projet> liste = new List<Projet>();
+            foreach (Projet projet in SingletonProjet.getInstance().Projets)
+            {
+                liste.Add(projet);
+            }
+
+            if (monFichier != null)
+            {
+                // La fonction ToString de la classe Client retourne: nom + ";" + prenom
+                await Windows.Storage.FileIO.WriteLinesAsync(monFichier, liste.ConvertAll(x => x.stringCSV()), Windows.Storage.Streams.UnicodeEncoding.Utf8);
+            }
         }
     }
 }
