@@ -97,15 +97,15 @@ namespace GestionProjetsEtClients
                 {
                     SingletonMessageValidation.getInstance().AfficherSucces = true;
                     SingletonMessageValidation.getInstance().AfficherErreur = false;
-                    SingletonMessageValidation.getInstance().Titre = "Ajout";
-                    SingletonMessageValidation.getInstance().Titre = "L'ajout d'un client a fonctionnée";
+                    SingletonMessageValidation.getInstance().Titre = "Succès";
+                    SingletonMessageValidation.getInstance().Message = "L'ajout d'un client a fonctionnée";
                 }
                 else
                 {
                     SingletonMessageValidation.getInstance().AfficherSucces = false;
                     SingletonMessageValidation.getInstance().AfficherErreur = true;
-                    SingletonMessageValidation.getInstance().Titre = "Ajout";
-                    SingletonMessageValidation.getInstance().Titre = "L'ajout d'un client a échouée";
+                    SingletonMessageValidation.getInstance().Titre = "Erreur";
+                    SingletonMessageValidation.getInstance().Message = "L'ajout d'un client a échouée";
                 }
             }
 

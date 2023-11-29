@@ -106,15 +106,15 @@ namespace GestionProjetsEtClients
                 {
                     SingletonMessageValidation.getInstance().AfficherSucces = true;
                     SingletonMessageValidation.getInstance().AfficherErreur = false;
-                    SingletonMessageValidation.getInstance().Titre = "Modification";
-                    SingletonMessageValidation.getInstance().Titre = "La modification du client a fonctionnée";
+                    SingletonMessageValidation.getInstance().Titre = "Succès";
+                    SingletonMessageValidation.getInstance().Message = "La modification du client a fonctionnée";
                 }
                 else
                 {
                     SingletonMessageValidation.getInstance().AfficherSucces = false;
                     SingletonMessageValidation.getInstance().AfficherErreur = true;
-                    SingletonMessageValidation.getInstance().Titre = "Modification";
-                    SingletonMessageValidation.getInstance().Titre = "La modification du client a échouée";
+                    SingletonMessageValidation.getInstance().Titre = "Erreur";
+                    SingletonMessageValidation.getInstance().Message = "La modification du client a échouée";
                 }
             }
         }
