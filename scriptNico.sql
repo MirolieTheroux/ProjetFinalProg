@@ -188,11 +188,9 @@ BEGIN
 END//
 DELIMITER ;
 
--- (Nicolas) Requête pour voir les projets
-DROP PROCEDURE IF EXISTS p_get_projets;
-DELIMITER //
-CREATE PROCEDURE p_get_projets()
-BEGIN
+-- (Nicolas) Vue / Requête pour voir les projets
+DROP VIEW IF EXISTS v_get_projets;
+CREATE VIEW v_get_projets AS
     SELECT
         no_projet,
         titre,
@@ -206,6 +204,13 @@ BEGIN
         c.nom as nom_client
     FROM projet p
     INNER JOIN client c on p.id_client = c.id_client;
+
+-- (Nicolas) Procédure pour voir les projets
+DROP PROCEDURE IF EXISTS p_get_projets;
+DELIMITER //
+CREATE PROCEDURE p_get_projets()
+BEGIN
+    SELECT * FROM v_get_projets;
 END //
 DELIMITER ;
 
@@ -214,20 +219,9 @@ DROP PROCEDURE IF EXISTS p_get_projets_client;
 DELIMITER //
 CREATE PROCEDURE p_get_projets_client(IN _id_client INT)
 BEGIN
-    SELECT
-        no_projet,
-        titre,
-        date_debut,
-        description,
-        budget,
-        nbr_employe_requis,
-        total_salaire,
-        statut,
-        p.id_client,
-        c.nom as nom_client
-    FROM projet p
-    INNER JOIN client c on p.id_client = c.id_client
-    WHERE p.id_client = _id_client
+    SELECT *
+    FROM v_get_projets
+    WHERE id_client = _id_client
     ORDER BY FIELD(statut,'en cours','terminé'),
              date_debut;
 END //
