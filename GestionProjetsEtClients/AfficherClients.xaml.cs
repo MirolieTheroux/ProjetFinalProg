@@ -76,5 +76,25 @@ namespace GestionProjetsEtClients
                 this.Frame.Navigate(typeof(ZoomClient), lvListeClients.SelectedIndex);
             }
         }
+
+        private void autoSuggestBoxNom_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            List<Client> suggestion = new List<Client>();
+
+            foreach(Client client in SingletonClient.getInstance().Clients)
+            {
+                if (client.Nom.Contains(autoSuggestBoxNom.Text))
+                {
+                    suggestion.Add(client);
+                }
+
+                autoSuggestBoxNom.ItemsSource = suggestion;
+            }
+        }
+
+        private void autoSuggestBoxNom_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+
+        }
     }
 }

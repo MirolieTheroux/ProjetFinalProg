@@ -47,6 +47,13 @@
                  Margin="50 10 50 10"
                  Message="Définir un message aproprié" />
 
+        <AutoSuggestBox Grid.Row="2" 
+                        x:Name="autoSuggestBoxNom" 
+                        QueryIcon="Find" 
+                        PlaceholderText="Entrez un nom de client" 
+                        TextChanged="autoSuggestBoxNom_TextChanged"
+                        QuerySubmitted="autoSuggestBoxNom_QuerySubmitted"/>
+
         <ListView x:Name="lvListeClients" 
                   Grid.Row="3"
                   Margin="10"
