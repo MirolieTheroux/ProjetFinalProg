@@ -13,6 +13,7 @@
                     x:Name="navView" 
                     IsSettingsVisible="False"
                     ItemInvoked="navView_ItemInvoked"
+                    IsBackEnabled="True"
                     BackRequested="navView_BackRequested"
                     Loaded="navView_Loaded">
         <NavigationView.MenuItems>

@@ -46,7 +46,7 @@ namespace GestionProjetsEtClients
 
             if (!SingletonVerification.getInstance().isDateValide(Convert.ToString(calDateNaissance.Date)))
             {
-                txtBlErreurDdn.Text = "Veuillez entrer une date valide.";
+                txtBlErreurDdn.Text = "Veuillez entrer une date de naissance valide.";
                 bErreur = true;
                 args.Cancel = true;
             }
@@ -67,7 +67,7 @@ namespace GestionProjetsEtClients
 
             if (!SingletonVerification.getInstance().isDateEmbaucheValide(Convert.ToString(calDateEmbauche.Date)))
             {
-                txtBlErreurDateEmbauche.Text = "Veuillez entrer une date valide.";
+                txtBlErreurDateEmbauche.Text = "Veuillez entrer une date d'embauche valide.";
                 bErreur = true;
                 args.Cancel = true;
             }
@@ -122,7 +122,7 @@ namespace GestionProjetsEtClients
                     SingletonMessageValidation.getInstance().AfficherSucces = true;
                     SingletonMessageValidation.getInstance().AfficherErreur = false;
                     SingletonMessageValidation.getInstance().Titre = "Ajout";
-                    SingletonMessageValidation.getInstance().Titre = "L'ajout d'un employé a fonctionné";
+                    SingletonMessageValidation.getInstance().Message = "L'ajout d'un employé a fonctionné";
                 }
             }
         }
@@ -147,5 +147,7 @@ namespace GestionProjetsEtClients
             txtBlErreurPhoto.Text = string.Empty;
             txtBlErreurStatut.Text = string.Empty;
         }
+
+      
     }
 }

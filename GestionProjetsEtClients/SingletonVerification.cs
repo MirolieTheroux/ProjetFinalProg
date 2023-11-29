@@ -34,6 +34,17 @@ namespace GestionProjetsEtClients
                 return false;
         }
 
+        public bool isTexteNonVideEtNum(string valeur)
+        {
+            string nonNumeric = "^[0-9]";
+            Regex reg = new Regex(nonNumeric, RegexOptions.IgnoreCase);
+
+            if (!string.IsNullOrEmpty(valeur.Trim()) && reg.IsMatch(valeur))
+                return true;
+            else
+                return false;
+        }
+
         public bool isAdresseValide(string adresse)
         {
             if (!string.IsNullOrEmpty(adresse.Trim()))

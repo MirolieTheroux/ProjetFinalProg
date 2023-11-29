@@ -29,7 +29,7 @@ namespace GestionProjetsEtClients
         public ZoomProjet()
         {
             this.InitializeComponent();
-
+           
             if (SingletonMessageValidation.getInstance().AfficherSucces)
             {
                 infoBar.IsOpen = true;
@@ -48,6 +48,8 @@ namespace GestionProjetsEtClients
             {
                 infoBar.IsOpen = false;
             }
+
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -67,6 +69,18 @@ namespace GestionProjetsEtClients
                 run.Text = $"Description :\n{SingletonProjet.getInstance().Projets[index].Description.ToString()}";
                 rtbpDescription.Inlines.Add(run);
                 tblEmployeRequis.Text = $"(Max {SingletonProjet.getInstance().Projets[index].NbrEmployeRequis.ToString()} employés)";
+
+                SingletonProjetEmploye.getInstance().getListeProjetsEmploye(SingletonProjet.getInstance().Projets[index].NoProjet.ToString());
+                 lvProjetsEmploye.ItemsSource = SingletonProjetEmploye.getInstance().ProjetsEmploye;
+
+                if (SingletonProjet.getInstance().Projets[index].NbrEmployeRequis > SingletonProjetEmploye.getInstance().ProjetsEmploye.Count && SingletonAdmin.getInstance().valideConnexion())
+                {
+                    abAjouterEmployer.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    abAjouterEmployer.Visibility = Visibility.Collapsed;
+                }
             }
         }
 
@@ -83,14 +97,15 @@ namespace GestionProjetsEtClients
             this.Frame.Navigate(typeof(ZoomProjet), index);
         }
 
-        private void abAjouterEmployer_Click(object sender, RoutedEventArgs e)
+        private async void abAjouterEmployer_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void abModiferHeures_Click(object sender, RoutedEventArgs e)
-        {
-
+            ModalAjouterEmployeProjet ajoutEmployeProjet = new ModalAjouterEmployeProjet();
+            ajoutEmployeProjet.XamlRoot = grilleProjet.XamlRoot;
+            ajoutEmployeProjet.Title = "Ajouter un employé à un projet";
+            ajoutEmployeProjet.PrimaryButtonText = "Ajouter";
+            ajoutEmployeProjet.SecondaryButtonText = "Annuler";
+            ajoutEmployeProjet.DefaultButton = ContentDialogButton.Primary;
+            var resultat = await ajoutEmployeProjet.ShowAsync();
         }
     }
 }

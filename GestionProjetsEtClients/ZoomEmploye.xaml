@@ -24,15 +24,14 @@
 
         <CommandBar 
               Grid.Column="2"
-              x:Name="commandBar"
+              x:Name="comModif"
               Background="Transparent" 
               IsOpen="False" 
               FontSize="20"
               DefaultLabelPosition="Right"
               Margin="0 0 15 0">
-                <AppBarButton Icon="Edit" Label="Modifier" Click="AppBarButton_Click" />
-                <AppBarButton Icon="Add" Label="Associer un projet" Click="AppBarButton_Click_1"></AppBarButton>
-            </CommandBar>
+            <AppBarButton Icon="Edit" Label="Modifier" Click="AppBarButton_Click" />
+        </CommandBar>
   
         <InfoBar 
           Grid.Row="1"

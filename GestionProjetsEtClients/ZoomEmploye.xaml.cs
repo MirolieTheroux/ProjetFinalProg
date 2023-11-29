@@ -42,6 +42,15 @@ namespace GestionProjetsEtClients
             {
                 infoBar.IsOpen = false;
             }
+
+            if (SingletonAdmin.getInstance().valideConnexion())
+            {
+                comModif.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                comModif.Visibility = Visibility.Collapsed;
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
