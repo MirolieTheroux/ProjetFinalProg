@@ -115,5 +115,10 @@ namespace GestionProjetsEtClients
                 this.Frame.Navigate(typeof(ZoomEmploye), pe.Matricule);
             }
         }
+
+        private void abTerminerProjet_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
