@@ -13,9 +13,12 @@
     <Grid x:Name="grilleEmployes">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Margin="50 15 0 0" FontSize="25">Liste des employés</TextBlock>
+        <TextBox x:Name="txtBoxRechercheNomOuPrenom" Header="Rechercher par ville" Grid.Row="1" Margin="10"  SelectionChanged="txtBoxRechercheVille_SelectionChanged"></TextBox>
+
         <CommandBar 
                x:Name="comAjout"
                Background="Transparent" 
@@ -25,7 +28,7 @@
             <AppBarButton Icon="Add" Label="Ajouter un employé" Click="AppBarButton_Click" />
         </CommandBar>
 
-        <ListView x:Name="lvEmployes" Grid.Row="1" Margin="10" SelectionChanged="lvEmployes_SelectionChanged">
+        <ListView x:Name="lvEmployes" Grid.Row="2" Margin="10" SelectionChanged="lvEmployes_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Employe">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10" HorizontalAlignment="Stretch">
