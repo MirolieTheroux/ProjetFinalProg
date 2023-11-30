@@ -40,7 +40,10 @@ namespace GestionProjetsEtClients
         }
 
         public ObservableCollection<ProjetEmploye> ProjetsEmploye { get { return listeProjetEmploye; } }
-
+        /// <summary>
+        /// Permet d'avoir la liste des projets d'
+        /// </summary>
+        /// <param name="sNo_projet">Numéro de projet</param>
         public void getListeProjetsEmploye(string sNo_projet)
         {
             listeProjetEmploye.Clear();
@@ -59,6 +62,7 @@ namespace GestionProjetsEtClients
                     //string sMatricule = (string)reader["matricule"];
                     string sNom = (string)reader["nom"];
                     string sPrenom = (string)reader["prenom"];
+                    double dTauxHoraire = (double)reader["taux_horaire"];
                     //string sNo_projetBd = (string)reader["no_projet"];
                     double dNbHeures = (double)reader["nbr_heure_travail"];
                     double dSalaire = (double)reader["salaire_employe_projet"];
@@ -68,6 +72,7 @@ namespace GestionProjetsEtClients
                         //Matricule = sMatricule,
                         Nom = sNom,
                         Prenom = sPrenom,
+                        TauxHoraire = dTauxHoraire,
                         //NoProjet = sNo_projetBd,
                         NbHeuresTravaillees = dNbHeures,
                         SalaireEmploye = dSalaire
@@ -85,6 +90,13 @@ namespace GestionProjetsEtClients
             }
         }
 
+        /// <summary>
+        /// Permet d'ajouter un employé à un projet
+        /// </summary>
+        /// <param name="sMatricule">Matricule de l'employé</param>
+        /// <param name="sNo_projet">Numéro de projet</param>
+        /// <param name="dHeuresTravaillees">Nombre d'heures travaillées par l'employé</param>
+        /// <returns></returns>
         public int ajouterProjetEmploye(string sMatricule, string sNo_projet, double dHeuresTravaillees)
         {
             int iValidation = 0;

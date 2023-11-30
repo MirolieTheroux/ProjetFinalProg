@@ -60,5 +60,11 @@ namespace GestionProjetsEtClients
                 this.Frame.Navigate(typeof(ZoomEmploye), lvEmployes.SelectedIndex);
             }
         }
+
+        private void txtBoxRechercheVille_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            SingletonEmploye.getInstance().GetEmployeParNom(txtBoxRechercheNomOuPrenom.Text);
+
+        }
     }
 }

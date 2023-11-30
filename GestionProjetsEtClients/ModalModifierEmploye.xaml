@@ -37,12 +37,12 @@
         <TextBox x:Name="txtBoxPrenom" Header="Prénom" Margin="10 10 10 0" Grid.Row="2" MinWidth="200" HorizontalAlignment="Stretch"></TextBox>
         <TextBlock x:Name="txtBlErreurPrenom" Foreground="Red" Margin="10 0 0 0" Grid.Row="3" ></TextBlock>
 
-        <CalendarDatePicker x:Name="calDateNaissance" Margin="10 10 10 0"  Header="Date de naissance" Grid.Row="4" HorizontalAlignment="Stretch" ></CalendarDatePicker>
+        <CalendarDatePicker x:Name="calDateNaissance" Margin="10 10 10 0"  Header="Date de naissance" Grid.Row="4" HorizontalAlignment="Stretch" IsEnabled="False"></CalendarDatePicker>
 
         <TextBox x:Name="txtBoxCourriel" Header="Courriel" Margin="10 10 10 0" Grid.Row="5"></TextBox>
         <TextBlock x:Name="txtBlErreurCourriel"  Margin="10 0 0 0" Foreground="Red" Grid.Row="6" ></TextBlock>
 
-        <TextBox x:Name="txtBoxAdresse" Header="Adresse" Margin="10 10 10 0"  Grid.Column="1" MinWidth="200" HorizontalAlignment="Stretch"></TextBox>
+        <TextBox x:Name="txtBoxAdresse" Header="Adresse" Margin="10 10 10 0"  Grid.Column="1" MinWidth="200" TextWrapping="Wrap" HorizontalAlignment="Stretch"></TextBox>
         <TextBlock x:Name="txtBlErreurAdresse"  Margin="10 0 0 0" Foreground="Red" Grid.Row="1" Grid.Column="1" ></TextBlock>
 
         <CalendarDatePicker x:Name="calDateEmbauche" Margin="10 10 10 0"  Header="Date d'embauche" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch" IsEnabled="False"></CalendarDatePicker>

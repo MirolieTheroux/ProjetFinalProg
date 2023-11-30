@@ -195,6 +195,60 @@ namespace GestionProjetsEtClients
                 return iValidation;
             }
         }
+
+        public ObservableCollection<Employe> GetEmployeParNom(string nomOuPrenom)
+        {
+            listeEmployes.Clear();
+            try
+            {
+                //appel de la procédure stockées 
+                MySqlCommand commande = new MySqlCommand("p_recherche_nom_prenom_employe");
+                commande.Connection = connection;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                commande.Parameters.AddWithValue("nomOuPrenom", nomOuPrenom);
+
+                connection.Open();
+                MySqlDataReader reader = commande.ExecuteReader();
+                while (reader.Read())
+                {
+                    string sMatricule = (string)reader["matricule"];
+                    string sNom = (string)reader["nom"];
+                    string sPrenom = (string)reader["prenom"];
+                    DateTime datNaissance = ((DateTime)reader["date_naissance"]).Date;
+                    string sEmail = (string)reader["email"];
+                    string sAdresse = (string)reader["adresse"];
+                    DateTime datEmbauche = ((DateTime)reader["date_embauche"]).Date;
+                    double dTauxHoraire = (double)reader["taux_horaire"];
+                    string sLienPhoto = (string)reader["lien_photo"];
+                    string sStatut = (string)reader["statut"];
+
+                    Employe employe = new Employe
+                    {
+                        Matricule = sMatricule,
+                        Nom = sNom,
+                        Prenom = sPrenom,
+                        DateNaissance = datNaissance.ToString("yyyy-MM-dd"),
+                        Email = sEmail,
+                        Adresse = sAdresse,
+                        DateEmbauche = datEmbauche.ToString("yyyy-MM-dd"),
+                        TauxHoraire = dTauxHoraire,
+                        LienPhoto = sLienPhoto,
+                        Statut = sStatut
+                    };
+                    listeEmployes.Add(employe);
+                }
+
+                reader.Close();
+                connection.Close();
+            }
+            catch (MySqlException ex)
+            {
+                connection.Close();
+            }
+            return listeEmployes;
+        }
+
     }
 }
 

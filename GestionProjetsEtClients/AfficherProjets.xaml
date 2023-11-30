@@ -14,6 +14,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -39,7 +40,9 @@
                  Margin="50 10 50 10"
                  Message="Définir un message aproprié"/>
 
-        <ListView x:Name="lvListeProjets" Grid.Row="3" Margin="10" SelectionChanged="lvListeProjets_SelectionChanged">
+        <ToggleSwitch x:Name="toggleSwitchEncours" Margin="40 0 0 0" OffContent="Tous" OnContent="En cours" Toggled="toggleSwitchEncours_Toggled"  Grid.Row="3"></ToggleSwitch>
+
+        <ListView x:Name="lvListeProjets" Grid.Row="4" Margin="10" SelectionChanged="lvListeProjets_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Projet">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10" HorizontalAlignment="Stretch">

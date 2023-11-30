@@ -92,5 +92,17 @@ namespace GestionProjetsEtClients
                 await Windows.Storage.FileIO.WriteLinesAsync(monFichier, liste.ConvertAll(x => x.stringCSV()), Windows.Storage.Streams.UnicodeEncoding.Utf8);
             }
         }
+
+        private void toggleSwitchEncours_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (toggleSwitchEncours.IsOn)
+            {
+                SingletonProjet.getInstance().getProjetsEnCours();
+            }
+            else
+            {
+                SingletonProjet.getInstance().getListeProjets();
+            }
+        }
     }
 }

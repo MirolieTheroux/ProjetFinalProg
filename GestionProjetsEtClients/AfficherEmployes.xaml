@@ -13,9 +13,12 @@
     <Grid x:Name="grilleEmployes">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Margin="50 15 0 0" FontSize="25">Liste des employés</TextBlock>
+        <TextBox x:Name="txtBoxRechercheNomOuPrenom" Header="Rechercher par prénom/nom" Grid.Row="1" Margin="10"  SelectionChanged="txtBoxRechercheVille_SelectionChanged"></TextBox>
+
         <CommandBar 
                x:Name="comAjout"
                Background="Transparent" 
@@ -25,7 +28,7 @@
             <AppBarButton Icon="Add" Label="Ajouter un employé" Click="AppBarButton_Click" />
         </CommandBar>
 
-        <ListView x:Name="lvEmployes" Grid.Row="1" Margin="10" SelectionChanged="lvEmployes_SelectionChanged">
+        <ListView x:Name="lvEmployes" Grid.Row="2" Margin="10" SelectionChanged="lvEmployes_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Employe">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10" HorizontalAlignment="Stretch">
@@ -34,24 +37,29 @@
                                 <ImageBrush ImageSource="{x:Bind LienPhoto}" Stretch="UniformToFill"/>
                             </Ellipse.Fill>
                         </Ellipse>
-                        <StackPanel Width="95" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <TextBlock Text="{x:Bind Matricule}" Margin="5" VerticalAlignment="Center" FontSize="15"  />
-                        </StackPanel>
-                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                        <TextBlock Text="{x:Bind Prenom}" VerticalAlignment="Center"  Margin="5" FontSize="15"/>
-                        <TextBlock Text="{x:Bind Nom}" VerticalAlignment="Center"  Margin="0 0 5 0" FontSize="15"/>
-                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                        <TextBlock Text="{x:Bind DateNaissance}" VerticalAlignment="Center" Margin="5" FontSize="15"/>
-                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                        <TextBlock Text="{x:Bind Email}" VerticalAlignment="Center"  Margin="5" FontSize="15"/>
-                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                        <TextBlock Text="{x:Bind Adresse}" VerticalAlignment="Center" Margin="5" FontSize="15"/>
-                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                        <TextBlock Text="{x:Bind DateEmbauche}" VerticalAlignment="Center" Margin="5" FontSize="15"/>
-                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                        <TextBlock Text="{x:Bind TauxHoraireFormat}" VerticalAlignment="Center" Margin="5" FontSize="15"/>
-                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                        <TextBlock Text="{x:Bind Statut}" VerticalAlignment="Center" Margin="5" FontSize="15"/>
+
+                        <TextBlock Text="{x:Bind Matricule}"  Width="90" TextAlignment="Center" Margin="5" VerticalAlignment="Center" FontSize="13"/>
+                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="15"/>
+
+                        <TextBlock Text="{x:Bind NomCompletFormat}" VerticalAlignment="Center" Width="140" TextAlignment="Center" Margin="5" FontSize="13"/>
+                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="15"/>
+
+                        <TextBlock Text="{x:Bind DateNaissance}" VerticalAlignment="Center" Width="80" TextAlignment="Center" Margin="5" FontSize="13"/>
+                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="15"/>
+
+                        <TextBlock Text="{x:Bind Email}" VerticalAlignment="Center" Width="160" TextAlignment="Center" Margin="5" FontSize="13"/>
+                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="15"/>
+
+                        <TextBlock Text="{x:Bind Adresse}" VerticalAlignment="Center" Width="200" TextAlignment="Center" Margin="5" FontSize="13"/>
+                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="15"/>
+
+                        <TextBlock Text="{x:Bind DateEmbauche}" VerticalAlignment="Center" Width="80" TextAlignment="Center" Margin="5" FontSize="13"/>
+                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="15"/>
+
+                        <TextBlock Text="{x:Bind TauxHoraireFormat}" VerticalAlignment="Center" Width="55" TextAlignment="Center" Margin="5" FontSize="13"/>
+                        <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="15"/>
+
+                        <TextBlock Text="{x:Bind Statut}" VerticalAlignment="Center" Width="80" TextAlignment="Center" Margin="5" FontSize="13"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
