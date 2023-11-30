@@ -46,6 +46,30 @@
                  Title="Titre"
                  Margin="50 10 50 10"
                  Message="Définir un message aproprié" />
+        
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <AutoSuggestBox Grid.Column="0" 
+                            x:Name="autoSuggestBoxNom" 
+                            Margin="50 10 25 10"
+                            QueryIcon="Find" 
+                            PlaceholderText="Entrez un nom de client" 
+                            TextChanged="autoSuggestBoxNom_TextChanged"
+                            QuerySubmitted="autoSuggestBoxNom_QuerySubmitted"/>
+
+            <AutoSuggestBox Grid.Column="1" 
+                            x:Name="autoSuggestBoxId" 
+                            Margin="25 10 50 10"
+                            QueryIcon="Find" 
+                            PlaceholderText="Entrez un id de client" 
+                            TextChanged="autoSuggestBoxId_TextChanged"
+                            QuerySubmitted="autoSuggestBoxId_QuerySubmitted"/>
+
+        </Grid>
 
         <ListView x:Name="lvListeClients" 
                   Grid.Row="3"

@@ -172,7 +172,7 @@ namespace GestionProjetsEtClients
                 validation = command.ExecuteNonQuery();
                 con.Close();
 
-                SingletonClient.getInstance().getListeClients();
+                SingletonProjet.getInstance().getListeProjets();
                 return validation;
             }
             catch (MySqlException ex)
@@ -205,7 +205,7 @@ namespace GestionProjetsEtClients
                 validation = command.ExecuteNonQuery();
                 con.Close();
 
-                SingletonClient.getInstance().getListeClients();
+                SingletonProjet.getInstance().getListeProjets();
                 return validation;
             }
             catch (MySqlException ex)

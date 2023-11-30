@@ -145,5 +145,20 @@ namespace GestionProjetsEtClients
                 return validation;
             }
         }
+
+        public int getIndexNom(string nom)
+        {
+            int index = -1;
+            List<string> listeNom = new List<string>();
+
+            foreach(Client client in listeClients)
+            {
+                listeNom.Add(client.Nom);
+            }
+
+            index = listeNom.IndexOf(nom);
+
+            return index;
+        }
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -74,6 +75,100 @@ namespace GestionProjetsEtClients
             {
                 SingletonMessageValidation.getInstance().annulerMessage();
                 this.Frame.Navigate(typeof(ZoomClient), lvListeClients.SelectedIndex);
+            }
+        }
+
+        private void autoSuggestBoxNom_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+       {
+            List<String> suggestion = new List<String>();
+
+            foreach(Client client in SingletonClient.getInstance().Clients)
+            {
+                if (client.Nom.Contains(autoSuggestBoxNom.Text))
+                {
+                    suggestion.Add(client.Nom);
+                }
+
+            }
+
+            autoSuggestBoxNom.ItemsSource = suggestion;
+        }
+
+        private void autoSuggestBoxNom_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            int index = -1;
+            bool quitterPage = false;
+
+            if(args.ChosenSuggestion != null)
+            {
+                index = SingletonClient.getInstance().getIndexNom(args.ChosenSuggestion.ToString());
+                quitterPage = true;
+            }
+            else
+            {
+                foreach (Client client in SingletonClient.getInstance().Clients)
+                {
+                    if (client.Nom.Contains(sender.Text))
+                    {
+                        {
+                            index = SingletonClient.getInstance().getIndexNom(client.Nom);
+                            quitterPage = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (quitterPage)
+            {
+                this.Frame.Navigate(typeof(ZoomClient), index);
+            }
+        }
+
+        private void autoSuggestBoxId_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            List<String> suggestion = new List<String>();
+
+            foreach(Client client in SingletonClient.getInstance().Clients)
+            {
+                if (client.Id.ToString().Contains(autoSuggestBoxId.Text))
+                {
+                    suggestion.Add(client.Id + " - " + client.Nom);
+                }
+
+            }
+
+            suggestion.Sort();
+
+            autoSuggestBoxId.ItemsSource = suggestion;
+        }
+
+        private void autoSuggestBoxId_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            int index = -1;
+            bool quitterPage = false;
+
+            if (args.ChosenSuggestion != null)
+            {
+                index = SingletonClient.getInstance().getIndexNom(args.ChosenSuggestion.ToString().Substring(6));
+                quitterPage = true;
+            }
+            else
+            {
+                foreach (Client client in SingletonClient.getInstance().Clients)
+                {
+                    if (client.Id.ToString().Contains(sender.Text))
+                    {
+                        {
+                            index = SingletonClient.getInstance().getIndexNom(client.Nom);
+                            quitterPage = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (quitterPage)
+            {
+                this.Frame.Navigate(typeof(ZoomClient), index);
             }
         }
     }
