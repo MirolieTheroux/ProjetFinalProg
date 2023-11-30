@@ -62,6 +62,7 @@ namespace GestionProjetsEtClients
                     //string sMatricule = (string)reader["matricule"];
                     string sNom = (string)reader["nom"];
                     string sPrenom = (string)reader["prenom"];
+                    double dTauxHoraire = (double)reader["taux_horaire"];
                     //string sNo_projetBd = (string)reader["no_projet"];
                     double dNbHeures = (double)reader["nbr_heure_travail"];
                     double dSalaire = (double)reader["salaire_employe_projet"];
@@ -71,6 +72,7 @@ namespace GestionProjetsEtClients
                         //Matricule = sMatricule,
                         Nom = sNom,
                         Prenom = sPrenom,
+                        TauxHoraire = dTauxHoraire,
                         //NoProjet = sNo_projetBd,
                         NbHeuresTravaillees = dNbHeures,
                         SalaireEmploye = dSalaire
