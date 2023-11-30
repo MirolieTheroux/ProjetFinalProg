@@ -108,7 +108,7 @@ namespace GestionProjetsEtClients
             {
                 foreach (Client client in SingletonClient.getInstance().Clients)
                 {
-                    if (client.Nom.Contains(sender.Text))
+                    if (client.Nom.Contains(sender.Text) && !String.IsNullOrEmpty(sender.Text))
                     {
                         {
                             index = SingletonClient.getInstance().getIndexNom(client.Nom);
@@ -156,7 +156,7 @@ namespace GestionProjetsEtClients
             {
                 foreach (Client client in SingletonClient.getInstance().Clients)
                 {
-                    if (client.Id.ToString().Contains(sender.Text))
+                    if (client.Id.ToString().Contains(sender.Text) && !String.IsNullOrEmpty(sender.Text))
                     {
                         {
                             index = SingletonClient.getInstance().getIndexNom(client.Nom);
