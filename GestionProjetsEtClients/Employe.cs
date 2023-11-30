@@ -12,6 +12,10 @@ namespace GestionProjetsEtClients
         public string Matricule { get; set; }
         public string Nom { get; set; }
         public string Prenom { get; set; }
+        public string NomCompletFormat
+        {
+            get { return Prenom + " " + Nom; }
+        }
         public string DateNaissance { get; set; }
         public string Email { get; set; }
         public string Adresse { get; set; }
