@@ -17,7 +17,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Margin="50 15 0 0" FontSize="25">Liste des employés</TextBlock>
-        <TextBox x:Name="txtBoxRechercheNomOuPrenom" Header="Rechercher par ville" Grid.Row="1" Margin="10"  SelectionChanged="txtBoxRechercheVille_SelectionChanged"></TextBox>
+        <TextBox x:Name="txtBoxRechercheNomOuPrenom" Header="Rechercher par prénom/nom" Grid.Row="1" Margin="10"  SelectionChanged="txtBoxRechercheVille_SelectionChanged"></TextBox>
 
         <CommandBar 
                x:Name="comAjout"

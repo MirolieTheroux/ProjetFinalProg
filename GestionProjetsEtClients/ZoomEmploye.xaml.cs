@@ -55,10 +55,13 @@ namespace GestionProjetsEtClients
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            //var pageFrom = e.SourcePageType;
+            //var texte = pageFrom.Name;
+            //faire un if selon le nom de la page et dans le else je vais faire une recherche par le matricule-> faire une procédure 
+            //select ... where matricule=matricule.
             index = (int)e.Parameter;
             if (index >= 0)
             {
-            
                 imgProfil.ImageSource = new BitmapImage(new Uri(SingletonEmploye.getInstance().Employes[index].LienPhoto));
                 txtBlMatricule.Text = "Matricule : " + SingletonEmploye.getInstance().Employes[index].Matricule; 
                 txtBlNom.Text = SingletonEmploye.getInstance().Employes[index].Prenom + " " +  SingletonEmploye.getInstance().Employes[index].Nom;
