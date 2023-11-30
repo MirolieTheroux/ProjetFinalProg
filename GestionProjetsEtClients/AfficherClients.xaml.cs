@@ -78,22 +78,49 @@ namespace GestionProjetsEtClients
         }
 
         private void autoSuggestBoxNom_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
-        {
-            List<Client> suggestion = new List<Client>();
+       {
+            List<String> suggestion = new List<String>();
 
             foreach(Client client in SingletonClient.getInstance().Clients)
             {
                 if (client.Nom.Contains(autoSuggestBoxNom.Text))
                 {
-                    suggestion.Add(client);
+                    suggestion.Add(client.Nom);
                 }
 
-                autoSuggestBoxNom.ItemsSource = suggestion;
             }
+
+            autoSuggestBoxNom.ItemsSource = suggestion;
         }
 
         private void autoSuggestBoxNom_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
+            int index = -1;
+            bool quitterPage = false;
+
+            try
+            {
+                index = SingletonClient.getInstance().getIndexNom(args.ChosenSuggestion.ToString());
+                this.Frame.Navigate(typeof(ZoomClient), index);
+            }
+            catch (NullReferenceException nre)
+            {
+                foreach (Client client in SingletonClient.getInstance().Clients)
+                {
+                    if (client.Nom.Contains(sender.Text))
+                    {
+                        {
+                            index = SingletonClient.getInstance().getIndexNom(client.Nom);
+                            quitterPage = true;
+                            break;
+                        }
+                    }
+                }
+                if(quitterPage)
+                {
+                    this.Frame.Navigate(typeof(ZoomClient), index);
+                }
+            }
 
         }
     }

@@ -49,6 +49,7 @@
 
         <AutoSuggestBox Grid.Row="2" 
                         x:Name="autoSuggestBoxNom" 
+                        Margin="50 10 50 10"
                         QueryIcon="Find" 
                         PlaceholderText="Entrez un nom de client" 
                         TextChanged="autoSuggestBoxNom_TextChanged"
