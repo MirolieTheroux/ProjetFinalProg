@@ -122,18 +122,23 @@
                 </CommandBar>
             </Grid>
 
-            <ListView x:Name="lvProjetsEmploye" Grid.Row="9" Margin="10">
+            <ListView x:Name="lvProjetsEmploye" Grid.Row="9" Margin="10" SelectionChanged="lvProjetsEmploye_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local:ProjetEmploye">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10" HorizontalAlignment="Stretch">
-                            <TextBlock Text="{x:Bind Matricule}" Margin="5" VerticalAlignment="Center" FontSize="15"  />
+                            <!--<TextBlock Text="{x:Bind Matricule}" Margin="5" Width="90" VerticalAlignment="Center" FontSize="15"  />
+                            <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>-->
+
+                            <TextBlock Text="{x:Bind NomCompletFormat}" VerticalAlignment="Center" Width="175" TextAlignment="Center" Margin="5" FontSize="15"/>
                             <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                            <TextBlock Text="{x:Bind Prenom}" VerticalAlignment="Center"  Margin="5" FontSize="15"/>
-                            <TextBlock Text="{x:Bind Nom}" VerticalAlignment="Center" Margin="0 0 5 0" FontSize="15"/>
+
+                            <TextBlock Text="{x:Bind TauxHoraireFormat}" VerticalAlignment="Center" Width="60" TextAlignment="Center" FontSize="15"></TextBlock>
                             <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                            <TextBlock Text="{x:Bind NbHeures}" VerticalAlignment="Center"  Margin="5" FontSize="15"/>
+
+                            <TextBlock Text="{x:Bind NbHeures}" VerticalAlignment="Center" Width="50" Margin="5" TextAlignment="Center" FontSize="15"/>
                             <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                            <TextBlock Text="{x:Bind SalaireEmpFormat}" VerticalAlignment="Center" Margin="5" FontSize="15"/>
+
+                            <TextBlock Text="{x:Bind SalaireEmpFormat}" VerticalAlignment="Center" Width="80" TextAlignment="Center" Margin="5" FontSize="15"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

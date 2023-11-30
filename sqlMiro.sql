@@ -66,7 +66,11 @@ CALL p_ajouter_employes ('Ronan', 'Saoirse','1994-10-10','sr@gmail.com','123 rue
 CALL p_ajouter_employes ('Monaghan', 'Michelle','1976-02-22','michellem@gmail.com','569 rue des Forges, Trois-Rivières', '2011-11-16',45.35,'https://www.themoviedb.org/t/p/w500/jB47BoGdudHELszn9ZAZqnnUy8N.jpg', 'Temps plein');
 CALL p_ajouter_employes ('Lépine', 'Nicolas','1990-01-26','nicolas.lepime@gmail.com','4870 route 218, Ste-Cécile', '2016-09-29',38.75,'https://wes.eletsonline.com/school/wp-content/uploads/sites/7/2021/03/Nicolas-Lepine.jpg', 'Temps plein');
 CALL p_ajouter_employes ('Swift', 'Taylor','1989-12-13','taylorswift@gmail.com','5 Hermina Plaza, New York', '2023-05-04',24.65,'https://fr.web.img5.acsta.net/pictures/19/08/27/09/51/3618586.jpg', 'Journalier');
-CALL p_ajouter_employes ('Pitt', 'Brad','1980-01-10','bp@gmail.com','19 rue Étoile, St-Angèle', '2009-11-16',95.43,'https://images.mubicdn.net/images/cast_member/2552/cache-207-1524922850/image-w856.jpg?size=800x', 'Temps plein');
+CALL p_ajouter_employes ('Lerman', 'Logan','1992-01-19','loganlerman@gmail.com','956 rue des Bouleaux, Bécancour', '2015-11-30',57.86,'https://www.themoviedb.org/t/p/w500/qWbN2toEEQgW9DFjgy3gT2VoVlQ.jpg', 'Temps plein');
+CALL p_ajouter_employes ('OBrien', 'Dylan','1991-08-26','dylanobrien@gmail.com','526 rue des Oiseaux, St-Grégoire', '2014-04-16',60.25,'https://upload.wikimedia.org/wikipedia/commons/3/35/Dylan_O%27Brien_2014_Comic_Con_%28cropped%29.jpg', 'Temps plein');
+CALL p_ajouter_employes ('Larson', 'Brie','1989-10-01','brielarson@gmail.com','444 rue Papineau, Trois-Rivières', '2022-11-16',25.65,'https://m.media-amazon.com/images/M/MV5BNDE4ZWY1ZTUtYjNhMy00MTQyLWFmMjktNTkyYTFjOGRlNDk0XkEyXkFqcGdeQXVyMTE1MTYxNDAw._V1_.jpg', 'Journalier');
+CALL p_ajouter_employes ('Waltz', 'Christoph','1956-10-04','christophwaltz@gmail.com','89 rue Capricorne, Gentilly', '2022-03-17',26.32,'https://media.gq-magazine.co.uk/photos/5d139c2086dd7e5a22553b33/16:9/w_1280,c_limit/Christoph-Waltz_GQ_01Apr15_Matthew-Brookes_b.jpg', 'Journalier');
+CALL p_ajouter_employes ('Shipka', 'Kiernan','1999-11-10','kiernanshipka@gmail.com','19 rue Étoile, St-Angèle', '2023-11-01',24.65,'https://www.instyle.com/thmb/z0l1fFbXOrCgD4FNKm4eh5qy8No=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Kiernan-Shipka-HEd-Shot-Ramona-Rosales-x-Netflix-9453ca691f9a440894354ef9e7640928.jpg', 'Journalier');
 
 -- Déclencheur pour générer un matricule à l'employé avant l'ajout (Mirolie)
 DROP TRIGGER IF EXISTS genererMatricule;
@@ -122,7 +126,7 @@ DROP procedure if exists p_get_projets_employe;
 DELIMITER //
 CREATE procedure p_get_projets_employe(IN num_projet char(11))
 BEGIN
-   SELECT e.prenom, e.nom, nbr_heure_travail, salaire_employe_projet
+   SELECT e.matricule, e.prenom, e.nom,e.taux_horaire, nbr_heure_travail, salaire_employe_projet
     from employe e
              inner join projet_employe pe on e.matricule = pe.matricule
     where no_projet = num_projet;
@@ -160,6 +164,12 @@ CALL p_ajout_projets_employe('MO-1976-78','534-43-2023',24);
 CALL p_ajout_projets_employe('PI-1980-60','614-68-2015',59);
 CALL p_ajout_projets_employe('RO-1994-87','455-81-2023',61);
 CALL p_ajout_projets_employe('PA-1997-79','972-82-2022',74.25);
+CALL p_ajout_projets_employe('SH-1999-40','124-19-2023',20);
+CALL p_ajout_projets_employe('WA-1956-45','167-69-2023',35);
+CALL p_ajout_projets_employe('OB-1991-49','186-92-2023',60.5);
+CALL p_ajout_projets_employe('LE-1992-46','410-88-2020',42);
+CALL p_ajout_projets_employe('LA-1989-29','802-15-2006',16);
+CALL p_ajout_projets_employe('DO-1965-34','853-70-2022',40.75);
 
 -- Fonction pour vérifier le statut du projet + requête sous-requête(Mirolie)
 drop function if exists f_verif_employe_dispo;
@@ -210,3 +220,35 @@ CREATE TRIGGER updateCoutProjet
        UPDATE projet set total_salaire = coutTotal where no_projet=new.no_projet;
    end ;
 DELIMITER //
+
+-- Procédure pour rechercher par nom ou prénom un employé (Mirolie)
+drop procedure if exists p_recherche_nom_prenom_employe;
+DELIMITER //
+CREATE procedure p_recherche_nom_prenom_employe(IN nomOuPrenom varchar(100))
+BEGIN
+   SELECT * FROM employe WHERE nom LIKE CONCAT('%', nomOuPrenom, '%') OR prenom LIKE CONCAT('%', nomOuPrenom, '%');
+end;
+//
+DELIMITER ;
+
+-- Procédure pour avoir seulement les projets en cours (Mirolie)
+DROP procedure if exists p_get_projets_encours;
+DELIMITER //
+CREATE procedure p_get_projets_encours()
+BEGIN
+    SELECT no_projet,
+           titre,
+           date_debut,
+           description,
+           budget,
+           nbr_employe_requis,
+           total_salaire,
+           statut,
+           p.id_client,
+           c.nom as nom_client
+    FROM projet p
+             INNER JOIN client c on p.id_client = c.id_client
+    where p.statut = 'en cours';
+end;
+//
+DELIMITER ;

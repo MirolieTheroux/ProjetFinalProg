@@ -48,8 +48,6 @@ namespace GestionProjetsEtClients
             {
                 infoBar.IsOpen = false;
             }
-
-
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -106,6 +104,16 @@ namespace GestionProjetsEtClients
             ajoutEmployeProjet.SecondaryButtonText = "Annuler";
             ajoutEmployeProjet.DefaultButton = ContentDialogButton.Primary;
             var resultat = await ajoutEmployeProjet.ShowAsync();
+        }
+
+        private void lvProjetsEmploye_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lvProjetsEmploye.SelectedIndex >= 0)
+            {
+                ProjetEmploye pe = lvProjetsEmploye.SelectedItem as ProjetEmploye;
+
+                this.Frame.Navigate(typeof(ZoomEmploye), pe.Matricule);
+            }
         }
     }
 }
