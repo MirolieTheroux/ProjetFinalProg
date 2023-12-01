@@ -138,7 +138,14 @@ namespace GestionProjetsEtClients
             {
                 ProjetEmploye pe = lvProjetsEmploye.SelectedItem as ProjetEmploye;
 
-                this.Frame.Navigate(typeof(ZoomEmploye), pe.Matricule);
+                InfosNavigation infos = new InfosNavigation()
+                {
+                    NomPage= "ZoomProjet",
+                    MatEmploye= pe.Matricule
+                };
+
+
+                this.Frame.Navigate(typeof(ZoomEmploye),infos );
             }
         }
 

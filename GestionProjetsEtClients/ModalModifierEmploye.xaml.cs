@@ -25,7 +25,6 @@ namespace GestionProjetsEtClients
         public ModalModifierEmploye()
         {
             this.InitializeComponent();
-
             iIndex = SingletonEmploye.getInstance().getIndex();
             txtBoxNom.Text = SingletonEmploye.getInstance().Employes[iIndex].Nom;
             txtBoxPrenom.Text = SingletonEmploye.getInstance().Employes[iIndex].Prenom;

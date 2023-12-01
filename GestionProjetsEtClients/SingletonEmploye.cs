@@ -249,6 +249,23 @@ namespace GestionProjetsEtClients
             return listeEmployes;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="matEmp"></param>
+        /// <returns></returns>
+        public int getIndexParMatricule(string matEmp)
+        {
+            int index = -1;
+            List<string> listeMatricule = new List<string>();
+            foreach(Employe employe in listeEmployes)
+            {
+                listeMatricule.Add(employe.Matricule);
+            }
+
+            index = listeMatricule.IndexOf(matEmp);
+            return index;
+        }
     }
 }
 

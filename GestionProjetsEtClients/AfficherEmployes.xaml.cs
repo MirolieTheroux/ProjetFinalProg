@@ -76,7 +76,12 @@ namespace GestionProjetsEtClients
         {
             if (lvEmployes.SelectedIndex >= 0)
             {
-                this.Frame.Navigate(typeof(ZoomEmploye), lvEmployes.SelectedIndex);
+                InfosNavigation infos = new InfosNavigation()
+                {
+                    NomPage = "AfficherEmployes",
+                    IndexEmploye = lvEmployes.SelectedIndex
+                };
+                this.Frame.Navigate(typeof(ZoomEmploye), infos);
             }
         }
 

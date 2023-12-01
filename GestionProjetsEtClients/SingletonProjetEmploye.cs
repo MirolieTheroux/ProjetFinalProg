@@ -59,7 +59,7 @@ namespace GestionProjetsEtClients
                 MySqlDataReader reader = commande.ExecuteReader();
                 while (reader.Read())
                 {
-                    //string sMatricule = (string)reader["matricule"];
+                    string sMatricule = (string)reader["matricule"];
                     string sNom = (string)reader["nom"];
                     string sPrenom = (string)reader["prenom"];
                     double dTauxHoraire = (double)reader["taux_horaire"];
@@ -69,7 +69,7 @@ namespace GestionProjetsEtClients
 
                     ProjetEmploye projetemploye = new ProjetEmploye
                     {
-                        //Matricule = sMatricule,
+                        Matricule = sMatricule,
                         Nom = sNom,
                         Prenom = sPrenom,
                         TauxHoraire = dTauxHoraire,
