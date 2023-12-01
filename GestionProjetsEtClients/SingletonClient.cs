@@ -160,5 +160,43 @@ namespace GestionProjetsEtClients
 
             return index;
         }
+
+        public ObservableCollection<Client> GetClientParNom(string nomRecherche)
+        {
+            listeClients.Clear();
+            try
+            {
+                MySqlCommand command = new MySqlCommand("p_get_clients_par_nom");
+                command.Connection = con;
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("nomP", nomRecherche);
+                con.Open();
+                MySqlDataReader r = command.ExecuteReader();
+
+                while (r.Read())
+                {
+                    int id = (int)r["id_client"];
+                    string nom = (string)r["nom"];
+                    string adresse = (string)r["adresse"];
+                    string no_telephone = (string)r["no_telephone"];
+                    string email = (string)r["email"];
+                    Client client = new Client { Id = id, Nom = nom, Adresse = adresse, NoTelephone = no_telephone, Email = email };
+                    listeClients.Add(client);
+
+                }
+                r.Close();
+                con.Close();
+            }
+            catch (MySqlException ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                {
+                    con.Close();
+                }
+            }
+            return listeClients;
+        }
+
     }
 }

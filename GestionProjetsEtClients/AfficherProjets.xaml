@@ -18,19 +18,29 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Liste des projets"
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Liste des projets"
            HorizontalAlignment="Left"
            FontSize="25"
            Margin="50 15 0 0"/>
 
-        <CommandBar Grid.Column="1" 
+            <CommandBar Grid.Column="1" 
                     x:Name="commandBar"
                     Background="Transparent" 
                     IsOpen="False" 
                     DefaultLabelPosition="Right"
                     Margin="0 0 15 0">
-            <AppBarButton x:Name="abbExportProjet" Icon="Download" Label="Télécharger la liste des projets" Click="abbExportProjet_Click" />
-        </CommandBar>
+                <AppBarButton x:Name="abbExportProjet" Icon="Download" Label="Télécharger la liste des projets" Click="abbExportProjet_Click" />
+            </CommandBar>
+
+            <ToggleSwitch x:Name="toggleSwitchEncours" OffContent="Tous" OnContent="En cours" Toggled="toggleSwitchEncours_Toggled"  Grid.Column="2"></ToggleSwitch>
+        </Grid>
 
         <InfoBar Grid.Row="1"
                  x:Name="infoBar"
@@ -40,7 +50,9 @@
                  Margin="50 10 50 10"
                  Message="Définir un message aproprié"/>
 
-        <ToggleSwitch x:Name="toggleSwitchEncours" Margin="40 0 0 0" OffContent="Tous" OnContent="En cours" Toggled="toggleSwitchEncours_Toggled"  Grid.Row="3"></ToggleSwitch>
+        <TextBox x:Name="txtBoxRechercheTitre" Header="Rechercher par titre" Grid.Row="3" Margin="30 0 30 0"  SelectionChanged="txtBoxRechercheTitre_SelectionChanged"></TextBox>
+
+
 
         <ListView x:Name="lvListeProjets" Grid.Row="4" Margin="10" SelectionChanged="lvListeProjets_SelectionChanged">
             <ListView.ItemTemplate>

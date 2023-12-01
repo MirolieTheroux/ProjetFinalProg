@@ -252,3 +252,35 @@ BEGIN
 end;
 //
 DELIMITER ;
+
+-- Procédure pour faire une recherche par nom de client (Mirolie)
+drop procedure if exists p_get_clients_par_nom;
+DELIMITER //
+CREATE procedure p_get_clients_par_nom(IN nomP varchar(100))
+BEGIN
+   SELECT * FROM client WHERE nom LIKE CONCAT('%', nomP, '%');
+end;
+//
+DELIMITER ;
+
+-- Procédure pour avoir seulement les projets titre (Mirolie)
+DROP procedure if exists p_get_projets_par_titre;
+DELIMITER //
+CREATE procedure p_get_projets_par_titre(IN titreP varchar(100))
+BEGIN
+    SELECT no_projet,
+           titre,
+           date_debut,
+           description,
+           budget,
+           nbr_employe_requis,
+           total_salaire,
+           statut,
+           p.id_client,
+           c.nom as nom_client
+    FROM projet p
+             INNER JOIN client c on p.id_client = c.id_client
+    where p.titre LIKE CONCAT('%', titreP, '%');
+end;
+//
+DELIMITER ;
