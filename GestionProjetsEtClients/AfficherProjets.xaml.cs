@@ -104,5 +104,11 @@ namespace GestionProjetsEtClients
                 SingletonProjet.getInstance().getListeProjets();
             }
         }
+
+        private void txtBoxRechercheTitre_SelectionChanged(object sender, RoutedEventArgs e)
+        {
+            SingletonProjet.getInstance().GetProjetParTitre(txtBoxRechercheTitre.Text);
+        }
+
     }
 }

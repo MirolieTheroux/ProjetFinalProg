@@ -9,26 +9,44 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-  
+
     <Grid x:Name="grilleEmployes">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Margin="50 15 0 0" FontSize="25">Liste des employés</TextBlock>
-        <TextBox x:Name="txtBoxRechercheNomOuPrenom" Header="Rechercher par prénom/nom" Grid.Row="1" Margin="10"  SelectionChanged="txtBoxRechercheVille_SelectionChanged"></TextBox>
 
-        <CommandBar 
-               x:Name="comAjout"
-               Background="Transparent" 
-               IsOpen="False" 
-               DefaultLabelPosition="Right"
-               Margin="0 0 15 0">
-            <AppBarButton Icon="Add" Label="Ajouter un employé" Click="AppBarButton_Click" />
-        </CommandBar>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Margin="50 15 0 0" FontSize="25">Liste des employés</TextBlock>
+            <CommandBar 
+                    x:Name="comAjout"
+                    Grid.Column="1" 
+                    Background="Transparent" 
+                    IsOpen="False" 
+                    DefaultLabelPosition="Right"
+                    Margin="0 0 15 0">
+                <AppBarButton Icon="Add" Label="Ajouter un employé" Click="AppBarButton_Click" />
+            </CommandBar>
 
-        <ListView x:Name="lvEmployes" Grid.Row="2" Margin="10" SelectionChanged="lvEmployes_SelectionChanged">
+        </Grid>
+        
+        <InfoBar Grid.Row="1"
+          x:Name="infoBar"
+          IsOpen="False"
+          Severity="Success"
+          Title="Titre"
+          Margin="50 10 50 10"
+          Message="Définir un message aproprié" />
+        
+        <TextBox x:Name="txtBoxRechercheNomOuPrenom" Header="Rechercher par prénom/nom" Grid.Row="2" Margin="30 0 30 0"  SelectionChanged="txtBoxRechercheVille_SelectionChanged"></TextBox>
+
+        <ListView x:Name="lvEmployes" Grid.Row="3" Margin="10" SelectionChanged="lvEmployes_SelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Employe">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10" HorizontalAlignment="Stretch">

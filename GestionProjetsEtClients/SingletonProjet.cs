@@ -269,5 +269,60 @@ namespace GestionProjetsEtClients
                 }
             }
         }
+
+        public ObservableCollection<Projet> GetProjetParTitre(string titreRecherche)
+        {
+            listeProjets.Clear();
+            try
+            {
+                MySqlCommand command = new MySqlCommand("p_get_projets_par_titre");
+                command.Connection = con;
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("titreP", titreRecherche);
+                con.Open();
+                MySqlDataReader r = command.ExecuteReader();
+
+                while (r.Read())
+                {
+                    string no_projet = (string)r["no_projet"];
+                    string titre = (string)r["titre"];
+                    DateTime date_debut = ((DateTime)r["date_debut"]).Date;
+                    string description = (string)r["description"];
+                    double budget = (double)r["budget"];
+                    int nbr_employe_requis = (int)r["nbr_employe_requis"];
+                    double total_salaire = (double)r["total_salaire"];
+                    string statut = (string)r["statut"];
+                    int id_client = (int)r["id_client"];
+                    string nom_client = (string)r["nom_client"];
+
+                    Projet projet = new Projet
+                    {
+                        NoProjet = no_projet,
+                        Titre = titre,
+                        DateDebut = date_debut.ToString("yyyy-MM-dd"),
+                        Description = description,
+                        Budget = budget,
+                        NbrEmployeRequis = nbr_employe_requis,
+                        TotalSalaire = total_salaire,
+                        Statut = statut,
+                        IdClient = id_client,
+                        NomClient = nom_client
+                    };
+                    listeProjets.Add(projet);
+
+                }
+                r.Close();
+                con.Close();
+            }
+            catch (MySqlException ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                {
+                    con.Close();
+                }
+            }
+            return listeProjets;
+        }
     }
 }
