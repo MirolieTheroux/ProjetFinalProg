@@ -61,10 +61,17 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="0"
-                       x:Name="tblStatut"
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock 
+                        Text="Statut : "
                        FontSize="20"
                        Margin="50 15 0 0"/>
+                    <TextBlock 
+                       x:Name="tblStatut"
+                       FontSize="20"
+                       Margin="5 15 0 0"/>
+                </StackPanel>
+                
 
                 <TextBlock Grid.Column="1"
                            x:Name="tblBudget"

@@ -1,3 +1,4 @@
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
@@ -6,6 +7,7 @@ using Microsoft.UI.Xaml.Documents;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
+using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -48,6 +50,17 @@ namespace GestionProjetsEtClients
             {
                 infoBar.IsOpen = false;
             }
+
+            if (SingletonAdmin.getInstance().valideConnexion())
+            {
+                commandBarHaut.Visibility = Visibility.Visible;
+                commandBarBas.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                commandBarHaut.Visibility = Visibility.Collapsed;
+                commandBarBas.Visibility = Visibility.Collapsed;
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -60,7 +73,7 @@ namespace GestionProjetsEtClients
                 tblDateDebut.Text = $"Date de début : {SingletonProjet.getInstance().Projets[index].DateDebut.ToString()}";
                 tblBudget.Text = $"Budget : {SingletonProjet.getInstance().Projets[index].BudgetFormat.ToString()}";
                 tblClient.Text = $"Client : {SingletonProjet.getInstance().Projets[index].NomClient.ToString()}";
-                tblStatut.Text = $"Statut : {SingletonProjet.getInstance().Projets[index].Statut.ToString()}";
+                tblStatut.Text = $"{SingletonProjet.getInstance().Projets[index].Statut.ToString()}";
                 tblTotalSalaire.Text = $"Total des salaires : {SingletonProjet.getInstance().Projets[index].TotalSalaireFormat.ToString()}";
 
                 Run run = new Run();
@@ -78,6 +91,17 @@ namespace GestionProjetsEtClients
                 else
                 {
                     abAjouterEmployer.Visibility = Visibility.Collapsed;
+                }
+
+                if (SingletonProjet.getInstance().Projets[index].Statut == "terminé")
+                {
+                    abTerminerProjet.Visibility = Visibility.Collapsed;
+                    tblStatut.Foreground = new SolidColorBrush(Colors.Green);
+                }
+                else
+                {
+                    abTerminerProjet.Visibility = Visibility.Visible;
+                    tblStatut.Foreground = new SolidColorBrush(Colors.Red);
                 }
             }
         }
@@ -116,9 +140,38 @@ namespace GestionProjetsEtClients
             }
         }
 
-        private void abTerminerProjet_Click(object sender, RoutedEventArgs e)
+        private async void abTerminerProjet_Click(object sender, RoutedEventArgs e)
         {
+            string no_projet = SingletonProjet.getInstance().Projets[index].NoProjet.ToString();
+            ContentDialog dialog = new ContentDialog();
+            dialog.XamlRoot = grilleProjet.XamlRoot;
+            dialog.Title = $"Terminer le projet #{no_projet}";
+            dialog.PrimaryButtonText = "Terminer";
+            dialog.CloseButtonText = "Annuler";
+            dialog.DefaultButton = ContentDialogButton.Close;
+            dialog.Content = "Êtes-vous sûr de vouloir terminer le projet?";
 
+            var result = await dialog.ShowAsync();
+
+            if (result == ContentDialogResult.Primary)
+            {
+                if (SingletonProjet.getInstance().terminer(no_projet) > 0)
+                {
+                    SingletonMessageValidation.getInstance().AfficherSucces = true;
+                    SingletonMessageValidation.getInstance().AfficherErreur = false;
+                    SingletonMessageValidation.getInstance().Titre = "Succès";
+                    SingletonMessageValidation.getInstance().Message = "La fermeture du projet a fonctionné";
+                }
+                else
+                {
+                    SingletonMessageValidation.getInstance().AfficherSucces = false;
+                    SingletonMessageValidation.getInstance().AfficherErreur = true;
+                    SingletonMessageValidation.getInstance().Titre = "Erreur";
+                    SingletonMessageValidation.getInstance().Titre = "La fermeture du projet a échoué";
+                }
+            }
+
+            this.Frame.Navigate(typeof(ZoomProjet), index);
         }
     }
 }

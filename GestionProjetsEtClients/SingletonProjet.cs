@@ -172,7 +172,7 @@ namespace GestionProjetsEtClients
                 validation = command.ExecuteNonQuery();
                 con.Close();
 
-                SingletonClient.getInstance().getListeClients();
+                SingletonProjet.getInstance().getListeProjets();
                 return validation;
             }
             catch (MySqlException ex)
@@ -205,7 +205,37 @@ namespace GestionProjetsEtClients
                 validation = command.ExecuteNonQuery();
                 con.Close();
 
-                SingletonClient.getInstance().getListeClients();
+                SingletonProjet.getInstance().getListeProjets();
+                return validation;
+            }
+            catch (MySqlException ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                {
+                    con.Close();
+                    return validation;
+                }
+                return validation;
+            }
+        }
+
+        public int terminer(string no_projet)
+        {
+            int validation = 0;
+            try
+            {
+                MySqlCommand command = new MySqlCommand("p_terminer_projet");
+                command.Connection = con;
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("_no_projet", no_projet);
+
+                con.Open();
+                command.Prepare();
+                validation = command.ExecuteNonQuery();
+                con.Close();
+
+                SingletonProjet.getInstance().getListeProjets();
                 return validation;
             }
             catch (MySqlException ex)
