@@ -20,11 +20,11 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <TextBox x:Name="txtBoxMatricule" Header="Matricule de l'employé" Margin="10 10 10 0"></TextBox>
-        <TextBlock x:Name="txtBlErreurMatricule" Margin="10 0 0 0" Foreground="Red" Grid.Row="1" ></TextBlock>
+        <!--<TextBox x:Name="txtBoxMatricule" Header="Matricule de l'employé" Margin="10 10 10 0"></TextBox>
+        <TextBlock x:Name="txtBlErreurMatricule" Margin="10 0 0 0" Foreground="Red" Grid.Row="1" ></TextBlock>-->
 
-        <TextBox x:Name="txtBoxNoProjet" Header="Numéro du projet" Margin="10 10 10 0" Grid.Row="2" ></TextBox>
-        <TextBlock x:Name="txtBlErreurNoProjet" Foreground="Red" Margin="10 0 0 0" Grid.Row="3"></TextBlock>
+        <AutoSuggestBox x:Name="asbxMatricule" Header="Matricule de l'employé" Margin="10 10 10 0" TextChanged="asbxMatricule_TextChanged"/>
+        <TextBlock x:Name="txtBlErreurMatricule" Margin="10 0 0 0" Foreground="Red" Grid.Row="1" ></TextBlock>
 
         <TextBox x:Name="txtBoxNbHeures" Header="Nombre d'heures travaillées" Margin="10 10 10 0" Grid.Row="4"></TextBox>
         <TextBlock x:Name="txtBlErreurNbHeures"  Margin="10 0 0 0" Foreground="Red" Grid.Row="5" ></TextBlock>

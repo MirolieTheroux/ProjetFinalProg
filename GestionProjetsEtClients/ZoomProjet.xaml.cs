@@ -121,6 +121,7 @@ namespace GestionProjetsEtClients
 
         private async void abAjouterEmployer_Click(object sender, RoutedEventArgs e)
         {
+            SingletonProjet.getInstance().setIndex(index);
             ModalAjouterEmployeProjet ajoutEmployeProjet = new ModalAjouterEmployeProjet();
             ajoutEmployeProjet.XamlRoot = grilleProjet.XamlRoot;
             ajoutEmployeProjet.Title = "Ajouter un employé à un projet";
@@ -128,6 +129,7 @@ namespace GestionProjetsEtClients
             ajoutEmployeProjet.SecondaryButtonText = "Annuler";
             ajoutEmployeProjet.DefaultButton = ContentDialogButton.Primary;
             var resultat = await ajoutEmployeProjet.ShowAsync();
+            this.Frame.Navigate(typeof(ZoomProjet), index);
         }
 
         private void lvProjetsEmploye_SelectionChanged(object sender, SelectionChangedEventArgs e)

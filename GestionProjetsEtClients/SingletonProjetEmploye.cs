@@ -118,6 +118,7 @@ namespace GestionProjetsEtClients
                 connection.Close();
 
                 getListeProjetsEmploye(sNo_projet);
+                SingletonProjet.getInstance().getListeProjets();
                 return iValidation;
             }
             catch (Exception ex)
@@ -125,8 +126,12 @@ namespace GestionProjetsEtClients
                 if (connection.State == System.Data.ConnectionState.Open)
                 {
                     connection.Close();
+                    SingletonMessageValidation.getInstance().Titre = "Erreur";
+                    SingletonMessageValidation.getInstance().Message = ex.Message;
                     return iValidation;
                 }
+                SingletonMessageValidation.getInstance().Titre = "Erreur";
+                SingletonMessageValidation.getInstance().Message = "L'ajout de l'employé à échoué";
                 return iValidation;
             }
         }
