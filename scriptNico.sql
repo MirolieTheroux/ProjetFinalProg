@@ -241,6 +241,17 @@ BEGIN
 END //
 DELIMITER ;
 
+-- (Nicolas) Procédure pour changer le statut à terminé
+DROP PROCEDURE IF EXISTS p_terminer_projet;
+DELIMITER //
+CREATE PROCEDURE p_terminer_projet(IN _no_projet char(11))
+BEGIN
+    UPDATE projet
+    SET statut = 'terminé'
+    WHERE no_projet = _no_projet;
+END //
+DELIMITER ;
+
 -- (Nicolas) Ajout d'élément dans la table projet
 -- Attention, modifier les id_client selon le réel si l'on éxécute se script pour la première fois (à cause des nombre aléatoire)
 CALL p_ajout_projet("Retructuration de l'architecture informatique", '2022-10-10', "Recréer une nouvelle archiecture de l'infrastructure informatique du client en lui proposant un système de gestion des dossiers, un système de cybersécurité et un support technique.", 200000, 4, 972);
