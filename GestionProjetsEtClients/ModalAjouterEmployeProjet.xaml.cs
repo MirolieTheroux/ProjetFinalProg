@@ -30,17 +30,12 @@ namespace GestionProjetsEtClients
         {
             enleverMessagesErreurs();
             bool bErreur = false;
+            int indexProjet = SingletonProjet.getInstance().getIndex();
 
-            if (!SingletonVerification.getInstance().isAdresseValide(txtBoxMatricule.Text))
+            //if (!SingletonVerification.getInstance().isAdresseValide(txtBoxMatricule.Text))
+            if (!SingletonVerification.getInstance().isAdresseValide(asbxMatricule.Text))
             {
                 txtBlErreurMatricule.Text = "Veuillez entrer un matricule";
-                bErreur = true;
-                args.Cancel = true;
-            }
-
-            if (!SingletonVerification.getInstance().isAdresseValide(txtBoxNoProjet.Text))
-            {
-                txtBlErreurNoProjet.Text = "Veuillez entrer un numéro de projet";
                 bErreur = true;
                 args.Cancel = true;
             }
@@ -54,11 +49,18 @@ namespace GestionProjetsEtClients
 
             if (!bErreur)
             {
-                SingletonProjetEmploye.getInstance().ajouterProjetEmploye(txtBoxMatricule.Text, txtBoxNoProjet.Text, Convert.ToDouble(txtBoxNbHeures.Text));
-                SingletonMessageValidation.getInstance().AfficherSucces = true;
-                SingletonMessageValidation.getInstance().AfficherErreur = false;
-                SingletonMessageValidation.getInstance().Titre = "Ajout";
-                SingletonMessageValidation.getInstance().Message = "L'ajout d'un employé a fonctionné";
+                if(SingletonProjetEmploye.getInstance().ajouterProjetEmploye(asbxMatricule.Text, SingletonProjet.getInstance().Projets[indexProjet].NoProjet, Convert.ToDouble(txtBoxNbHeures.Text)) > 0)
+                {
+                    SingletonMessageValidation.getInstance().AfficherSucces = true;
+                    SingletonMessageValidation.getInstance().AfficherErreur = false;
+                    SingletonMessageValidation.getInstance().Titre = "Succès";
+                    SingletonMessageValidation.getInstance().Message = "L'ajout d'un employé a fonctionné";
+                }
+                else
+                {
+                    SingletonMessageValidation.getInstance().AfficherSucces = false;
+                    SingletonMessageValidation.getInstance().AfficherErreur = true;
+                }
             }
         }
 
@@ -70,8 +72,22 @@ namespace GestionProjetsEtClients
         private void enleverMessagesErreurs()
         {
             txtBlErreurMatricule.Text = string.Empty;
-            txtBlErreurNoProjet.Text = string.Empty;
             txtBlErreurNbHeures.Text = string.Empty;
+        }
+
+        private void asbxMatricule_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            List<string> listeMatricule = new List<string>();
+
+            foreach (Employe employe in SingletonEmploye.getInstance().Employes)
+            {
+                if (employe.Matricule.Contains(sender.Text))
+                {
+                    listeMatricule.Add(employe.Matricule);
+                }
+            }
+
+            asbxMatricule.ItemsSource = listeMatricule;
         }
     }
 }
