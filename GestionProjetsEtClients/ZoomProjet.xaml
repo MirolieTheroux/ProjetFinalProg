@@ -42,7 +42,7 @@
                     DefaultLabelPosition="Right"
                     Margin="0 0 15 0">
                     <AppBarButton x:Name="abModifierProjet" Icon="Edit" Label="Modifier" Click="abModifierProjet_Click" />
-                    <AppBarButton x:Name="abTerminerProjet" Icon="Important" Label="Terminer" Click="abTerminerProjet_Click" />
+                    <AppBarButton x:Name="abTerminerProjet" Icon="Important" Label="Terminer" Click="abTerminerProjet_Click"/>
                 </CommandBar>
             </Grid>
 
