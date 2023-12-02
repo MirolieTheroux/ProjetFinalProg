@@ -126,7 +126,12 @@ namespace GestionProjetsEtClients
             if (lvListeProjetClient.SelectedIndex >= 0)
             {
                 SingletonMessageValidation.getInstance().annulerMessage();
-                this.Frame.Navigate(typeof(ZoomProjet), lvListeProjetClient.SelectedIndex);
+                InfosNavigation infos = new InfosNavigation()
+                {
+                    NomPage = "ZoomClient",
+                    IndexProjet = lvListeProjetClient.SelectedIndex
+                };
+                this.Frame.Navigate(typeof(ZoomProjet), infos);
             }
         }
     }

@@ -121,7 +121,7 @@ CREATE TABLE projet_employe
     FOREIGN KEY (no_projet) REFERENCES projet (no_projet)
 );
 
--- Procédure pour avoir les projets des employés (Mirolie)
+-- Procédure pour avoir les employés d'un projet (Mirolie)
 DROP procedure if exists p_get_projets_employe;
 DELIMITER //
 CREATE procedure p_get_projets_employe(IN num_projet char(11))
@@ -282,5 +282,33 @@ BEGIN
              INNER JOIN client c on p.id_client = c.id_client
     where p.titre LIKE CONCAT('%', titreP, '%');
 end;
+//
+DELIMITER ;
+
+-- Procédure pour avoir le projet en cours de l'employé (Mirolie)
+DROP procedure if exists  p_get_employe_projet_encours;
+DELIMITER //
+CREATE procedure p_get_employe_projet_encours(IN matEmp varchar(10))
+BEGIN
+   SELECT p.no_projet, p.titre
+    from projet p
+             inner join projet_employe pe on p.no_projet = pe.no_projet
+             inner join employe e on pe.matricule = e.matricule
+    where e.matricule = matEmp AND p.statut = 'en cours';
+    end;
+//
+DELIMITER ;
+
+-- Procédure pour avoir les projets terminés de l'employé (Mirolie)
+DROP procedure if exists p_get_employe_projets_termines;
+DELIMITER //
+CREATE procedure p_get_employe_projets_termines(IN matEmp varchar(10))
+BEGIN
+   SELECT p.no_projet, p.titre
+    from projet p
+             inner join projet_employe pe on p.no_projet = pe.no_projet
+             inner join employe e on pe.matricule = e.matricule
+    where e.matricule = matEmp AND p.statut = 'terminé';
+    end;
 //
 DELIMITER ;

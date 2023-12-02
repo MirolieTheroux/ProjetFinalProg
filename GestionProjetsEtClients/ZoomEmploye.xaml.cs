@@ -59,23 +59,26 @@ namespace GestionProjetsEtClients
             var texte = infos.NomPage;
             index = infos.IndexEmploye;
             string mat = infos.MatEmploye;
-            //faire un if selon le nom de la page et dans le else je vais faire une recherche par le matricule-> faire une procédure 
-            //select ... where matricule=matricule.
-            if (texte == "AfficherEmployes")
-            {             
-                    imgProfil.ImageSource = new BitmapImage(new Uri(SingletonEmploye.getInstance().Employes[infos.IndexEmploye].LienPhoto));
-                    txtBlMatricule.Text = "Matricule : " + SingletonEmploye.getInstance().Employes[infos.IndexEmploye].Matricule;
-                    txtBlNom.Text = SingletonEmploye.getInstance().Employes[infos.IndexEmploye].Prenom + " " + SingletonEmploye.getInstance().Employes[infos.IndexEmploye].Nom;
-                    txtBlDateNaissance.Text = "Date de naissance : " + SingletonEmploye.getInstance().Employes[infos.IndexEmploye].DateNaissance;
-                    txtBlEmail.Text = "Courriel : " + SingletonEmploye.getInstance().Employes[infos.IndexEmploye].Email;
-                    txtBlAdresse.Text = "Adresse : " + SingletonEmploye.getInstance().Employes[infos.IndexEmploye].Adresse;
-                    txtBlDateEmbauche.Text = "Date d'embauche : " + SingletonEmploye.getInstance().Employes[infos.IndexEmploye].DateEmbauche;
-                    string sEmbauche = SingletonEmploye.getInstance().Employes[infos.IndexEmploye].DateEmbauche;
-                    int iAnneeEmbauche = Convert.ToInt32(sEmbauche.Substring(0, 4));
-                    int iNbAnciennete = DateTime.Now.Year - iAnneeEmbauche;
-                    txtBlAnciennete.Text = "Ancienneté : " + iNbAnciennete + " " + "an(s)";
-                    txtBlTauxHoraire.Text = "Taux horaire : " + SingletonEmploye.getInstance().Employes[infos.IndexEmploye].TauxHoraireFormat.ToString() + "/h";
-                    txtBlStatut.Text = "Statut : " + SingletonEmploye.getInstance().Employes[infos.IndexEmploye].Statut;
+            if (texte == "AfficherEmployes" || texte == "ModalModifierEmploye")
+            {
+                imgProfil.ImageSource = new BitmapImage(new Uri(SingletonEmploye.getInstance().Employes[index].LienPhoto));
+                txtBlMatricule.Text = "Matricule : " + SingletonEmploye.getInstance().Employes[index].Matricule;
+                txtBlNom.Text = SingletonEmploye.getInstance().Employes[index].Prenom + " " + SingletonEmploye.getInstance().Employes[index].Nom;
+                txtBlDateNaissance.Text = "Date de naissance : " + SingletonEmploye.getInstance().Employes[index].DateNaissance;
+                txtBlEmail.Text = "Courriel : " + SingletonEmploye.getInstance().Employes[index].Email;
+                txtBlAdresse.Text = "Adresse : " + SingletonEmploye.getInstance().Employes[index].Adresse;
+                txtBlDateEmbauche.Text = "Date d'embauche : " + SingletonEmploye.getInstance().Employes[index].DateEmbauche;
+                string sEmbauche = SingletonEmploye.getInstance().Employes[index].DateEmbauche;
+                int iAnneeEmbauche = Convert.ToInt32(sEmbauche.Substring(0, 4));
+                int iNbAnciennete = DateTime.Now.Year - iAnneeEmbauche;
+                txtBlAnciennete.Text = "Ancienneté : " + iNbAnciennete + " " + "an(s)";
+                txtBlTauxHoraire.Text = "Taux horaire : " + SingletonEmploye.getInstance().Employes[index].TauxHoraireFormat.ToString() + "/h";
+                txtBlStatut.Text = "Statut : " + SingletonEmploye.getInstance().Employes[index].Statut;
+
+                SingletonProjet.getInstance().getProjetEmployeEnCours(SingletonEmploye.getInstance().Employes[index].Matricule);
+                SingletonProjet.getInstance().getListeProjetsEmployeTermines(SingletonEmploye.getInstance().Employes[index].Matricule);
+                lvProjetEnCours.ItemsSource = SingletonProjet.getInstance().ProjetEC;
+                lvProjetsTermines.ItemsSource = SingletonProjet.getInstance().ProjetsT;
             }
             else
             {
@@ -93,8 +96,12 @@ namespace GestionProjetsEtClients
                 txtBlAnciennete.Text = "Ancienneté : " + iNbAnciennete + " " + "an(s)";
                 txtBlTauxHoraire.Text = "Taux horaire : " + SingletonEmploye.getInstance().Employes[index].TauxHoraireFormat.ToString() + "/h";
                 txtBlStatut.Text = "Statut : " + SingletonEmploye.getInstance().Employes[index].Statut;
-            }
 
+                SingletonProjet.getInstance().getProjetEmployeEnCours(mat);
+                SingletonProjet.getInstance().getListeProjetsEmployeTermines(mat);
+                lvProjetEnCours.ItemsSource = SingletonProjet.getInstance().ProjetEC;
+                lvProjetsTermines.ItemsSource = SingletonProjet.getInstance().ProjetsT;
+            }
         }
 
         private async void AppBarButton_Click(object sender, RoutedEventArgs e)
@@ -108,14 +115,42 @@ namespace GestionProjetsEtClients
             modifierEmploye.DefaultButton = ContentDialogButton.Primary;
             var resultat = await modifierEmploye.ShowAsync();
 
-            //raffraichis la liste des employés
-            SingletonEmploye.getInstance().getListeEmployesBD();
-            this.Frame.Navigate(typeof(ZoomEmploye), index);
+            InfosNavigation infos = new InfosNavigation()
+            {
+                NomPage = "ModalModifierEmploye",
+                IndexEmploye = index
+            };
+            this.Frame.Navigate(typeof(ZoomEmploye), infos);
         }
 
-        private void AppBarButton_Click_1(object sender, RoutedEventArgs e)
+        private void lvProjetsEnCours_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+           
+            if (lvProjetEnCours.SelectedIndex >= 0)
+            { 
+                Projet projet = lvProjetEnCours.SelectedItem as Projet;
 
+                InfosNavigation infos = new InfosNavigation()
+                {
+                    NomPage = "ZoomEmploye",
+                    NoProjet = projet.NoProjet,
+                };
+                this.Frame.Navigate(typeof(ZoomProjet), infos);
+            }
+        }
+
+        private void lvProjetsTermines_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (lvProjetsTermines.SelectedIndex >= 0)
+            {
+                Projet projet = lvProjetsTermines.SelectedItem as Projet;
+                InfosNavigation infos = new InfosNavigation()
+                {
+                    NomPage = "ZoomEmploye",
+                    NoProjet = projet.NoProjet,
+                };
+                this.Frame.Navigate(typeof(ZoomProjet), infos);
+            }
         }
     }
 }

@@ -196,6 +196,8 @@ namespace GestionProjetsEtClients
             }
         }
 
+ 
+
         public ObservableCollection<Employe> GetEmployeParNom(string nomOuPrenom)
         {
             listeEmployes.Clear();
@@ -250,10 +252,10 @@ namespace GestionProjetsEtClients
         }
 
         /// <summary>
-        /// 
+        /// Permet d'avoir l'index de l'employé avec le matricule
         /// </summary>
-        /// <param name="matEmp"></param>
-        /// <returns></returns>
+        /// <param name="matEmp">Matricule de l'employé</param>
+        /// <returns>Index de l'employé dans la liste</returns>
         public int getIndexParMatricule(string matEmp)
         {
             int index = -1;
@@ -262,7 +264,6 @@ namespace GestionProjetsEtClients
             {
                 listeMatricule.Add(employe.Matricule);
             }
-
             index = listeMatricule.IndexOf(matEmp);
             return index;
         }

@@ -156,13 +156,14 @@ namespace GestionProjetsEtClients
                     SingletonMessageValidation.getInstance().AfficherSucces = true;
                     SingletonMessageValidation.getInstance().AfficherErreur = false;
                     SingletonMessageValidation.getInstance().Titre = "Modification";
-                    SingletonMessageValidation.getInstance().Titre = "La modification de l'employé a fonctionnée";
+                    SingletonMessageValidation.getInstance().Message = "La modification de l'employé a fonctionnée";
                 }
             }
         }
 
         private void ContentDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+            
             args.Cancel = false;
         }
 

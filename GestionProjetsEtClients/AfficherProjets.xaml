@@ -58,17 +58,17 @@
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Projet">
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="10" HorizontalAlignment="Stretch">
-                        <TextBlock Text="{x:Bind NoProjet}" Margin="5" VerticalAlignment="Center" FontSize="15"  />
+                        <TextBlock Text="{x:Bind NoProjet}" Margin="5" VerticalAlignment="Center" FontSize="13" Width="90" TextAlignment="Center" />
                         <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                        <TextBlock Text="{x:Bind Titre}" VerticalAlignment="Center"  Margin="5" FontSize="15"/>
+                        <TextBlock Text="{x:Bind Titre}" VerticalAlignment="Center"  Margin="5" FontSize="13" Width="275" TextAlignment="Center"/>
                         <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                        <TextBlock Text="{x:Bind DateDebut}" VerticalAlignment="Center" Margin="5" FontSize="15"/>
+                        <TextBlock Text="{x:Bind DateDebut}" VerticalAlignment="Center" Margin="5" FontSize="13" Width="80" TextAlignment="Center"/>
                         <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                        <TextBlock Text="{x:Bind BudgetFormat}" VerticalAlignment="Center"  Margin="5" FontSize="15"/>
+                        <TextBlock Text="{x:Bind BudgetFormat}" VerticalAlignment="Center"  Margin="5" FontSize="13" Width="100" TextAlignment="Center"/>
                         <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                        <TextBlock Text="{x:Bind Statut}" VerticalAlignment="Center" Margin="5" FontSize="15"/>
+                        <TextBlock Text="{x:Bind Statut}" VerticalAlignment="Center" Margin="5" FontSize="13" Width="60" TextAlignment="Center"/>
                         <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                        <TextBlock Text="{x:Bind NomClient}" VerticalAlignment="Center" Margin="5" FontSize="15"/>
+                        <TextBlock Text="{x:Bind NomClient}" VerticalAlignment="Center" Margin="5" FontSize="13" Width="150" TextAlignment="Center"/>
                         <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
                     </StackPanel>
                 </DataTemplate>
