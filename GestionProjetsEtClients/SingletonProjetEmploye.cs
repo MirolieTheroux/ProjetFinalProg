@@ -41,7 +41,7 @@ namespace GestionProjetsEtClients
 
         public ObservableCollection<ProjetEmploye> ProjetsEmploye { get { return listeProjetEmploye; } }
         /// <summary>
-        /// Permet d'avoir la liste des projets d'
+        /// Permet d'avoir la liste des employés d'un projet
         /// </summary>
         /// <param name="sNo_projet">Numéro de projet</param>
         public void getListeProjetsEmploye(string sNo_projet)
@@ -49,7 +49,7 @@ namespace GestionProjetsEtClients
             listeProjetEmploye.Clear();
             try
             {
-                MySqlCommand commande = new MySqlCommand("p_get_projets_employe");
+                MySqlCommand commande = new MySqlCommand("p_get_employes_projet");
                 commande.Connection = connection;
                 commande.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -135,6 +135,8 @@ namespace GestionProjetsEtClients
                 return iValidation;
             }
         }
+
+
     }
 
 

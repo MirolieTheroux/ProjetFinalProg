@@ -16,11 +16,12 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
-        <TextBlock x:Name="txtBlNom" HorizontalAlignment="Left" FontSize="25" Margin="50 15 0 0"></TextBlock>
+
+        <TextBlock x:Name="txtBlNom" HorizontalAlignment="Center" FontSize="30" Margin="50 15 0 0"></TextBlock>
 
         <CommandBar 
               Grid.Column="2"
@@ -28,14 +29,15 @@
               Background="Transparent" 
               IsOpen="False" 
               FontSize="20"
+            HorizontalAlignment="Right"
               DefaultLabelPosition="Right"
               Margin="0 0 15 0">
             <AppBarButton Icon="Edit" Label="Modifier" Click="AppBarButton_Click" />
         </CommandBar>
-  
+
         <InfoBar 
           Grid.Row="1"
-            Grid.ColumnSpan="2"
+            Grid.ColumnSpan="3"
           x:Name="infoBar"
           IsOpen="False"
           Severity="Success"
@@ -72,5 +74,28 @@
                 <TextBlock x:Name="txtBlStatut" TextAlignment="Center" Grid.Row="8" Margin="5"></TextBlock>
             </Grid>
         </StackPanel>
+
+       
+            <TextBlock TextAlignment="Center" Grid.Column="1" Grid.Row="3">Projet en cours</TextBlock>
+            <ListView x:Name="lvProjetEnCours" Grid.Column="1"  Grid.Row="3" Margin="22" SelectionChanged="lvProjetsEnCours_SelectionChanged" >
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="local:Projet">
+                    <StackPanel Orientation="Horizontal"  Margin="10" HorizontalAlignment="Stretch" >
+                        <TextBlock Text="{x:Bind Titre}" VerticalAlignment="Center" Width="250" TextAlignment="Center" Margin="5" FontSize="13"/>
+                      </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        
+            <TextBlock TextAlignment="Center" Grid.Column="2" Grid.Row="3">Projet(s) terminé(s)</TextBlock>
+        <ListView x:Name="lvProjetsTermines" Grid.Column="2" Grid.Row="3" Margin="22" SelectionChanged="lvProjetsTermines_SelectionChanged" >
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:Projet">
+                    <StackPanel Orientation="Horizontal"  Margin="10" HorizontalAlignment="Stretch">
+                        <TextBlock Text="{x:Bind Titre}" VerticalAlignment="Center" Width="250" TextAlignment="Center" Margin="5" FontSize="13"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

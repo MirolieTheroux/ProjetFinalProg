@@ -12,5 +12,7 @@ namespace GestionProjetsEtClients
         public string NomPage { get; set; }
         public string MatEmploye { get; set; }
         public int IndexEmploye { get; set; }
+        public string NoProjet { get; set; }
+        public int IndexProjet { get; set; }
     }
 }

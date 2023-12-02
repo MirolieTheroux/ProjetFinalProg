@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Navigation;
 using MySqlX.XDevAPI.Common;
+using Org.BouncyCastle.Bcpg;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -65,10 +66,13 @@ namespace GestionProjetsEtClients
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (e.Parameter is not null)
-            {
-                index = (int)e.Parameter;
 
+            InfosNavigation infos = (InfosNavigation)e.Parameter;
+            var texte = infos.NomPage;
+            index = infos.IndexProjet;
+            string noProjet = infos.NoProjet;
+            if (texte == "AfficherProjets" || texte == "ModalModifierProjet" || texte == "ModalAjouterEmployeProjet" || texte == "ZoomClient")
+            {
                 tblTitrePage.Text = $"{SingletonProjet.getInstance().Projets[index].NoProjet.ToString()} {SingletonProjet.getInstance().Projets[index].Titre.ToString()}";
                 tblDateDebut.Text = $"Date de début : {SingletonProjet.getInstance().Projets[index].DateDebut.ToString()}";
                 tblBudget.Text = $"Budget : {SingletonProjet.getInstance().Projets[index].BudgetFormat.ToString()}";
@@ -83,6 +87,46 @@ namespace GestionProjetsEtClients
 
                 SingletonProjetEmploye.getInstance().getListeProjetsEmploye(SingletonProjet.getInstance().Projets[index].NoProjet.ToString());
                  lvProjetsEmploye.ItemsSource = SingletonProjetEmploye.getInstance().ProjetsEmploye;
+                
+
+                if (SingletonProjet.getInstance().Projets[index].NbrEmployeRequis > SingletonProjetEmploye.getInstance().ProjetsEmploye.Count && SingletonAdmin.getInstance().valideConnexion())
+                {
+                    abAjouterEmployer.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    abAjouterEmployer.Visibility = Visibility.Collapsed;
+                }
+
+                if (SingletonProjet.getInstance().Projets[index].Statut == "terminé")
+                {
+                    abTerminerProjet.Visibility = Visibility.Collapsed;
+                    tblStatut.Foreground = new SolidColorBrush(Colors.Green);
+                }
+                else
+                {
+                    abTerminerProjet.Visibility = Visibility.Visible;
+                    tblStatut.Foreground = new SolidColorBrush(Colors.Red);
+                }
+            }
+            else 
+            {
+                index = SingletonProjet.getInstance().getIndexParNoProjet(noProjet);
+                tblTitrePage.Text = $"{SingletonProjet.getInstance().Projets[index].NoProjet.ToString()} {SingletonProjet.getInstance().Projets[index].Titre.ToString()}";
+                tblDateDebut.Text = $"Date de début : {SingletonProjet.getInstance().Projets[index].DateDebut.ToString()}";
+                tblBudget.Text = $"Budget : {SingletonProjet.getInstance().Projets[index].BudgetFormat.ToString()}";
+                tblClient.Text = $"Client : {SingletonProjet.getInstance().Projets[index].NomClient.ToString()}";
+                tblStatut.Text = $"{SingletonProjet.getInstance().Projets[index].Statut.ToString()}";
+                tblTotalSalaire.Text = $"Total des salaires : {SingletonProjet.getInstance().Projets[index].TotalSalaireFormat.ToString()}";
+
+                Run run = new Run();
+                run.Text = $"Description :\n{SingletonProjet.getInstance().Projets[index].Description.ToString()}";
+                rtbpDescription.Inlines.Add(run);
+                tblEmployeRequis.Text = $"(Max {SingletonProjet.getInstance().Projets[index].NbrEmployeRequis.ToString()} employés)";
+
+                SingletonProjetEmploye.getInstance().getListeProjetsEmploye(SingletonProjet.getInstance().Projets[index].NoProjet.ToString());
+                lvProjetsEmploye.ItemsSource = SingletonProjetEmploye.getInstance().ProjetsEmploye;
+
 
                 if (SingletonProjet.getInstance().Projets[index].NbrEmployeRequis > SingletonProjetEmploye.getInstance().ProjetsEmploye.Count && SingletonAdmin.getInstance().valideConnexion())
                 {
@@ -116,7 +160,12 @@ namespace GestionProjetsEtClients
             modifProjet.SecondaryButtonText = "Annuler";
             modifProjet.DefaultButton = ContentDialogButton.Primary;
             var resultat = await modifProjet.ShowAsync();
-            this.Frame.Navigate(typeof(ZoomProjet), index);
+            InfosNavigation infos = new InfosNavigation()
+            {
+                NomPage = "ModalModifierProjet",
+                IndexProjet = index,
+            };
+            this.Frame.Navigate(typeof(ZoomProjet), infos);
         }
 
         private async void abAjouterEmployer_Click(object sender, RoutedEventArgs e)
@@ -129,7 +178,12 @@ namespace GestionProjetsEtClients
             ajoutEmployeProjet.SecondaryButtonText = "Annuler";
             ajoutEmployeProjet.DefaultButton = ContentDialogButton.Primary;
             var resultat = await ajoutEmployeProjet.ShowAsync();
-            this.Frame.Navigate(typeof(ZoomProjet), index);
+            InfosNavigation infos = new InfosNavigation()
+            {
+                NomPage = "ModalAjouterEmployeProjet",
+                IndexProjet = index,
+            };
+            this.Frame.Navigate(typeof(ZoomProjet), infos);
         }
 
         private void lvProjetsEmploye_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -143,8 +197,6 @@ namespace GestionProjetsEtClients
                     NomPage= "ZoomProjet",
                     MatEmploye= pe.Matricule
                 };
-
-
                 this.Frame.Navigate(typeof(ZoomEmploye),infos );
             }
         }

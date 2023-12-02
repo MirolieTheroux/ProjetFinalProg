@@ -14,12 +14,17 @@ namespace GestionProjetsEtClients
         static SingletonProjet instance = null;
         MySqlConnection con;
         ObservableCollection<Projet> listeProjets;
+        ObservableCollection<Projet> projetEnCours;
+        ObservableCollection<Projet> listeProjetsTermines;
+
         int index;
 
         public SingletonProjet()
         {
             con = new MySqlConnection("Server=cours.cegep3r.info;Database=a2023_420325ri_fabeq11;Uid=1468780;Pwd=1468780;");
             listeProjets = new ObservableCollection<Projet>();
+            projetEnCours = new ObservableCollection<Projet>();
+            listeProjetsTermines = new ObservableCollection<Projet>();
             index = -1;
             getListeProjets();
         }
@@ -43,6 +48,8 @@ namespace GestionProjetsEtClients
         }
 
         public ObservableCollection<Projet> Projets { get { return listeProjets; } }
+        public ObservableCollection<Projet> ProjetEC { get { return projetEnCours; } }
+        public ObservableCollection<Projet> ProjetsT { get { return listeProjetsTermines; } }
 
         public void getListeProjets()
         {
@@ -96,7 +103,6 @@ namespace GestionProjetsEtClients
             }
 
         }
-
         public void getListeProjetsClient(int id_client_zoom)
         {
             listeProjets.Clear();
@@ -354,5 +360,87 @@ namespace GestionProjetsEtClients
             }
             return listeProjets;
         }
+
+        public void getProjetEmployeEnCours(string sMatriculeEmp)
+        {
+            projetEnCours.Clear();
+            try
+            {
+                MySqlCommand commande = new MySqlCommand("p_get_employe_projet_encours");
+                commande.Connection = con;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                commande.Parameters.AddWithValue("matEmp", sMatriculeEmp);
+                con.Open();
+                MySqlDataReader reader = commande.ExecuteReader();
+                while (reader.Read())
+                {
+                    string sNo_Projet = (string)reader["no_projet"];
+                    string sTitreProjet = (string)reader["titre"];
+
+                    Projet projetsEmp = new Projet
+                    {
+                        NoProjet = sNo_Projet,
+                        Titre = sTitreProjet,
+                    };
+                    projetEnCours.Add(projetsEmp);
+                }
+
+                reader.Close();
+                con.Close();
+            }
+            catch (MySqlException ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
+            }
+        }
+
+        public void getListeProjetsEmployeTermines(string sMatriculeEmp)
+        {
+            listeProjetsTermines.Clear();
+            try
+            {
+                MySqlCommand commande = new MySqlCommand("p_get_employe_projets_termines");
+                commande.Connection = con;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                commande.Parameters.AddWithValue("matEmp", sMatriculeEmp);
+                con.Open();
+                MySqlDataReader reader = commande.ExecuteReader();
+                while (reader.Read())
+                {
+                    string sNo_Projet = (string)reader["no_projet"];
+                    string sTitreProjet = (string)reader["titre"];
+
+                    Projet projetsEmp = new Projet
+                    {
+                        NoProjet = sNo_Projet,
+                        Titre = sTitreProjet,
+                    };
+                    listeProjetsTermines.Add(projetsEmp);
+                }
+
+                reader.Close();
+                con.Close();
+            }
+            catch (MySqlException ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
+            }
+        }
+        public int getIndexParNoProjet(string noProjet)
+        {
+            int index = -1;
+            List<string> listeNoProjet = new List<string>();
+            foreach (Projet projet in listeProjets)
+            {
+                listeNoProjet.Add(projet.NoProjet);
+            }
+            index = listeNoProjet.IndexOf(noProjet);
+            return index;
+        }
+
     }
 }
