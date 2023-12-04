@@ -26,7 +26,7 @@ namespace GestionProjetsEtClients
         public AfficherProjets()
         {
             this.InitializeComponent();
-            SingletonProjet.getInstance().getListeProjets();
+            SingletonProjet.getInstance().getProjetsEnCours();
             lvListeProjets.ItemsSource = SingletonProjet.getInstance().Projets;
 
             if (SingletonAdmin.getInstance().valideConnexion())
@@ -102,11 +102,11 @@ namespace GestionProjetsEtClients
         {
             if (toggleSwitchEncours.IsOn)
             {
-                SingletonProjet.getInstance().getProjetsEnCours();
+                SingletonProjet.getInstance().getListeProjets();
             }
             else
             {
-                SingletonProjet.getInstance().getListeProjets();
+                SingletonProjet.getInstance().getProjetsEnCours();
             }
         }
 

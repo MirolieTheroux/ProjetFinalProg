@@ -39,7 +39,7 @@
                 <AppBarButton x:Name="abbExportProjet" Icon="Download" Label="Télécharger la liste des projets" Click="abbExportProjet_Click" />
             </CommandBar>
 
-            <ToggleSwitch x:Name="toggleSwitchEncours" OffContent="Tous" OnContent="En cours" Toggled="toggleSwitchEncours_Toggled"  Grid.Column="2"></ToggleSwitch>
+            <ToggleSwitch x:Name="toggleSwitchEncours" OffContent="En cours" OnContent="Tous" Toggled="toggleSwitchEncours_Toggled"  Grid.Column="2"></ToggleSwitch>
         </Grid>
 
         <InfoBar Grid.Row="1"
