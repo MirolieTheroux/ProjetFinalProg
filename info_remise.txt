@@ -1,0 +1,6 @@
+String de connexion :
+"Server=cours.cegep3r.info;Database=a2023_420325ri_fabeq11;Uid=1468780;Pwd=1468780;"
+
+Nom - Github :
+Mirolie Théroux - MirolieTheroux
+Nicolas Fleurent - NicFleurent

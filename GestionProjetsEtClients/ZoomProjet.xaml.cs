@@ -152,6 +152,7 @@ namespace GestionProjetsEtClients
 
         private async void abModifierProjet_Click(object sender, RoutedEventArgs e)
         {
+            SingletonMessageValidation.getInstance().annulerMessage();
             SingletonProjet.getInstance().setIndex(index);
             ModalModifierProjet modifProjet = new ModalModifierProjet();
             modifProjet.XamlRoot = grilleProjet.XamlRoot;
