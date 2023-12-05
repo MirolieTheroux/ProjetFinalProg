@@ -51,7 +51,7 @@ namespace GestionProjetsEtClients
         public ObservableCollection<Projet> Projets { get { return listeProjets; } }
         public ObservableCollection<Projet> ProjetEC { get { return projetEnCours; } }
         public ObservableCollection<Projet> ProjetsT { get { return listeProjetsTermines; } }
-
+      
         public void getListeProjets()
         {
             bProjetEnCours = false;
@@ -209,6 +209,7 @@ namespace GestionProjetsEtClients
                 }
             }
         }
+        public bool valideProjetEncours() { return bProjetEnCours; }  
         public void getProjetEmployeEnCours(string sMatriculeEmp)
         {
             projetEnCours.Clear();

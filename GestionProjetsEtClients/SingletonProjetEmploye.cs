@@ -118,9 +118,16 @@ namespace GestionProjetsEtClients
                 connection.Close();
 
                 getListeProjetsEmploye(sNo_projet);
-                SingletonProjet.getInstance().getListeProjets();
+                if (SingletonProjet.getInstance().valideProjetEncours())
+                {
+                    SingletonProjet.getInstance().getProjetsEnCours();
+                }
+                else
+                {
+                    SingletonProjet.getInstance().getListeProjets();
+                }
 
-                if(iValidation == 0)
+                if (iValidation == 0)
                 {
                     SingletonMessageValidation.getInstance().Titre = "Erreur";
                     SingletonMessageValidation.getInstance().Message = "Le matricule entré n'existe pas";

@@ -79,7 +79,7 @@ namespace GestionProjetsEtClients
 
             if (!SingletonVerification.getInstance().isCourrielValide(txtBoxCourriel.Text))
             {
-                txtBlErreurCourriel.Text = "Veuillez entrer un email valide.";
+                txtBlErreurCourriel.Text = "Veuillez entrer un courriel valide.";
                 bErreur = true;
                 args.Cancel = true;
             }
