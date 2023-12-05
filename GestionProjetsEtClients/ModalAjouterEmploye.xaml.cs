@@ -164,7 +164,7 @@ namespace GestionProjetsEtClients
                 {
                     SingletonMessageValidation.getInstance().AfficherSucces = true;
                     SingletonMessageValidation.getInstance().AfficherErreur = false;
-                    SingletonMessageValidation.getInstance().Titre = "Ajout";
+                    SingletonMessageValidation.getInstance().Titre = "Succès";
                     SingletonMessageValidation.getInstance().Message = "L'ajout d'un employé a fonctionné";
                 }
             }

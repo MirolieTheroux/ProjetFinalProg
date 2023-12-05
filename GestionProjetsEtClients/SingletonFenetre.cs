@@ -23,8 +23,6 @@ namespace GestionProjetsEtClients
 
             return instance;
         }
-
-
         public Window Fenetre
         {
             get { return fenetre; }

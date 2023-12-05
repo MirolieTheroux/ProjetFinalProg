@@ -95,110 +95,27 @@ namespace GestionProjetsEtClients
             }
         }
         /// <summary>
-        /// Permet d'ajouter un employé dans la BD
+        /// Permet d'avoir l'index de l'employé avec le matricule
         /// </summary>
-        /// <param name="nom">Nom de l'employé</param>
-        /// <param name="prenom">Prénom de l'employé</param>
-        /// <param name="date_naissance">Date de naissance de l'employé</param>
-        /// <param name="email">Email de l'employé</param>
-        /// <param name="adresse">Adresse de l'employé</param>
-        /// <param name="date_embauche">Date d'embauche de l'employé</param>
-        /// <param name="taux_horaire">Taux Horaire de l'employé</param>
-        /// <param name="lien_photo">Photo de l'employé</param>
-        /// <param name="statut">Statut de l'employé</param>
-        public int ajouterEmployesBD(string nom, string prenom, string date_naissance, string email, string adresse, string date_embauche, double taux_horaire, string lien_photo, string statut)
+        /// <param name="matEmp">Matricule de l'employé</param>
+        /// <returns>Index de l'employé dans la liste</returns>
+        public int getIndexParMatricule(string matEmp)
         {
-            int iValidation = 0;
-            try
+            int index = -1;
+            List<string> listeMatricule = new List<string>();
+            foreach (Employe employe in listeEmployes)
             {
-                //appel de la procédure stockées
-                MySqlCommand commande = new MySqlCommand("p_ajouter_employes");
-                commande.Connection = connection;
-                commande.CommandType = System.Data.CommandType.StoredProcedure;
-
-                commande.Parameters.AddWithValue("nomP", nom);
-                commande.Parameters.AddWithValue("prenomP", prenom);
-                commande.Parameters.AddWithValue("date_naissanceP", date_naissance);
-                commande.Parameters.AddWithValue("emailP", email);
-                commande.Parameters.AddWithValue("adresseP", adresse);
-                commande.Parameters.AddWithValue("date_embaucheP", date_embauche);
-                commande.Parameters.AddWithValue("taux_horaireP", taux_horaire);
-                commande.Parameters.AddWithValue("lien_photoP", lien_photo);
-                commande.Parameters.AddWithValue("statutP", statut);
-
-                connection.Open();
-                commande.Prepare();
-                iValidation = commande.ExecuteNonQuery();
-
-                connection.Close();
-
-                getListeEmployesBD();
-                return iValidation;
+                listeMatricule.Add(employe.Matricule);
             }
-            catch (Exception ex)
-            {
-                if (connection.State == System.Data.ConnectionState.Open)
-                {
-                    connection.Close();
-                    return iValidation;
-                }
-                return iValidation;
-            }
+            index = listeMatricule.IndexOf(matEmp);
+            return index;
         }
-
         /// <summary>
-        /// Permet de modifier un employé
+        /// Permet de rechercher les employés par nom/prénom
         /// </summary>
-        /// <param name="matricule">Matricule de l'employé</param>
-        /// <param name="nom">Nom de l'employé</param>
-        /// <param name="prenom">Prénom de l'employé</param>
-        /// <param name="email">Email de l'employé</param>
-        /// <param name="adresse">Adresse de l'employé</param>
-        /// <param name="taux_horaire">Taux Horaire de l'employé</param>
-        /// <param name="lien_photo">Photo de l'employé</param>
-        /// <param name="statut">Statut de l'employé</param>
-        public int modifierEmployesBD(string matricule, string nom, string prenom, string email, string adresse, double taux_horaire, string lien_photo, string statut)
-        {
-            int iValidation = 0;
-            try
-            {
-                //appel de la procédure stockées 
-                MySqlCommand commande = new MySqlCommand("p_modifier_employe");
-                commande.Connection = connection;
-                commande.CommandType = System.Data.CommandType.StoredProcedure;
-
-                commande.Parameters.AddWithValue("mat", matricule);
-                commande.Parameters.AddWithValue("nomP", nom);
-                commande.Parameters.AddWithValue("prenomP", prenom);
-                commande.Parameters.AddWithValue("emailP", email);
-                commande.Parameters.AddWithValue("adresseP", adresse);
-                commande.Parameters.AddWithValue("taux_horaireP", taux_horaire);
-                commande.Parameters.AddWithValue("lien_photoP", lien_photo);
-                commande.Parameters.AddWithValue("statutP", statut);
-
-                connection.Open();
-                commande.Prepare();
-                iValidation = commande.ExecuteNonQuery();
-
-                connection.Close();
-
-                getListeEmployesBD();
-                return iValidation;
-            }
-            catch (Exception ex)
-            {
-                if (connection.State == System.Data.ConnectionState.Open)
-                {
-                    connection.Close();
-                    return iValidation;
-                }
-                return iValidation;
-            }
-        }
-
- 
-
-        public ObservableCollection<Employe> GetEmployeParNom(string nomOuPrenom)
+        /// <param name="nomOuPrenom">Le nom ou prénom de l'employé</param>
+        /// <returns>L'employé ou les employés qui ont les valeurs de la recherche</returns>
+        public ObservableCollection<Employe> getEmployeParNom(string nomOuPrenom)
         {
             listeEmployes.Clear();
             try
@@ -250,22 +167,105 @@ namespace GestionProjetsEtClients
             }
             return listeEmployes;
         }
-
         /// <summary>
-        /// Permet d'avoir l'index de l'employé avec le matricule
+        /// Permet d'ajouter un employé dans la BD
         /// </summary>
-        /// <param name="matEmp">Matricule de l'employé</param>
-        /// <returns>Index de l'employé dans la liste</returns>
-        public int getIndexParMatricule(string matEmp)
+        /// <param name="nom">Nom de l'employé</param>
+        /// <param name="prenom">Prénom de l'employé</param>
+        /// <param name="date_naissance">Date de naissance de l'employé</param>
+        /// <param name="email">Email de l'employé</param>
+        /// <param name="adresse">Adresse de l'employé</param>
+        /// <param name="date_embauche">Date d'embauche de l'employé</param>
+        /// <param name="taux_horaire">Taux Horaire de l'employé</param>
+        /// <param name="lien_photo">Photo de l'employé</param>
+        /// <param name="statut">Statut de l'employé</param>
+        public int ajouterEmployesBD(string nom, string prenom, string date_naissance, string email, string adresse, string date_embauche, double taux_horaire, string lien_photo, string statut)
         {
-            int index = -1;
-            List<string> listeMatricule = new List<string>();
-            foreach(Employe employe in listeEmployes)
+            int iValidation = 0;
+            try
             {
-                listeMatricule.Add(employe.Matricule);
+                //appel de la procédure stockées
+                MySqlCommand commande = new MySqlCommand("p_ajouter_employes");
+                commande.Connection = connection;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                commande.Parameters.AddWithValue("nomP", nom);
+                commande.Parameters.AddWithValue("prenomP", prenom);
+                commande.Parameters.AddWithValue("date_naissanceP", date_naissance);
+                commande.Parameters.AddWithValue("emailP", email);
+                commande.Parameters.AddWithValue("adresseP", adresse);
+                commande.Parameters.AddWithValue("date_embaucheP", date_embauche);
+                commande.Parameters.AddWithValue("taux_horaireP", taux_horaire);
+                commande.Parameters.AddWithValue("lien_photoP", lien_photo);
+                commande.Parameters.AddWithValue("statutP", statut);
+
+                connection.Open();
+                commande.Prepare();
+                iValidation = commande.ExecuteNonQuery();
+
+                connection.Close();
+
+                getListeEmployesBD();
+                return iValidation;
             }
-            index = listeMatricule.IndexOf(matEmp);
-            return index;
+            catch (Exception ex)
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                    return iValidation;
+                }
+                return iValidation;
+            }
+        }
+        /// <summary>
+        /// Permet de modifier un employé
+        /// </summary>
+        /// <param name="matricule">Matricule de l'employé</param>
+        /// <param name="nom">Nom de l'employé</param>
+        /// <param name="prenom">Prénom de l'employé</param>
+        /// <param name="email">Email de l'employé</param>
+        /// <param name="adresse">Adresse de l'employé</param>
+        /// <param name="taux_horaire">Taux Horaire de l'employé</param>
+        /// <param name="lien_photo">Photo de l'employé</param>
+        /// <param name="statut">Statut de l'employé</param>
+        public int modifierEmployesBD(string matricule, string nom, string prenom, string email, string adresse, double taux_horaire, string lien_photo, string statut)
+        {
+            int iValidation = 0;
+            try
+            {
+                //appel de la procédure stockées 
+                MySqlCommand commande = new MySqlCommand("p_modifier_employe");
+                commande.Connection = connection;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                commande.Parameters.AddWithValue("mat", matricule);
+                commande.Parameters.AddWithValue("nomP", nom);
+                commande.Parameters.AddWithValue("prenomP", prenom);
+                commande.Parameters.AddWithValue("emailP", email);
+                commande.Parameters.AddWithValue("adresseP", adresse);
+                commande.Parameters.AddWithValue("taux_horaireP", taux_horaire);
+                commande.Parameters.AddWithValue("lien_photoP", lien_photo);
+                commande.Parameters.AddWithValue("statutP", statut);
+
+                connection.Open();
+                commande.Prepare();
+                iValidation = commande.ExecuteNonQuery();
+
+                connection.Close();
+
+                getListeEmployesBD();
+                return iValidation;
+            }
+            catch (Exception ex)
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                    return iValidation;
+                }
+                return iValidation;
+            }
         }
     }
 }

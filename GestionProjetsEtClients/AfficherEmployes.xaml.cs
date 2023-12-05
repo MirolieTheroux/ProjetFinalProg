@@ -87,7 +87,7 @@ namespace GestionProjetsEtClients
 
         private void txtBoxRechercheVille_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            SingletonEmploye.getInstance().GetEmployeParNom(txtBoxRechercheNomOuPrenom.Text);
+            SingletonEmploye.getInstance().getEmployeParNom(txtBoxRechercheNomOuPrenom.Text);
 
         }
     }

@@ -112,7 +112,7 @@ namespace GestionProjetsEtClients
 
         private void txtBoxRechercheTitre_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            SingletonProjet.getInstance().GetProjetParTitre(txtBoxRechercheTitre.Text);
+            SingletonProjet.getInstance().getProjetParTitre(txtBoxRechercheTitre.Text);
         }
 
     }

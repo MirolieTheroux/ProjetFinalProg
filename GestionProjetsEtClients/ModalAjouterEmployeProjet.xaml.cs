@@ -12,6 +12,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Globalization.NumberFormatting;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -23,7 +24,19 @@ namespace GestionProjetsEtClients
         public ModalAjouterEmployeProjet()
         {
             this.InitializeComponent();
-  
+            SetNumberBoxNumberFormatter();
+        }
+        private void SetNumberBoxNumberFormatter()
+        {
+            IncrementNumberRounder rounderHeure = new IncrementNumberRounder();
+            rounderHeure.Increment = 0.01;
+            rounderHeure.RoundingAlgorithm = RoundingAlgorithm.RoundHalfUp;
+
+            DecimalFormatter formatterHeure = new DecimalFormatter();
+            formatterHeure.IntegerDigits = 1;
+            formatterHeure.FractionDigits = 2;
+            formatterHeure.NumberRounder = rounderHeure;
+            nbBoxNbHeures.NumberFormatter = formatterHeure;
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -32,15 +45,14 @@ namespace GestionProjetsEtClients
             bool bErreur = false;
             int indexProjet = SingletonProjet.getInstance().getIndex();
 
-            //if (!SingletonVerification.getInstance().isAdresseValide(txtBoxMatricule.Text))
             if (!SingletonVerification.getInstance().isChampValide(asbxMatricule.Text))
             {
                 txtBlErreurMatricule.Text = "Veuillez entrer un matricule";
                 bErreur = true;
                 args.Cancel = true;
             }
-
-            if (!SingletonVerification.getInstance().isTexteNonVideEtNum(txtBoxNbHeures.Text))
+           
+            if (nbBoxNbHeures.Value is not double.NaN)
             {
                 txtBlErreurNbHeures.Text = "Veuillez entrer un nombre d'heures";
                 bErreur = true;
@@ -49,7 +61,7 @@ namespace GestionProjetsEtClients
 
             if (!bErreur)
             {
-                if(SingletonProjetEmploye.getInstance().ajouterProjetEmploye(asbxMatricule.Text, SingletonProjet.getInstance().Projets[indexProjet].NoProjet, Convert.ToDouble(txtBoxNbHeures.Text)) > 0)
+                if(SingletonProjetEmploye.getInstance().ajouterProjetEmploye(asbxMatricule.Text, SingletonProjet.getInstance().Projets[indexProjet].NoProjet, nbBoxNbHeures.Value) > 0)
                 {
                     SingletonMessageValidation.getInstance().AfficherSucces = true;
                     SingletonMessageValidation.getInstance().AfficherErreur = false;
@@ -63,7 +75,6 @@ namespace GestionProjetsEtClients
                 }
             }
         }
-
         private void ContentDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             args.Cancel = true;

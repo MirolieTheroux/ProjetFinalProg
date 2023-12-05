@@ -156,105 +156,6 @@ namespace GestionProjetsEtClients
             }
 
         }
-
-        public int ajouter(string titre, string date_debut, string description, double budget, int nbr_employe_requis, int id_client)
-        {
-            int validation = 0;
-            try
-            {
-                MySqlCommand command = new MySqlCommand("p_ajout_projet");
-                command.Connection = con;
-                command.CommandType = System.Data.CommandType.StoredProcedure;
-
-                command.Parameters.AddWithValue("_titre", titre);
-                command.Parameters.AddWithValue("_date_debut", date_debut);
-                command.Parameters.AddWithValue("_description", description);
-                command.Parameters.AddWithValue("_budget", budget);
-                command.Parameters.AddWithValue("_nbr_employe_requis", nbr_employe_requis);
-                command.Parameters.AddWithValue("_id_client", id_client);
-
-                con.Open();
-                command.Prepare();
-                validation = command.ExecuteNonQuery();
-                con.Close();
-
-                SingletonProjet.getInstance().getListeProjets();
-                return validation;
-            }
-            catch (MySqlException ex)
-            {
-                if (con.State == System.Data.ConnectionState.Open)
-                {
-                    con.Close();
-                    return validation;
-                }
-                return validation;
-            }
-        }
-
-        public int modifier(string no_projet, string titre, string description, double budget)
-        {
-            int validation = 0;
-            try
-            {
-                MySqlCommand command = new MySqlCommand("p_modifier_projet");
-                command.Connection = con;
-                command.CommandType = System.Data.CommandType.StoredProcedure;
-
-                command.Parameters.AddWithValue("_no_projet", no_projet);
-                command.Parameters.AddWithValue("_titre", titre);
-                command.Parameters.AddWithValue("_description", description);
-                command.Parameters.AddWithValue("_budget", budget);
-
-                con.Open();
-                command.Prepare();
-                validation = command.ExecuteNonQuery();
-                con.Close();
-
-                SingletonProjet.getInstance().getListeProjets();
-                return validation;
-            }
-            catch (MySqlException ex)
-            {
-                if (con.State == System.Data.ConnectionState.Open)
-                {
-                    con.Close();
-                    return validation;
-                }
-                return validation;
-            }
-        }
-
-        public int terminer(string no_projet)
-        {
-            int validation = 0;
-            try
-            {
-                MySqlCommand command = new MySqlCommand("p_terminer_projet");
-                command.Connection = con;
-                command.CommandType = System.Data.CommandType.StoredProcedure;
-
-                command.Parameters.AddWithValue("_no_projet", no_projet);
-
-                con.Open();
-                command.Prepare();
-                validation = command.ExecuteNonQuery();
-                con.Close();
-
-                SingletonProjet.getInstance().getListeProjets();
-                return validation;
-            }
-            catch (MySqlException ex)
-            {
-                if (con.State == System.Data.ConnectionState.Open)
-                {
-                    con.Close();
-                    return validation;
-                }
-                return validation;
-            }
-        }
-
         public void getProjetsEnCours()
         {
             listeProjets.Clear();
@@ -305,8 +206,75 @@ namespace GestionProjetsEtClients
                 }
             }
         }
+        public void getProjetEmployeEnCours(string sMatriculeEmp)
+        {
+            projetEnCours.Clear();
+            try
+            {
+                MySqlCommand commande = new MySqlCommand("p_get_employe_projet_encours");
+                commande.Connection = con;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
 
-        public ObservableCollection<Projet> GetProjetParTitre(string titreRecherche)
+                commande.Parameters.AddWithValue("matEmp", sMatriculeEmp);
+                con.Open();
+                MySqlDataReader reader = commande.ExecuteReader();
+                while (reader.Read())
+                {
+                    string sNo_Projet = (string)reader["no_projet"];
+                    string sTitreProjet = (string)reader["titre"];
+
+                    Projet projetsEmp = new Projet
+                    {
+                        NoProjet = sNo_Projet,
+                        Titre = sTitreProjet,
+                    };
+                    projetEnCours.Add(projetsEmp);
+                }
+
+                reader.Close();
+                con.Close();
+            }
+            catch (MySqlException ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
+            }
+        }
+        public void getListeProjetsEmployeTermines(string sMatriculeEmp)
+        {
+            listeProjetsTermines.Clear();
+            try
+            {
+                MySqlCommand commande = new MySqlCommand("p_get_employe_projets_termines");
+                commande.Connection = con;
+                commande.CommandType = System.Data.CommandType.StoredProcedure;
+
+                commande.Parameters.AddWithValue("matEmp", sMatriculeEmp);
+                con.Open();
+                MySqlDataReader reader = commande.ExecuteReader();
+                while (reader.Read())
+                {
+                    string sNo_Projet = (string)reader["no_projet"];
+                    string sTitreProjet = (string)reader["titre"];
+
+                    Projet projetsEmp = new Projet
+                    {
+                        NoProjet = sNo_Projet,
+                        Titre = sTitreProjet,
+                    };
+                    listeProjetsTermines.Add(projetsEmp);
+                }
+
+                reader.Close();
+                con.Close();
+            }
+            catch (MySqlException ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                    con.Close();
+            }
+        }
+        public ObservableCollection<Projet> getProjetParTitre(string titreRecherche)
         {
             listeProjets.Clear();
             try
@@ -360,76 +328,6 @@ namespace GestionProjetsEtClients
             }
             return listeProjets;
         }
-
-        public void getProjetEmployeEnCours(string sMatriculeEmp)
-        {
-            projetEnCours.Clear();
-            try
-            {
-                MySqlCommand commande = new MySqlCommand("p_get_employe_projet_encours");
-                commande.Connection = con;
-                commande.CommandType = System.Data.CommandType.StoredProcedure;
-
-                commande.Parameters.AddWithValue("matEmp", sMatriculeEmp);
-                con.Open();
-                MySqlDataReader reader = commande.ExecuteReader();
-                while (reader.Read())
-                {
-                    string sNo_Projet = (string)reader["no_projet"];
-                    string sTitreProjet = (string)reader["titre"];
-
-                    Projet projetsEmp = new Projet
-                    {
-                        NoProjet = sNo_Projet,
-                        Titre = sTitreProjet,
-                    };
-                    projetEnCours.Add(projetsEmp);
-                }
-
-                reader.Close();
-                con.Close();
-            }
-            catch (MySqlException ex)
-            {
-                if (con.State == System.Data.ConnectionState.Open)
-                    con.Close();
-            }
-        }
-
-        public void getListeProjetsEmployeTermines(string sMatriculeEmp)
-        {
-            listeProjetsTermines.Clear();
-            try
-            {
-                MySqlCommand commande = new MySqlCommand("p_get_employe_projets_termines");
-                commande.Connection = con;
-                commande.CommandType = System.Data.CommandType.StoredProcedure;
-
-                commande.Parameters.AddWithValue("matEmp", sMatriculeEmp);
-                con.Open();
-                MySqlDataReader reader = commande.ExecuteReader();
-                while (reader.Read())
-                {
-                    string sNo_Projet = (string)reader["no_projet"];
-                    string sTitreProjet = (string)reader["titre"];
-
-                    Projet projetsEmp = new Projet
-                    {
-                        NoProjet = sNo_Projet,
-                        Titre = sTitreProjet,
-                    };
-                    listeProjetsTermines.Add(projetsEmp);
-                }
-
-                reader.Close();
-                con.Close();
-            }
-            catch (MySqlException ex)
-            {
-                if (con.State == System.Data.ConnectionState.Open)
-                    con.Close();
-            }
-        }
         public int getIndexParNoProjet(string noProjet)
         {
             int index = -1;
@@ -441,6 +339,100 @@ namespace GestionProjetsEtClients
             index = listeNoProjet.IndexOf(noProjet);
             return index;
         }
+        public int ajouter(string titre, string date_debut, string description, double budget, int nbr_employe_requis, int id_client)
+        {
+            int validation = 0;
+            try
+            {
+                MySqlCommand command = new MySqlCommand("p_ajout_projet");
+                command.Connection = con;
+                command.CommandType = System.Data.CommandType.StoredProcedure;
 
+                command.Parameters.AddWithValue("_titre", titre);
+                command.Parameters.AddWithValue("_date_debut", date_debut);
+                command.Parameters.AddWithValue("_description", description);
+                command.Parameters.AddWithValue("_budget", budget);
+                command.Parameters.AddWithValue("_nbr_employe_requis", nbr_employe_requis);
+                command.Parameters.AddWithValue("_id_client", id_client);
+
+                con.Open();
+                command.Prepare();
+                validation = command.ExecuteNonQuery();
+                con.Close();
+
+                SingletonProjet.getInstance().getListeProjets();
+                return validation;
+            }
+            catch (MySqlException ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                {
+                    con.Close();
+                    return validation;
+                }
+                return validation;
+            }
+        }
+        public int modifier(string no_projet, string titre, string description, double budget)
+        {
+            int validation = 0;
+            try
+            {
+                MySqlCommand command = new MySqlCommand("p_modifier_projet");
+                command.Connection = con;
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("_no_projet", no_projet);
+                command.Parameters.AddWithValue("_titre", titre);
+                command.Parameters.AddWithValue("_description", description);
+                command.Parameters.AddWithValue("_budget", budget);
+
+                con.Open();
+                command.Prepare();
+                validation = command.ExecuteNonQuery();
+                con.Close();
+
+                SingletonProjet.getInstance().getListeProjets();
+                return validation;
+            }
+            catch (MySqlException ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                {
+                    con.Close();
+                    return validation;
+                }
+                return validation;
+            }
+        }
+        public int terminer(string no_projet)
+        {
+            int validation = 0;
+            try
+            {
+                MySqlCommand command = new MySqlCommand("p_terminer_projet");
+                command.Connection = con;
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+
+                command.Parameters.AddWithValue("_no_projet", no_projet);
+
+                con.Open();
+                command.Prepare();
+                validation = command.ExecuteNonQuery();
+                con.Close();
+
+                SingletonProjet.getInstance().getListeProjets();
+                return validation;
+            }
+            catch (MySqlException ex)
+            {
+                if (con.State == System.Data.ConnectionState.Open)
+                {
+                    con.Close();
+                    return validation;
+                }
+                return validation;
+            }
+        }     
     }
 }
