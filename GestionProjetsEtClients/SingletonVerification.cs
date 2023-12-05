@@ -33,6 +33,17 @@ namespace GestionProjetsEtClients
                 return false;
         }
 
+        public bool isNumTelValide(string valeur)
+        {
+            string numTel = "^\\(?([0-9]{3})\\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$";
+            Regex reg = new Regex(numTel, RegexOptions.IgnoreCase);
+
+            if (!string.IsNullOrEmpty(valeur.Trim()) && reg.IsMatch(valeur))
+                return true;
+            else
+                return false;
+        }
+
         public bool isTexteNonVideEtNum(string valeur)
         {
             string nonNumeric = "^[0-9]";

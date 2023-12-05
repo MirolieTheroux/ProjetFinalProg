@@ -81,7 +81,7 @@ namespace GestionProjetsEtClients
                 adresse = tbxAdresse.Text;
             }
 
-            if (String.IsNullOrEmpty(tbxNoTel.Text))
+            if (!SingletonVerification.getInstance().isNumTelValide(tbxNoTel.Text))
             {
                 tbxNoTel.BorderBrush = new SolidColorBrush(Colors.Red);
                 tblInvalidNoTel.Text = "Veuillez entrer un numéro de téléphone";
