@@ -85,6 +85,23 @@ namespace GestionProjetsEtClients
             {
                 nbxBudget.BorderBrush = new SolidColorBrush(Colors.Red);
                 tblInvalidBudget.Visibility = Visibility.Visible;
+                tblInvalidBudget.Text = "Veuillez entrer le budget";
+                erreurSaisie = true;
+                args.Cancel = true;
+            }
+            else if (nbxBudget.Value < 0)
+            {
+                nbxBudget.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidBudget.Visibility = Visibility.Visible;
+                tblInvalidBudget.Text = "Le budget ne peut pas être négatif";
+                erreurSaisie = true;
+                args.Cancel = true;
+            }
+            else if (nbxBudget.Value < 100)
+            {
+                nbxBudget.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidBudget.Visibility = Visibility.Visible;
+                tblInvalidBudget.Text = "Nous n'acceptons pas les projets à moins de 100$";
                 erreurSaisie = true;
                 args.Cancel = true;
             }

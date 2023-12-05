@@ -76,6 +76,7 @@ namespace GestionProjetsEtClients
 
         private async void abModifier_Click(object sender, RoutedEventArgs e)
         {
+            SingletonMessageValidation.getInstance().annulerMessage();
             SingletonClient.getInstance().setIndex(index);
             ModalModificationClient modifClient = new ModalModificationClient();
             modifClient.XamlRoot = grilleClient.XamlRoot;

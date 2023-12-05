@@ -106,6 +106,7 @@ namespace GestionProjetsEtClients
 
         private async void AppBarButton_Click(object sender, RoutedEventArgs e)
         {
+            SingletonMessageValidation.getInstance().annulerMessage();
             SingletonEmploye.getInstance().setIndex(index);
             ModalModifierEmploye modifierEmploye = new ModalModifierEmploye();
             modifierEmploye.XamlRoot = grilleEmploye.XamlRoot;
