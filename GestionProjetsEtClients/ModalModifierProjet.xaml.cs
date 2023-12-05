@@ -158,7 +158,6 @@ namespace GestionProjetsEtClients
                 }
             }
         }
-
         private void ContentDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             SingletonMessageValidation.getInstance().annulerMessage();

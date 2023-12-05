@@ -51,7 +51,7 @@ namespace GestionProjetsEtClients
                 // Assigner la date de naissance à calDateNaissance.Date
                 calDateEmbauche.Date = dateEmbauche;
             }
-           nbBoxTauxHoraire.Value = SingletonEmploye.getInstance().Employes[iIndex].TauxHoraire;
+            nbBoxTauxHoraire.Value = SingletonEmploye.getInstance().Employes[iIndex].TauxHoraire;
 
             switch (SingletonEmploye.getInstance().Employes[iIndex].Statut)
             {
@@ -89,7 +89,6 @@ namespace GestionProjetsEtClients
             formatterArgent.NumberRounder = rounderArgent;
             nbBoxTauxHoraire.NumberFormatter = formatterArgent;
         }
-
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             enleverMessagesErreurs();
@@ -197,7 +196,6 @@ namespace GestionProjetsEtClients
                 }
             }
         }
-
         private void ContentDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
             args.Cancel = false;
