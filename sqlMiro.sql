@@ -6,7 +6,6 @@
 -- Projet : no_projet (PK), titre, date_debut, description, budget, nbr_employe_requis, total_salaire, statut, id_client*,
 -- Projet_employe : matricule*(PK), no_projet*(PK), nbr_heure_travail, salaire_employe_projet
 
-
 -- #######################################################################################
 -- ################################### Table Employe #####################################
 -- #######################################################################################
@@ -25,7 +24,6 @@ create table Employe
     lien_photo     varchar(255),
     statut         varchar(11)
 );
-
 
 -- Procédure pour récupérer tous les employés de la BD (Mirolie)
 CREATE procedure p_get_employes()
@@ -97,12 +95,10 @@ BEGIN
     where matricule = matEmploye;
     RETURN nbAnnee;
 end
-
 //
 DELIMITER ;
 -- Appel de la fonction
 SELECT f_calcul_annee_exp('AU-1997-86');
-
 
 -- #######################################################################################
 -- ################################# Table projet_employe ################################
@@ -236,19 +232,7 @@ DROP procedure if exists p_get_projets_encours;
 DELIMITER //
 CREATE procedure p_get_projets_encours()
 BEGIN
-    SELECT no_projet,
-           titre,
-           date_debut,
-           description,
-           budget,
-           nbr_employe_requis,
-           total_salaire,
-           statut,
-           p.id_client,
-           c.nom as nom_client
-    FROM projet p
-             INNER JOIN client c on p.id_client = c.id_client
-    where p.statut = 'en cours';
+   SELECT * FROM v_get_projets where statut = 'en cours';
 end;
 //
 DELIMITER ;
@@ -268,33 +252,27 @@ DROP procedure if exists p_get_projets_par_titre;
 DELIMITER //
 CREATE procedure p_get_projets_par_titre(IN titreP varchar(100))
 BEGIN
-    SELECT no_projet,
-           titre,
-           date_debut,
-           description,
-           budget,
-           nbr_employe_requis,
-           total_salaire,
-           statut,
-           p.id_client,
-           c.nom as nom_client
-    FROM projet p
-             INNER JOIN client c on p.id_client = c.id_client
-    where p.titre LIKE CONCAT('%', titreP, '%');
+    SELECT * FROM v_get_projets        
+    where titre LIKE CONCAT('%', titreP, '%');
 end;
 //
 DELIMITER ;
+
+-- Vue/Requête pour avoir les projets d'un employé (Mirolie)
+DROP VIEW IF EXISTS v_get_projets_employe;
+CREATE VIEW v_get_projets_employe AS
+    SELECT p.no_projet, p.titre,e.matricule,p.statut
+    from projet p
+             inner join projet_employe pe on p.no_projet = pe.no_projet
+             inner join employe e on pe.matricule = e.matricule;
 
 -- Procédure pour avoir le projet en cours de l'employé (Mirolie)
 DROP procedure if exists  p_get_employe_projet_encours;
 DELIMITER //
 CREATE procedure p_get_employe_projet_encours(IN matEmp varchar(10))
 BEGIN
-   SELECT p.no_projet, p.titre
-    from projet p
-             inner join projet_employe pe on p.no_projet = pe.no_projet
-             inner join employe e on pe.matricule = e.matricule
-    where e.matricule = matEmp AND p.statut = 'en cours';
+  SELECT no_projet,titre from v_get_projets_employe
+    where matricule = matEmp AND statut = 'en cours';
     end;
 //
 DELIMITER ;
@@ -304,11 +282,8 @@ DROP procedure if exists p_get_employe_projets_termines;
 DELIMITER //
 CREATE procedure p_get_employe_projets_termines(IN matEmp varchar(10))
 BEGIN
-   SELECT p.no_projet, p.titre
-    from projet p
-             inner join projet_employe pe on p.no_projet = pe.no_projet
-             inner join employe e on pe.matricule = e.matricule
-    where e.matricule = matEmp AND p.statut = 'terminé';
+    SELECT no_projet,titre from v_get_projets_employe
+    where matricule = matEmp AND statut = 'terminé';
     end;
 //
 DELIMITER ;

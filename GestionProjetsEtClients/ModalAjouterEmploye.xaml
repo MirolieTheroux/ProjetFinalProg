@@ -52,7 +52,7 @@
             <TextBlock x:Name="txtBlErreurDateEmbauche"  Margin="10 0 0 0" Foreground="Red" Grid.Row="5" Grid.Column="1" TextWrapping="Wrap" ></TextBlock>
 
             <NumberBox x:Name="nbBoxTauxHoraire" Margin="10 10 10 0" Header="Taux horaire" Grid.Row="2" Grid.Column="1" ></NumberBox>
-            <TextBlock x:Name="txtBlErreurTauxHoraire"  Margin="10 0 0 0" Foreground="Red" Grid.Row="3" Grid.Column="1" ></TextBlock>
+            <TextBlock x:Name="txtBlErreurTauxHoraire"  Margin="10 0 0 0" Foreground="Red" Grid.Row="3" Grid.Column="1" TextWrapping="Wrap" ></TextBlock>
 
             <ComboBox x:Name="cmbBoxStatut" Margin="10 10 10 0" Header="Statut" HorizontalAlignment="Stretch" Grid.Row="6" Grid.Column="1">
                 <x:String>Journalier</x:String>

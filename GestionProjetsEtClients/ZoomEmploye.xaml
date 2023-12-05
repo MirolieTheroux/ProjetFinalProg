@@ -77,7 +77,7 @@
 
        
             <TextBlock TextAlignment="Center" Grid.Column="1" Grid.Row="3">Projet en cours</TextBlock>
-            <ListView x:Name="lvProjetEnCours" Grid.Column="1"  Grid.Row="3" Margin="22" SelectionChanged="lvProjetsEnCours_SelectionChanged" >
+        <ListView x:Name="lvProjetEnCours" Grid.Column="1"  Grid.Row="3" Margin="22" HorizontalAlignment="Center" SelectionChanged="lvProjetsEnCours_SelectionChanged" >
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local:Projet">
                     <StackPanel Orientation="Horizontal"  Margin="10" HorizontalAlignment="Stretch" >
@@ -88,7 +88,7 @@
             </ListView>
         
             <TextBlock TextAlignment="Center" Grid.Column="2" Grid.Row="3">Projet(s) terminé(s)</TextBlock>
-        <ListView x:Name="lvProjetsTermines" Grid.Column="2" Grid.Row="3" Margin="22" SelectionChanged="lvProjetsTermines_SelectionChanged" >
+        <ListView x:Name="lvProjetsTermines" Grid.Column="2" Grid.Row="3" Margin="22" HorizontalAlignment="Center" SelectionChanged="lvProjetsTermines_SelectionChanged" >
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Projet">
                     <StackPanel Orientation="Horizontal"  Margin="10" HorizontalAlignment="Stretch">

@@ -64,7 +64,6 @@ namespace GestionProjetsEtClients
             else
                 return false;
         }
-
         public bool isDateEmbaucheValide(string date)
         {
             if (date == "")
@@ -75,7 +74,6 @@ namespace GestionProjetsEtClients
                 return false;
 
         }
-
         public bool isDateDebutValide(string date)
         {
             if (date == "")
@@ -94,43 +92,37 @@ namespace GestionProjetsEtClients
             else
                 return false;
         }
-
-        public bool isTauxHValide(string th)
+        public bool isTauxHValide(double th)
         {
-            double tH = 0;
-            if (double.TryParse(th, out tH))
-            {
-                if (tH >= 15 && tH <= 100)
-                    return true;
-                else
-                    return false;
-            }
-            else
-                return false;
-        }
 
-        public bool isLienValide(string lien)
-        {
-            if (Uri.IsWellFormedUriString(lien, UriKind.Absolute))
+            if (th >= 15 && th <= 100)
                 return true;
             else
                 return false;
         }
 
-        public bool isStatutValide(int index)
-        {
-            if (index >= 0)
-                return true;
-            else
-                return false;
-        }
-        public bool isDataTooLong(string data, int longueur)
-        {
-            if(data.Length >= longueur)
-                return true;
-            else
-                return false;
-        }
-
+    public bool isLienValide(string lien)
+    {
+        if (Uri.IsWellFormedUriString(lien, UriKind.Absolute))
+            return true;
+        else
+            return false;
     }
+
+    public bool isStatutValide(int index)
+    {
+        if (index >= 0)
+            return true;
+        else
+            return false;
+    }
+    public bool isDataTooLong(string data, int longueur)
+    {
+        if (data.Length >= longueur)
+            return true;
+        else
+            return false;
+    }
+
+}
 }

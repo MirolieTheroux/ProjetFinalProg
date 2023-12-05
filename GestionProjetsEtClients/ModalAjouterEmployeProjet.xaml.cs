@@ -52,7 +52,7 @@ namespace GestionProjetsEtClients
                 args.Cancel = true;
             }
            
-            if (nbBoxNbHeures.Value is not double.NaN)
+            if (nbBoxNbHeures.Value is double.NaN)
             {
                 txtBlErreurNbHeures.Text = "Veuillez entrer un nombre d'heures";
                 bErreur = true;

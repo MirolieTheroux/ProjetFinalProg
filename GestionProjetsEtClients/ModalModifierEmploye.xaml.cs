@@ -147,9 +147,15 @@ namespace GestionProjetsEtClients
                 args.Cancel = true;
             }
 
-            if (nbBoxTauxHoraire.Value is not double.NaN)
+            if (nbBoxTauxHoraire.Value is double.NaN)
             {
                 txtBlErreurTauxHoraire.Text = "Veuillez entrer un taux horaire valide.";
+                bErreur = true;
+                args.Cancel = true;
+            }
+            else if (!SingletonVerification.getInstance().isTauxHValide(nbBoxTauxHoraire.Value))
+            {
+                txtBlErreurTauxHoraire.Text = "Veuillez entrer un taux horaire entre 15$/h et 100$/h.";
                 bErreur = true;
                 args.Cancel = true;
             }
