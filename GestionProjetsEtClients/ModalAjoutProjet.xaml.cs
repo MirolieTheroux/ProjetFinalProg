@@ -70,6 +70,15 @@ namespace GestionProjetsEtClients
             if (String.IsNullOrEmpty(tbxTitre.Text))
             {
                 tbxTitre.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidTitre.Text = "Veuillez entrer le titre";
+                tblInvalidTitre.Visibility = Visibility.Visible;
+                erreurSaisie = true;
+                args.Cancel = true;
+            }
+            else if(SingletonVerification.getInstance().isDataTooLong(tbxTitre.Text, 50))
+            {
+                tbxTitre.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidTitre.Text = "Il y a trop de caractères";
                 tblInvalidTitre.Visibility = Visibility.Visible;
                 erreurSaisie = true;
                 args.Cancel = true;
