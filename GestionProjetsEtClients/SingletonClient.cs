@@ -15,6 +15,7 @@ namespace GestionProjetsEtClients
         MySqlConnection con;
         ObservableCollection<Client> listeClients;
         int index;
+        string nomActuel;
 
         public SingletonClient()
         {
@@ -31,7 +32,14 @@ namespace GestionProjetsEtClients
 
             return instance;
         }
-
+        public void setNomActuel (string _nom)
+        {
+            nomActuel = _nom;
+        }
+        public string getNomActuel ()
+        {
+            return nomActuel;
+        }
         public void setIndex(int _index)
         {
             index = _index;
@@ -78,7 +86,7 @@ namespace GestionProjetsEtClients
             }
 
         }
-        public ObservableCollection<Client> GetClientParNom(string nomRecherche)
+        public ObservableCollection<Client> getClientParNom(string nomRecherche)
         {
             listeClients.Clear();
             try

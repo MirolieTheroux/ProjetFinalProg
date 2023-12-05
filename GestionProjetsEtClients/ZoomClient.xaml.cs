@@ -79,13 +79,17 @@ namespace GestionProjetsEtClients
         {
             SingletonMessageValidation.getInstance().annulerMessage();
             SingletonClient.getInstance().setIndex(index);
+            SingletonClient.getInstance().setNomActuel(SingletonClient.getInstance().Clients[index].Nom);
             ModalModificationClient modifClient = new ModalModificationClient();
             modifClient.XamlRoot = grilleClient.XamlRoot;
             modifClient.Title = "Modifier un client";
             modifClient.PrimaryButtonText = "Modifier";
             modifClient.SecondaryButtonText = "Annuler";
             modifClient.DefaultButton = ContentDialogButton.Primary;
+
             var resultat = await modifClient.ShowAsync();
+            index = SingletonClient.getInstance().getIndexNom(SingletonClient.getInstance().getNomActuel());
+
             this.Frame.Navigate(typeof(ZoomClient), index);
         }
 

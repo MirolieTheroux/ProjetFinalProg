@@ -81,7 +81,7 @@ namespace GestionProjetsEtClients
 
         private void txtBoxRechercheNom_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            SingletonClient.getInstance().GetClientParNom(txtBoxRechercheNom.Text);
+            SingletonClient.getInstance().getClientParNom(txtBoxRechercheNom.Text);
         }
     }
 }

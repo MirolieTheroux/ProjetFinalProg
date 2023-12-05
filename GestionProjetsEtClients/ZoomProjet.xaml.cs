@@ -71,7 +71,7 @@ namespace GestionProjetsEtClients
             var texte = infos.NomPage;
             index = infos.IndexProjet;
             string noProjet = infos.NoProjet;
-            if (texte == "AfficherProjets" || texte == "ModalModifierProjet" || texte == "ModalAjouterEmployeProjet" || texte == "ZoomClient")
+            if (texte == "AfficherProjets" || texte == "ModalAjouterEmployeProjet" || texte == "ZoomClient")
             {
                 tblTitrePage.Text = $"{SingletonProjet.getInstance().Projets[index].NoProjet.ToString()} {SingletonProjet.getInstance().Projets[index].Titre.ToString()}";
                 tblDateDebut.Text = $"Date de début : {SingletonProjet.getInstance().Projets[index].DateDebut.ToString()}";
@@ -164,12 +164,14 @@ namespace GestionProjetsEtClients
             modifProjet.PrimaryButtonText = "Modifier";
             modifProjet.SecondaryButtonText = "Annuler";
             modifProjet.DefaultButton = ContentDialogButton.Primary;
-            var resultat = await modifProjet.ShowAsync();
             InfosNavigation infos = new InfosNavigation()
             {
                 NomPage = "ModalModifierProjet",
-                IndexProjet = index,
+                NoProjet = SingletonProjet.getInstance().Projets[index].NoProjet
             };
+            var resultat = await modifProjet.ShowAsync();
+        
+
             this.Frame.Navigate(typeof(ZoomProjet), infos);
         }
 
@@ -219,6 +221,11 @@ namespace GestionProjetsEtClients
             dialog.CloseButtonText = "Annuler";
             dialog.DefaultButton = ContentDialogButton.Close;
             dialog.Content = "Êtes-vous sûr de vouloir terminer le projet?";
+            InfosNavigation infos = new InfosNavigation()
+            {
+                NomPage = "ModalTerminerProjet",
+                NoProjet = SingletonProjet.getInstance().Projets[index].NoProjet
+            };
 
             var result = await dialog.ShowAsync();
 
@@ -229,21 +236,16 @@ namespace GestionProjetsEtClients
                     SingletonMessageValidation.getInstance().AfficherSucces = true;
                     SingletonMessageValidation.getInstance().AfficherErreur = false;
                     SingletonMessageValidation.getInstance().Titre = "Succès";
-                    SingletonMessageValidation.getInstance().Message = "La fermeture du projet a fonctionné";
+                    SingletonMessageValidation.getInstance().Message = "La fermeture du projet a fonctionnée";
                 }
                 else
                 {
                     SingletonMessageValidation.getInstance().AfficherSucces = false;
                     SingletonMessageValidation.getInstance().AfficherErreur = true;
                     SingletonMessageValidation.getInstance().Titre = "Erreur";
-                    SingletonMessageValidation.getInstance().Titre = "La fermeture du projet a échoué";
+                    SingletonMessageValidation.getInstance().Titre = "La fermeture du projet a échouée";
                 }
             }
-            InfosNavigation infos = new InfosNavigation()
-            {
-                NomPage = "ModalModifierProjet",
-                IndexProjet = index,
-            };
             this.Frame.Navigate(typeof(ZoomProjet), infos);
         }
     }
