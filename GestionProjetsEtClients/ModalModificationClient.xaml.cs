@@ -47,6 +47,15 @@ namespace GestionProjetsEtClients
             if (String.IsNullOrEmpty(tbxNom.Text))
             {
                 tbxNom.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidNom.Text = "Veuillez entrer un nom";
+                tblInvalidNom.Visibility = Visibility.Visible;
+                erreurSaisie = true;
+                args.Cancel = true;
+            }
+            else if (SingletonVerification.getInstance().isDataTooLong(tbxNom.Text, 100))
+            {
+                tbxNom.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidNom.Text = "Il y a trop de caractères";
                 tblInvalidNom.Visibility = Visibility.Visible;
                 erreurSaisie = true;
                 args.Cancel = true;
@@ -61,6 +70,15 @@ namespace GestionProjetsEtClients
             if (String.IsNullOrEmpty(tbxAdresse.Text))
             {
                 tbxAdresse.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidAdresse.Text = "Veuillez entrer une adresse";
+                tblInvalidAdresse.Visibility = Visibility.Visible;
+                erreurSaisie = true;
+                args.Cancel = true;
+            }
+            else if (SingletonVerification.getInstance().isDataTooLong(tbxAdresse.Text, 255))
+            {
+                tbxAdresse.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidAdresse.Text = "Il y a trop de caractères";
                 tblInvalidAdresse.Visibility = Visibility.Visible;
                 erreurSaisie = true;
                 args.Cancel = true;
@@ -75,6 +93,15 @@ namespace GestionProjetsEtClients
             if (String.IsNullOrEmpty(tbxNoTel.Text))
             {
                 tbxNoTel.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidNoTel.Text = "Veuillez entrer un numéro de téléphone";
+                tblInvalidNoTel.Visibility = Visibility.Visible;
+                erreurSaisie = true;
+                args.Cancel = true;
+            }
+            else if (SingletonVerification.getInstance().isDataTooLong(tbxNoTel.Text, 10))
+            {
+                tbxNoTel.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidNoTel.Text = "Il y a trop de caractères";
                 tblInvalidNoTel.Visibility = Visibility.Visible;
                 erreurSaisie = true;
                 args.Cancel = true;
@@ -89,6 +116,15 @@ namespace GestionProjetsEtClients
             if (!SingletonVerification.getInstance().isCourrielValide(tbxEmail.Text))
             {
                 tbxEmail.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidEmail.Text = "Veuillez entrer un email valide";
+                tblInvalidEmail.Visibility = Visibility.Visible;
+                erreurSaisie = true;
+                args.Cancel = true;
+            }
+            else if (SingletonVerification.getInstance().isDataTooLong(tbxEmail.Text, 10))
+            {
+                tbxEmail.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidEmail.Text = "Il y a trop de caractères";
                 tblInvalidEmail.Visibility = Visibility.Visible;
                 erreurSaisie = true;
                 args.Cancel = true;

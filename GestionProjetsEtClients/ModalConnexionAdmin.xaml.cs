@@ -40,6 +40,15 @@ namespace GestionProjetsEtClients
             if (String.IsNullOrEmpty(tbxUser.Text))
             {
                 tbxUser.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidUser.Text = "Veuillez entrer un nom d'utilisateur";
+                tblInvalidUser.Visibility = Visibility.Visible;
+                erreurSaisie = true;
+                args.Cancel = true;
+            }
+            else if (SingletonVerification.getInstance().isDataTooLong(tbxUser.Text, 50))
+            {
+                tbxUser.BorderBrush = new SolidColorBrush(Colors.Red);
+                tblInvalidUser.Text = "Il y a trop de caractères";
                 tblInvalidUser.Visibility = Visibility.Visible;
                 erreurSaisie = true;
                 args.Cancel = true;
