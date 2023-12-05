@@ -144,7 +144,7 @@ namespace GestionProjetsEtClients
 
                 if (iNbAnciennete < 3 && cmbBoxStatut.SelectedIndex == 1)
                 {
-                    txtBlErreurStatut1.Text = "Le statut ne peut pas être TP, selon l'anciennteté";
+                    txtBlErreurStatut1.Text = "L'employé ne peut pas être temps plein s'il n'a pas 3 ans d'ancienneté";
                     bErreur = true;
                     args.Cancel = true;
                 }

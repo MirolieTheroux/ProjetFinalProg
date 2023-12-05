@@ -30,6 +30,7 @@ namespace GestionProjetsEtClients
         public ZoomEmploye()
         {
             this.InitializeComponent();
+            SingletonFenetre.getInstance().NavView.Header = "Détails de l'employé";
             SingletonProjet.getInstance().getListeProjets();
             if (SingletonMessageValidation.getInstance().AfficherSucces)
             {

@@ -96,7 +96,7 @@
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 10 0 10" HorizontalAlignment="Left">
                         <TextBlock Text="{x:Bind NoProjet}" Margin="5" VerticalAlignment="Center" FontSize="13" Width="90" TextAlignment="Center" />
                         <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
-                        <TextBlock Text="{x:Bind Titre}" VerticalAlignment="Center"  Margin="5" FontSize="13" Width="275" TextAlignment="Center"/>
+                        <TextBlock Text="{x:Bind Titre}" VerticalAlignment="Center"  Margin="5" FontSize="13" Width="290" TextAlignment="Center"/>
                         <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>
                         <TextBlock Text="{x:Bind DateDebut}" VerticalAlignment="Center" Margin="5" FontSize="13" Width="80" TextAlignment="Center"/>
                         <TextBlock Text="|" Margin="0 0 0 3" Foreground="DarkGreen" VerticalAlignment="Center" FontWeight="Bold"  FontSize="17"/>

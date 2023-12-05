@@ -59,7 +59,7 @@
                 <x:String>Temps plein</x:String>
             </ComboBox>
             <TextBlock x:Name="txtBlErreurStatut"  Margin="10 0 0 0" Foreground="Red" Grid.Row="7" Grid.Column="1" ></TextBlock>
-            <TextBlock x:Name="txtBlErreurStatut1"  Margin="10 0 0 0" Foreground="Red" Grid.Row="7" Grid.Column="1" FontSize="10" ></TextBlock>
+            <TextBlock x:Name="txtBlErreurStatut1"  Margin="10 0 0 0" Foreground="Red" Grid.Row="7" Grid.Column="1" TextWrapping="Wrap"></TextBlock>
 
             <TextBox x:Name="txtBoxPhoto" Margin="10 10 10 0" Header="Lien vers photo d'identité" Grid.Row="8" Grid.ColumnSpan="2" TextWrapping="Wrap"></TextBox>
             <TextBlock x:Name="txtBlErreurPhoto"  Margin="10 0 0 0" Foreground="Red" Grid.Row="9" Grid.ColumnSpan="2"></TextBlock>

@@ -23,11 +23,6 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Liste des clients"
-                       HorizontalAlignment="Left"
-                       FontSize="25"
-                       Margin="50 15 0 0"/>
-
             <CommandBar Grid.Column="1" 
                         x:Name="commandBar"
                         Background="Transparent" 
@@ -36,7 +31,6 @@
                         Margin="0 0 15 0">
                 <AppBarButton Icon="Add" Label="Ajouter un client" Click="AppBarButton_Click" />
             </CommandBar>
-
         </Grid>
 
         <InfoBar Grid.Row="1"

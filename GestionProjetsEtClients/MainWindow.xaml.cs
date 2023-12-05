@@ -28,10 +28,10 @@ namespace GestionProjetsEtClients
         {
             this.InitializeComponent();
             SingletonFenetre.getInstance().Fenetre = this;
+            SingletonFenetre.getInstance().NavView = navView;
             mainFrame.Navigate(typeof(AfficherProjets));
             afficherBoutonConnexion();
         }
-
         private void navView_Loaded(object sender, RoutedEventArgs e)
         {
             if (!(SingletonAdmin.getInstance().adminExiste()))
@@ -39,7 +39,6 @@ namespace GestionProjetsEtClients
                 afficherCreationAdmin();
             }
         }
-
         private void navView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             var item = (NavigationViewItem)args.InvokedItemContainer;
@@ -47,11 +46,11 @@ namespace GestionProjetsEtClients
             switch (item.Name)
             {
                 case "iProjets":
-                    SingletonMessageValidation.getInstance().annulerMessage();
+                    SingletonMessageValidation.getInstance().annulerMessage();                
                     mainFrame.Navigate(typeof(AfficherProjets));
                     break;
                 case "iClients":
-                    SingletonMessageValidation.getInstance().annulerMessage();
+                    SingletonMessageValidation.getInstance().annulerMessage();                
                     mainFrame.Navigate(typeof(AfficherClients));
                     break;
                 case "iEmployes":
@@ -70,7 +69,6 @@ namespace GestionProjetsEtClients
                     break;
             }
         }
-
         private void navView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
             if (mainFrame.CanGoBack)

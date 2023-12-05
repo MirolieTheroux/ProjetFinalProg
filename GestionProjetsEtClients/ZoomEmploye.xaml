@@ -81,7 +81,7 @@
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="local:Projet">
                     <StackPanel Orientation="Horizontal"  Margin="10" HorizontalAlignment="Stretch" >
-                        <TextBlock Text="{x:Bind Titre}" VerticalAlignment="Center" Width="250" TextAlignment="Center" Margin="5" FontSize="13"/>
+                        <TextBlock Text="{x:Bind Titre}" VerticalAlignment="Center" Width="250" TextAlignment="Center" Margin="5" FontSize="13" TextWrapping="Wrap"/>
                       </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
@@ -92,7 +92,7 @@
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:Projet">
                     <StackPanel Orientation="Horizontal"  Margin="10" HorizontalAlignment="Stretch">
-                        <TextBlock Text="{x:Bind Titre}" VerticalAlignment="Center" Width="250" TextAlignment="Center" Margin="5" FontSize="13"/>
+                        <TextBlock Text="{x:Bind Titre}" VerticalAlignment="Center" Width="250" TextAlignment="Center" Margin="5" FontSize="13" TextWrapping="Wrap"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

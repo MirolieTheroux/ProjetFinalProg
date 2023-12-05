@@ -78,7 +78,7 @@ namespace GestionProjetsEtClients
             else if(SingletonVerification.getInstance().isDataTooLong(tbxTitre.Text, 50))
             {
                 tbxTitre.BorderBrush = new SolidColorBrush(Colors.Red);
-                tblInvalidTitre.Text = "Il y a trop de caractères";
+                tblInvalidTitre.Text = "Le titre du projet est trop long";
                 tblInvalidTitre.Visibility = Visibility.Visible;
                 erreurSaisie = true;
                 args.Cancel = true;

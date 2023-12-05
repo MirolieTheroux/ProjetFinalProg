@@ -32,7 +32,7 @@ namespace GestionProjetsEtClients
         public ZoomProjet()
         {
             this.InitializeComponent();
-           
+            SingletonFenetre.getInstance().NavView.Header = "Détails du projet";
             if (SingletonMessageValidation.getInstance().AfficherSucces)
             {
                 infoBar.IsOpen = true;
@@ -100,6 +100,8 @@ namespace GestionProjetsEtClients
 
                 if (SingletonProjet.getInstance().Projets[index].Statut == "terminé")
                 {
+                    abModifierProjet.Visibility = Visibility.Collapsed;
+                    abAjouterEmployer.Visibility = Visibility.Collapsed;
                     abTerminerProjet.Visibility = Visibility.Collapsed;
                     tblStatut.Foreground = new SolidColorBrush(Colors.Green);
                 }
@@ -139,7 +141,9 @@ namespace GestionProjetsEtClients
 
                 if (SingletonProjet.getInstance().Projets[index].Statut == "terminé")
                 {
+                    abAjouterEmployer.Visibility = Visibility.Collapsed;
                     abTerminerProjet.Visibility = Visibility.Collapsed;
+                    abModifierProjet.Visibility = Visibility.Collapsed;
                     tblStatut.Foreground = new SolidColorBrush(Colors.Green);
                 }
                 else
@@ -189,6 +193,7 @@ namespace GestionProjetsEtClients
 
         private void lvProjetsEmploye_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            SingletonMessageValidation.getInstance().annulerMessage();
             if (lvProjetsEmploye.SelectedIndex >= 0)
             {
                 ProjetEmploye pe = lvProjetsEmploye.SelectedItem as ProjetEmploye;
@@ -205,6 +210,8 @@ namespace GestionProjetsEtClients
         private async void abTerminerProjet_Click(object sender, RoutedEventArgs e)
         {
             string no_projet = SingletonProjet.getInstance().Projets[index].NoProjet.ToString();
+            SingletonProjet.getInstance().getListeProjets();
+            index = SingletonProjet.getInstance().getIndexParNoProjet(no_projet);
             ContentDialog dialog = new ContentDialog();
             dialog.XamlRoot = grilleProjet.XamlRoot;
             dialog.Title = $"Terminer le projet #{no_projet}";
@@ -232,8 +239,12 @@ namespace GestionProjetsEtClients
                     SingletonMessageValidation.getInstance().Titre = "La fermeture du projet a échoué";
                 }
             }
-
-            this.Frame.Navigate(typeof(ZoomProjet), index);
+            InfosNavigation infos = new InfosNavigation()
+            {
+                NomPage = "ModalModifierProjet",
+                IndexProjet = index,
+            };
+            this.Frame.Navigate(typeof(ZoomProjet), infos);
         }
     }
 }

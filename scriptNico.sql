@@ -76,7 +76,7 @@ DELIMITER //
 CREATE PROCEDURE p_get_clients()
 BEGIN
     SELECT * FROM client
-    ORDER BY nom;
+    ORDER BY id_client;
 END //
 DELIMITER ;
 

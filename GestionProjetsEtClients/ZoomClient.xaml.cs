@@ -27,6 +27,7 @@ namespace GestionProjetsEtClients
         public ZoomClient()
         {
             this.InitializeComponent();
+            SingletonFenetre.getInstance().NavView.Header = "Détails du client";
             if (SingletonAdmin.getInstance().valideConnexion())
             {
                 commandBar.Visibility = Visibility.Visible;

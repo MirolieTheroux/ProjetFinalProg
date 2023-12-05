@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,9 @@ namespace GestionProjetsEtClients
     {
         static SingletonFenetre instance;
         Window fenetre;
-        public SingletonFenetre()
-        {
-
-        }
-
+        NavigationView navView;
+        public SingletonFenetre() { }
+        
         public static SingletonFenetre getInstance()
         {
             if (instance == null)
@@ -27,6 +26,12 @@ namespace GestionProjetsEtClients
         {
             get { return fenetre; }
             set { fenetre = value; }
+        }
+
+        public NavigationView NavView
+        {
+            get { return navView; }
+            set { navView = value; }
         }
     }
 }

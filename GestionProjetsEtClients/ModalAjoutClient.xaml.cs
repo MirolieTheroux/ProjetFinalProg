@@ -46,7 +46,7 @@ namespace GestionProjetsEtClients
             else if (SingletonVerification.getInstance().isDataTooLong(tbxNom.Text, 100))
             {
                 tbxNom.BorderBrush = new SolidColorBrush(Colors.Red);
-                tblInvalidNom.Text = "Il y a trop de caractères";
+                tblInvalidNom.Text = "Le nom du client est trop long";
                 tblInvalidNom.Visibility = Visibility.Visible;
                 erreurSaisie = true;
                 args.Cancel = true;
@@ -69,7 +69,7 @@ namespace GestionProjetsEtClients
             else if (SingletonVerification.getInstance().isDataTooLong(tbxAdresse.Text, 255))
             {
                 tbxAdresse.BorderBrush = new SolidColorBrush(Colors.Red);
-                tblInvalidAdresse.Text = "Il y a trop de caractères";
+                tblInvalidAdresse.Text = "L'adresse est trop longue";
                 tblInvalidAdresse.Visibility = Visibility.Visible;
                 erreurSaisie = true;
                 args.Cancel = true;
@@ -89,10 +89,10 @@ namespace GestionProjetsEtClients
                 erreurSaisie = true;
                 args.Cancel = true;
             }
-            else if (SingletonVerification.getInstance().isDataTooLong(tbxNoTel.Text, 10))
+            else if (SingletonVerification.getInstance().isDataTooLong(tbxNoTel.Text, 20))
             {
                 tbxNoTel.BorderBrush = new SolidColorBrush(Colors.Red);
-                tblInvalidNoTel.Text = "Il y a trop de caractères";
+                tblInvalidNoTel.Text = "Le numéro de téléphone est trop long";
                 tblInvalidNoTel.Visibility = Visibility.Visible;
                 erreurSaisie = true;
                 args.Cancel = true;
@@ -107,15 +107,15 @@ namespace GestionProjetsEtClients
             if (!SingletonVerification.getInstance().isCourrielValide(tbxEmail.Text))
             {
                 tbxEmail.BorderBrush = new SolidColorBrush(Colors.Red);
-                tblInvalidEmail.Text = "Veuillez entrer un email valide";
+                tblInvalidEmail.Text = "Veuillez entrer un courriel valide";
                 tblInvalidEmail.Visibility = Visibility.Visible;
                 erreurSaisie = true;
                 args.Cancel = true;
             }
-            else if (SingletonVerification.getInstance().isDataTooLong(tbxEmail.Text, 10))
+            else if (SingletonVerification.getInstance().isDataTooLong(tbxEmail.Text, 255))
             {
                 tbxEmail.BorderBrush = new SolidColorBrush(Colors.Red);
-                tblInvalidEmail.Text = "Il y a trop de caractères";
+                tblInvalidEmail.Text = "Le courriel est trop long";
                 tblInvalidEmail.Visibility = Visibility.Visible;
                 erreurSaisie = true;
                 args.Cancel = true;

@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Margin="50 15 0 0" FontSize="25">Liste des employés</TextBlock>
+           
             <CommandBar 
                     x:Name="comAjout"
                     Grid.Column="1" 

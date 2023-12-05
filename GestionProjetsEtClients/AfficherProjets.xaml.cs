@@ -26,6 +26,7 @@ namespace GestionProjetsEtClients
         public AfficherProjets()
         {
             this.InitializeComponent();
+            SingletonFenetre.getInstance().NavView.Header = "Liste des projets";
             SingletonProjet.getInstance().getProjetsEnCours();
             lvListeProjets.ItemsSource = SingletonProjet.getInstance().Projets;
 
@@ -74,6 +75,8 @@ namespace GestionProjetsEtClients
 
         private async void abbExportProjet_Click(object sender, RoutedEventArgs e)
         {
+            toggleSwitchEncours.IsOn = true;
+
             var picker = new Windows.Storage.Pickers.FileSavePicker();
 
             var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(SingletonFenetre.getInstance().Fenetre);

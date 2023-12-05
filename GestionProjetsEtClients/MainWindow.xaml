@@ -15,7 +15,8 @@
                     ItemInvoked="navView_ItemInvoked"
                     IsBackEnabled="True"
                     BackRequested="navView_BackRequested"
-                    Loaded="navView_Loaded">
+                    Loaded="navView_Loaded"
+                    Header="Header à changer selon la page">
         <NavigationView.MenuItems>
             <NavigationViewItemHeader Content="Externe"/>
             <NavigationViewItem Content="Projets" x:Name="iProjets" Icon="Folder"/>
