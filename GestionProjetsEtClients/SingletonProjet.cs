@@ -18,6 +18,7 @@ namespace GestionProjetsEtClients
         ObservableCollection<Projet> listeProjetsTermines;
 
         int index;
+        bool bProjetEnCours;
 
         public SingletonProjet()
         {
@@ -53,6 +54,7 @@ namespace GestionProjetsEtClients
 
         public void getListeProjets()
         {
+            bProjetEnCours = false;
             listeProjets.Clear();
             try
             {
@@ -158,6 +160,7 @@ namespace GestionProjetsEtClients
         }
         public void getProjetsEnCours()
         {
+            bProjetEnCours = true;
             listeProjets.Clear();
             try
             {
@@ -360,7 +363,15 @@ namespace GestionProjetsEtClients
                 validation = command.ExecuteNonQuery();
                 con.Close();
 
-                SingletonProjet.getInstance().getListeProjets();
+                if (bProjetEnCours)
+                {
+                    SingletonProjet.getInstance().getProjetsEnCours();
+                }
+                else
+                {
+                    SingletonProjet.getInstance().getListeProjets();
+                }
+                
                 return validation;
             }
             catch (MySqlException ex)
@@ -392,7 +403,15 @@ namespace GestionProjetsEtClients
                 validation = command.ExecuteNonQuery();
                 con.Close();
 
-                SingletonProjet.getInstance().getListeProjets();
+                if (bProjetEnCours)
+                {
+                    SingletonProjet.getInstance().getProjetsEnCours();
+                }
+                else
+                {
+                    SingletonProjet.getInstance().getListeProjets();
+                }
+
                 return validation;
             }
             catch (MySqlException ex)
@@ -421,7 +440,15 @@ namespace GestionProjetsEtClients
                 validation = command.ExecuteNonQuery();
                 con.Close();
 
-                SingletonProjet.getInstance().getListeProjets();
+                if (bProjetEnCours)
+                {
+                    SingletonProjet.getInstance().getProjetsEnCours();
+                }
+                else
+                {
+                    SingletonProjet.getInstance().getListeProjets();
+                }
+
                 return validation;
             }
             catch (MySqlException ex)
