@@ -60,7 +60,7 @@ namespace GestionProjetsEtClients
             var texte = infos.NomPage;
             index = infos.IndexEmploye;
             string mat = infos.MatEmploye;
-            if (texte == "AfficherEmployes" || texte == "ModalModifierEmploye")
+            if (texte == "AfficherEmployes")
             {
                 imgProfil.ImageSource = new BitmapImage(new Uri(SingletonEmploye.getInstance().Employes[index].LienPhoto));
                 txtBlMatricule.Text = "Matricule : " + SingletonEmploye.getInstance().Employes[index].Matricule;
@@ -115,13 +115,15 @@ namespace GestionProjetsEtClients
             modifierEmploye.PrimaryButtonText = "Modifier";
             modifierEmploye.SecondaryButtonText = "Annuler";
             modifierEmploye.DefaultButton = ContentDialogButton.Primary;
-            var resultat = await modifierEmploye.ShowAsync();
 
             InfosNavigation infos = new InfosNavigation()
             {
                 NomPage = "ModalModifierEmploye",
-                IndexEmploye = index
+                MatEmploye = SingletonEmploye.getInstance().Employes[index].Matricule
             };
+
+            var resultat = await modifierEmploye.ShowAsync();
+
             this.Frame.Navigate(typeof(ZoomEmploye), infos);
         }
         private void lvProjetsEnCours_SelectionChanged(object sender, SelectionChangedEventArgs e)
