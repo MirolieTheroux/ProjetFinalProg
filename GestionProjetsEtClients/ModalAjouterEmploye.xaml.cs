@@ -12,6 +12,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Globalization.NumberFormatting;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -23,6 +24,19 @@ namespace GestionProjetsEtClients
         public ModalAjouterEmploye()
         {
             this.InitializeComponent();
+            SetNumberBoxNumberFormatter();
+        }
+        private void SetNumberBoxNumberFormatter()
+        {
+            IncrementNumberRounder rounderArgent = new IncrementNumberRounder();
+            rounderArgent.Increment = 0.01;
+            rounderArgent.RoundingAlgorithm = RoundingAlgorithm.RoundHalfUp;
+
+            DecimalFormatter formatterArgent = new DecimalFormatter();
+            formatterArgent.IntegerDigits = 1;
+            formatterArgent.FractionDigits = 2;
+            formatterArgent.NumberRounder = rounderArgent;
+            nbBoxTauxHoraire.NumberFormatter = formatterArgent;
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -58,7 +72,7 @@ namespace GestionProjetsEtClients
                 args.Cancel = true;
             }
 
-            if (!SingletonVerification.getInstance().isAdresseValide(txtBoxAdresse.Text))
+            if (!SingletonVerification.getInstance().isChampValide(txtBoxAdresse.Text))
             {
                 txtBlErreurAdresse.Text = "Veuillez entrer une adresse.";
                 bErreur = true;
@@ -72,7 +86,7 @@ namespace GestionProjetsEtClients
                 args.Cancel = true;
             }
 
-            if (!SingletonVerification.getInstance().isTauxHValide(txtBoxTauxHoraire.Text))
+            if (nbBoxTauxHoraire.Value is not double.NaN)
             {
                 txtBlErreurTauxHoraire.Text = "Veuillez entrer un taux horaire valide.";
                 bErreur = true;
@@ -117,7 +131,7 @@ namespace GestionProjetsEtClients
                 string sDateEmbauche = sEmbauche.Substring(0, 10);
 
                 if (SingletonEmploye.getInstance().ajouterEmployesBD(txtBoxNom.Text, txtBoxPrenom.Text, sDateNaissance, txtBoxCourriel.Text, txtBoxAdresse.Text,
-                 sDateEmbauche, Convert.ToDouble(txtBoxTauxHoraire.Text), txtBoxPhoto.Text, cmbBoxStatut.SelectedItem as string) > 0)
+                 sDateEmbauche, Convert.ToDouble(nbBoxTauxHoraire.Value), txtBoxPhoto.Text, cmbBoxStatut.SelectedItem as string) > 0)
                 {
                     SingletonMessageValidation.getInstance().AfficherSucces = true;
                     SingletonMessageValidation.getInstance().AfficherErreur = false;

@@ -47,7 +47,7 @@
 
         <CalendarDatePicker x:Name="calDateEmbauche" Margin="10 10 10 0"  Header="Date d'embauche" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Stretch" IsEnabled="False"></CalendarDatePicker>
 
-        <TextBox x:Name="txtBoxTauxHoraire" Margin="10 10 10 0" Header="Taux Horaire" Grid.Row="2" Grid.Column="1" ></TextBox>
+        <NumberBox x:Name="nbBoxTauxHoraire" Margin="10 10 10 0" Header="Taux Horaire" Grid.Row="2" Grid.Column="1"></NumberBox>
         <TextBlock x:Name="txtBlErreurTauxHoraire"  Margin="10 0 0 0" Foreground="Red" Grid.Row="3" Grid.Column="1" ></TextBlock>
 
         <ComboBox x:Name="cmbBoxStatut" Margin="10 10 10 0" Header="Statut" HorizontalAlignment="Stretch" Grid.Row="5" Grid.Column="1">

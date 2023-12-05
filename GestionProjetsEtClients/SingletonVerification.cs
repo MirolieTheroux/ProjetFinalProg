@@ -22,7 +22,6 @@ namespace GestionProjetsEtClients
             return instance;
         }
 
-
         public bool isTexteNonVideEtNonNum(string valeur)
         {
             string nonNumeric = "^[0-9]";
@@ -45,7 +44,7 @@ namespace GestionProjetsEtClients
                 return false;
         }
 
-        public bool isAdresseValide(string adresse)
+        public bool isChampValide(string adresse)
         {
             if (!string.IsNullOrEmpty(adresse.Trim()))
                 return true;

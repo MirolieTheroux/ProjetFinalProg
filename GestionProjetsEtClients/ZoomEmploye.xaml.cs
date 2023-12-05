@@ -30,7 +30,7 @@ namespace GestionProjetsEtClients
         public ZoomEmploye()
         {
             this.InitializeComponent();
-
+            SingletonProjet.getInstance().getListeProjets();
             if (SingletonMessageValidation.getInstance().AfficherSucces)
             {
                 infoBar.IsOpen = true;
@@ -122,12 +122,11 @@ namespace GestionProjetsEtClients
             };
             this.Frame.Navigate(typeof(ZoomEmploye), infos);
         }
-
         private void lvProjetsEnCours_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-           
+
             if (lvProjetEnCours.SelectedIndex >= 0)
-            { 
+            {
                 Projet projet = lvProjetEnCours.SelectedItem as Projet;
 
                 InfosNavigation infos = new InfosNavigation()
@@ -138,7 +137,6 @@ namespace GestionProjetsEtClients
                 this.Frame.Navigate(typeof(ZoomProjet), infos);
             }
         }
-
         private void lvProjetsTermines_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (lvProjetsTermines.SelectedIndex >= 0)
