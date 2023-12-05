@@ -124,7 +124,6 @@ namespace GestionProjetsEtClients
             else
                 return false;
         }
-
         public bool isDataTooLong(string data, int longueur)
         {
             if(data.Length >= longueur)

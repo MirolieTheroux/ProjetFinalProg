@@ -50,10 +50,22 @@ namespace GestionProjetsEtClients
                 bErreur = true;
                 args.Cancel = true;
             }
+            else if(SingletonVerification.getInstance().isDataTooLong(txtBoxNom.Text, 50))
+            {
+                txtBlErreurNom.Text = "Le nom est trop long.";
+                bErreur = true;
+                args.Cancel = true;
+            }
 
             if (!SingletonVerification.getInstance().isTexteNonVideEtNonNum(txtBoxPrenom.Text))
             {
                 txtBlErreurPrenom.Text = "Veuillez entrer un prénom.";
+                bErreur = true;
+                args.Cancel = true;
+            }
+            else if (SingletonVerification.getInstance().isDataTooLong(txtBoxPrenom.Text, 50))
+            {
+                txtBlErreurPrenom.Text = "Le prénom est trop long.";
                 bErreur = true;
                 args.Cancel = true;
             }
@@ -71,10 +83,22 @@ namespace GestionProjetsEtClients
                 bErreur = true;
                 args.Cancel = true;
             }
+            else if (SingletonVerification.getInstance().isDataTooLong(txtBoxCourriel.Text, 255))
+            {
+                txtBlErreurCourriel.Text = "Le courriel est trop long.";
+                bErreur = true;
+                args.Cancel = true;
+            }
 
             if (!SingletonVerification.getInstance().isChampValide(txtBoxAdresse.Text))
             {
                 txtBlErreurAdresse.Text = "Veuillez entrer une adresse.";
+                bErreur = true;
+                args.Cancel = true;
+            }
+            else if (SingletonVerification.getInstance().isDataTooLong(txtBoxAdresse.Text, 255))
+            {
+                txtBlErreurAdresse.Text = "L'adresse est trop longue.";
                 bErreur = true;
                 args.Cancel = true;
             }
@@ -98,7 +122,12 @@ namespace GestionProjetsEtClients
                 txtBlErreurPhoto.Text = "Veuillez entrer un lien valide.";
                 bErreur = true;
                 args.Cancel = true;
-
+            }
+            else if (SingletonVerification.getInstance().isDataTooLong(txtBoxPhoto.Text, 255))
+            {
+                txtBlErreurPhoto.Text = "Le lien de la photo est trop long.";
+                bErreur = true;
+                args.Cancel = true;
             }
 
             if (calDateEmbauche.Date != null)
