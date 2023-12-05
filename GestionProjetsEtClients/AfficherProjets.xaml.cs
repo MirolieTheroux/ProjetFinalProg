@@ -115,7 +115,15 @@ namespace GestionProjetsEtClients
 
         private void txtBoxRechercheTitre_SelectionChanged(object sender, RoutedEventArgs e)
         {
-            SingletonProjet.getInstance().getProjetParTitre(txtBoxRechercheTitre.Text);
+            if (toggleSwitchEncours.IsOn)
+            {
+                SingletonProjet.getInstance().getProjetParTitre(txtBoxRechercheTitre.Text);
+            }
+            else
+            {
+                SingletonProjet.getInstance().getProjetParTitreEnCours(txtBoxRechercheTitre.Text);
+            }
+            
         }
 
     }

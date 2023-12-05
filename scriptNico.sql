@@ -252,6 +252,17 @@ BEGIN
 END //
 DELIMITER ;
 
+-- (Mirolie/Nicolas) Procédure pour avoir seulement les projets titre en cours
+DROP procedure if exists p_get_projets_par_titre;
+DELIMITER //
+CREATE procedure p_get_projets_par_titre(IN titreP varchar(100))
+BEGIN
+    SELECT * FROM v_get_projets        
+    where titre LIKE CONCAT('%', titreP, '%') AND statut = 'en cours';
+end;
+//
+DELIMITER ;
+
 -- (Nicolas) Ajout d'élément dans la table projet
 -- Attention, modifier les id_client selon le réel si l'on éxécute se script pour la première fois (à cause des nombre aléatoire)
 CALL p_ajout_projet("Retructuration de l'architecture informatique", '2022-10-10', "Recréer une nouvelle archiecture de l'infrastructure informatique du client en lui proposant un système de gestion des dossiers, un système de cybersécurité et un support technique.", 200000, 4, 972);
