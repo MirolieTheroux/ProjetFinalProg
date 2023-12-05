@@ -33,7 +33,7 @@ namespace GestionProjetsEtClients
             int indexProjet = SingletonProjet.getInstance().getIndex();
 
             //if (!SingletonVerification.getInstance().isAdresseValide(txtBoxMatricule.Text))
-            if (!SingletonVerification.getInstance().isAdresseValide(asbxMatricule.Text))
+            if (!SingletonVerification.getInstance().isChampValide(asbxMatricule.Text))
             {
                 txtBlErreurMatricule.Text = "Veuillez entrer un matricule";
                 bErreur = true;
