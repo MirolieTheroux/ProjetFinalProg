@@ -71,7 +71,7 @@ namespace GestionProjetsEtClients
             var texte = infos.NomPage;
             index = infos.IndexProjet;
             string noProjet = infos.NoProjet;
-            if (texte == "AfficherProjets" || texte == "ModalAjouterEmployeProjet" || texte == "ZoomClient")
+            if (texte == "AfficherProjets" || texte == "ZoomClient")
             {
                 tblTitrePage.Text = $"{SingletonProjet.getInstance().Projets[index].NoProjet.ToString()} {SingletonProjet.getInstance().Projets[index].Titre.ToString()}";
                 tblDateDebut.Text = $"Date de début : {SingletonProjet.getInstance().Projets[index].DateDebut.ToString()}";
@@ -184,12 +184,13 @@ namespace GestionProjetsEtClients
             ajoutEmployeProjet.PrimaryButtonText = "Ajouter";
             ajoutEmployeProjet.SecondaryButtonText = "Annuler";
             ajoutEmployeProjet.DefaultButton = ContentDialogButton.Primary;
-            var resultat = await ajoutEmployeProjet.ShowAsync();
             InfosNavigation infos = new InfosNavigation()
             {
                 NomPage = "ModalAjouterEmployeProjet",
-                IndexProjet = index,
+                NoProjet = SingletonProjet.getInstance().Projets[index].NoProjet
             };
+            var resultat = await ajoutEmployeProjet.ShowAsync();
+         
             this.Frame.Navigate(typeof(ZoomProjet), infos);
         }
 
