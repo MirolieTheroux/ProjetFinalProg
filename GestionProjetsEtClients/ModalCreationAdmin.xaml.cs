@@ -103,20 +103,21 @@ namespace GestionProjetsEtClients
                     SingletonMessageValidation.getInstance().AfficherSucces = true;
                     SingletonMessageValidation.getInstance().AfficherErreur = false;
                     SingletonMessageValidation.getInstance().Titre = "Succès";
-                    SingletonMessageValidation.getInstance().Titre = "L'ajout du compte administrateur a fonctionnée";
+                    SingletonMessageValidation.getInstance().Message = "L'ajout du compte administrateur a fonctionnée";
                 }
                 else
                 {
                     SingletonMessageValidation.getInstance().AfficherSucces = false;
                     SingletonMessageValidation.getInstance().AfficherErreur = true;
                     SingletonMessageValidation.getInstance().Titre = "Erreur";
-                    SingletonMessageValidation.getInstance().Titre = "L'ajout du compte administrateur a échouée";
+                    SingletonMessageValidation.getInstance().Message = "L'ajout du compte administrateur a échouée";
                 }
             }
         }
 
         private void ContentDialog_CloseButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
         {
+            SingletonMessageValidation.getInstance().annulerMessage();
             args.Cancel = false;
         }
     }

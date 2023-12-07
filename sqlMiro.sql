@@ -287,3 +287,47 @@ BEGIN
     end;
 //
 DELIMITER ;
+
+
+-- Fonction qui retourne le nombre de projets faits par un employé
+DROP FUNCTION IF EXISTS f_nb_projetsFaits_employe;
+DELIMITER //
+CREATE FUNCTION f_nb_projetsFaits_employe(matEmp char(10)) RETURNS INT
+BEGIN
+    DECLARE nbProjetsFaits int;
+    SELECT COUNT(*)
+    into nbProjetsFaits
+    from projet p
+             inner join projet_employe pe on p.no_projet = pe.no_projet
+             inner join employe e on e.matricule = pe.matricule
+    where p.statut = 'terminé' and e.matricule = matEMp;
+    RETURN nbProjetsFaits;
+end
+//
+DELIMITER ;
+-- Appel de la fonction
+SELECT f_nb_projetsFaits_employe('LA-1989-29') as 'nbProjetsFaitsEmploye';
+
+-- essaye de faire une fonction qui retourne une liste ??
+
+-- Fonction qui retourne le nombre total d'employé dans l'entreprise
+DROP FUNCTION IF EXISTS f_total_employe;
+DELIMITER //
+CREATE function f_total_employe() RETURNS INT
+BEGIN
+    DECLARE nbEmploye INT;
+    SELECT count(*) INTO nbEmploye from employe;
+    RETURN nbEmploye;
+end//
+Delimiter ;
+-- Appel à la fonction
+SELECT f_total_employe() AS 'TotalEmployé';
+
+-- View qui permet d'afficher le projet en cours pour chaque employé qui en ont un.
+DROP VIEW IF EXISTS v_projetencours_employe;
+CREATE VIEW v_projetencours_employe as
+SELECT e.matricule, e.nom, e.prenom
+from employe e
+where matricule IN(SELECT matricule from projet_employe where no_projet IN(SELECT no_projet from projet where statut = 'en cours'));
+
+SELECT * from v_projetencours_employe;
