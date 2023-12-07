@@ -21,6 +21,8 @@ namespace GestionProjetsEtClients
 {
     public sealed partial class ModalAjouterEmployeProjet : ContentDialog
     {
+        string matriculeChoisi = "";
+
         public ModalAjouterEmployeProjet()
         {
             this.InitializeComponent();
@@ -60,8 +62,8 @@ namespace GestionProjetsEtClients
             }
 
             if (!bErreur)
-            {
-                if(SingletonProjetEmploye.getInstance().ajouterProjetEmploye(asbxMatricule.Text, SingletonProjet.getInstance().Projets[indexProjet].NoProjet, nbBoxNbHeures.Value) > 0)
+            {             
+                if (SingletonProjetEmploye.getInstance().ajouterProjetEmploye(matriculeChoisi, SingletonProjet.getInstance().Projets[indexProjet].NoProjet, nbBoxNbHeures.Value) > 0)
                 {
                     SingletonMessageValidation.getInstance().AfficherSucces = true;
                     SingletonMessageValidation.getInstance().AfficherErreur = false;
@@ -88,18 +90,24 @@ namespace GestionProjetsEtClients
         }
 
         private void asbxMatricule_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
-        {
-            List<string> listeMatricule = new List<string>();
+        {         
+            List<Employe> listeMatricule = new List<Employe>();
 
             foreach (Employe employe in SingletonEmploye.getInstance().Employes)
             {
-                if (employe.Matricule.Contains(sender.Text))
+                if (employe.NomCompletFormat.ToLower().Contains(sender.Text.ToLower()))
                 {
-                    listeMatricule.Add(employe.Matricule);
+                    listeMatricule.Add(employe);
                 }
             }
 
             asbxMatricule.ItemsSource = listeMatricule;
+        }
+
+        private void asbxMatricule_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
+        {
+            Employe employe = args.SelectedItem as Employe;
+            matriculeChoisi = employe.Matricule;
         }
     }
 }

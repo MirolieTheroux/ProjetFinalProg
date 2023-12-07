@@ -97,6 +97,7 @@ namespace GestionProjetsEtClients
 
                 command.Parameters.AddWithValue("nomP", nomRecherche);
                 con.Open();
+                command.Prepare();
                 MySqlDataReader r = command.ExecuteReader();
 
                 while (r.Read())

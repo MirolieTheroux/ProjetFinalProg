@@ -28,5 +28,10 @@ namespace GestionProjetsEtClients
         }
         public string LienPhoto { get; set; }
         public string Statut { get; set; }
+
+        public override string ToString()
+        {
+            return Matricule + " - " + NomCompletFormat;
+        }
     }
 }

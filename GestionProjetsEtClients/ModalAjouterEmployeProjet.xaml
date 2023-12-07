@@ -23,7 +23,7 @@
         <!--<TextBox x:Name="txtBoxMatricule" Header="Matricule de l'employé" Margin="10 10 10 0"></TextBox>
         <TextBlock x:Name="txtBlErreurMatricule" Margin="10 0 0 0" Foreground="Red" Grid.Row="1" ></TextBlock>-->
 
-        <AutoSuggestBox x:Name="asbxMatricule" Header="Matricule de l'employé" Margin="10 10 10 0" TextChanged="asbxMatricule_TextChanged"/>
+        <AutoSuggestBox x:Name="asbxMatricule" Header="Matricule de l'employé" Margin="10 10 10 0" TextChanged="asbxMatricule_TextChanged" SuggestionChosen="asbxMatricule_SuggestionChosen"/>
         <TextBlock x:Name="txtBlErreurMatricule" Margin="10 0 0 0" Foreground="Red" Grid.Row="1" ></TextBlock>
 
         <NumberBox x:Name="nbBoxNbHeures" Header="Nombre d'heures travaillées" Margin="10 10 10 0" Grid.Row="4"></NumberBox>
