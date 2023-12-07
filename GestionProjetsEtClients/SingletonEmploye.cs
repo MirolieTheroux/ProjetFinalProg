@@ -128,6 +128,7 @@ namespace GestionProjetsEtClients
                 commande.Parameters.AddWithValue("nomOuPrenom", nomOuPrenom);
 
                 connection.Open();
+                commande.Prepare();
                 MySqlDataReader reader = commande.ExecuteReader();
                 while (reader.Read())
                 {

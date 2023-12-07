@@ -215,13 +215,15 @@ namespace GestionProjetsEtClients
             projetEnCours.Clear();
             try
             {
-                MySqlCommand commande = new MySqlCommand("p_get_employe_projet_encours");
-                commande.Connection = con;
-                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                MySqlCommand command = new MySqlCommand("p_get_employe_projet_encours");
+                command.Connection = con;
+                command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                commande.Parameters.AddWithValue("matEmp", sMatriculeEmp);
+                command.Parameters.AddWithValue("matEmp", sMatriculeEmp);
                 con.Open();
-                MySqlDataReader reader = commande.ExecuteReader();
+                command.Prepare();
+
+                MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     string sNo_Projet = (string)reader["no_projet"];
@@ -249,13 +251,15 @@ namespace GestionProjetsEtClients
             listeProjetsTermines.Clear();
             try
             {
-                MySqlCommand commande = new MySqlCommand("p_get_employe_projets_termines");
-                commande.Connection = con;
-                commande.CommandType = System.Data.CommandType.StoredProcedure;
+                MySqlCommand command = new MySqlCommand("p_get_employe_projets_termines");
+                command.Connection = con;
+                command.CommandType = System.Data.CommandType.StoredProcedure;
 
-                commande.Parameters.AddWithValue("matEmp", sMatriculeEmp);
+                command.Parameters.AddWithValue("matEmp", sMatriculeEmp);
                 con.Open();
-                MySqlDataReader reader = commande.ExecuteReader();
+                command.Prepare();
+
+                MySqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {
                     string sNo_Projet = (string)reader["no_projet"];
@@ -289,6 +293,8 @@ namespace GestionProjetsEtClients
 
                 command.Parameters.AddWithValue("titreP", titreRecherche);
                 con.Open();
+                command.Prepare();
+
                 MySqlDataReader r = command.ExecuteReader();
 
                 while (r.Read())
@@ -343,6 +349,7 @@ namespace GestionProjetsEtClients
 
                 command.Parameters.AddWithValue("titreP", titreRecherche);
                 con.Open();
+                command.Prepare();
                 MySqlDataReader r = command.ExecuteReader();
 
                 while (r.Read())

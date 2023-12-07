@@ -56,6 +56,7 @@ namespace GestionProjetsEtClients
                 commande.Parameters.AddWithValue("num_projet", sNo_projet);
 
                 connection.Open();
+                commande.Prepare();
                 MySqlDataReader reader = commande.ExecuteReader();
                 while (reader.Read())
                 {
