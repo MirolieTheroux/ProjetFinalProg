@@ -89,8 +89,10 @@ namespace GestionProjetsEtClients
         {
             if (date == "")
                 return false;
-            else
+            else if(DateTime.Today <= Convert.ToDateTime(date) && DateTime.Today.AddYears(1) >= Convert.ToDateTime(date))
                 return true;
+            else
+                return false;
         }
 
         public bool isCourrielValide(string courriel)

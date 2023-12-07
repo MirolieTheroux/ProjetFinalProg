@@ -35,8 +35,8 @@
                        Text="Veuillez entrer le titre"/>
 
             <CalendarDatePicker Grid.Row="2" x:Name="calDateDebut" Margin="0 10 0 0"  Header="Date de début" HorizontalAlignment="Stretch"/>
-            <TextBlock Grid.Row="3" x:Name="tblInvalidDateDebut" Foreground="Red" Visibility="Collapsed"
-                       Text="Veuillez entrer la date de début"/>
+            <TextBlock Grid.Row="3" x:Name="tblInvalidDateDebut" Foreground="Red" Visibility="Collapsed" TextWrapping="Wrap"
+                       Text="Veuillez entrer la date de début entre aujourd'hui et un an plus tard"/>
 
             <NumberBox Grid.Row="4"
                        x:Name="nbxBudget"
