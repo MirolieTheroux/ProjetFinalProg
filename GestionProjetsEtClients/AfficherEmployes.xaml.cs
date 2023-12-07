@@ -30,6 +30,7 @@ namespace GestionProjetsEtClients
         {
             this.InitializeComponent();
             SingletonFenetre.getInstance().NavView.Header = "Liste des employés";
+            SingletonEmploye.getInstance().getListeEmployesBD();
             lvEmployes.ItemsSource = SingletonEmploye.getInstance().Employes;
             if (SingletonAdmin.getInstance().valideConnexion())
             {

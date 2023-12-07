@@ -61,7 +61,7 @@ namespace GestionProjetsEtClients
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if(e.Parameter is not null)
+            if (e.Parameter is not null)
             {
                 index = (int)e.Parameter;
 
@@ -86,9 +86,10 @@ namespace GestionProjetsEtClients
             modifClient.PrimaryButtonText = "Modifier";
             modifClient.SecondaryButtonText = "Annuler";
             modifClient.DefaultButton = ContentDialogButton.Primary;
-
-            var resultat = await modifClient.ShowAsync();
+            SingletonClient.getInstance().getListeClients();
             index = SingletonClient.getInstance().getIndexNom(SingletonClient.getInstance().getNomActuel());
+            var resultat = await modifClient.ShowAsync();
+
 
             this.Frame.Navigate(typeof(ZoomClient), index);
         }

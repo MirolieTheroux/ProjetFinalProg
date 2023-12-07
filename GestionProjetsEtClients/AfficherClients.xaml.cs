@@ -28,6 +28,7 @@ namespace GestionProjetsEtClients
         {
             this.InitializeComponent();
             SingletonFenetre.getInstance().NavView.Header = "Liste des clients";
+            SingletonClient.getInstance().getListeClients();
             lvListeClients.ItemsSource = SingletonClient.getInstance().Clients;
             if (SingletonAdmin.getInstance().valideConnexion())
             {
